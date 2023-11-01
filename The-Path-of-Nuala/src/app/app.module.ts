@@ -12,6 +12,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { GameComponent } from './components/game/game.component';
+import { NewUserComponent } from './components/new-user/new-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,11 +27,14 @@ import { GameComponent } from './components/game/game.component';
     RegisterComponent,
     NavbarComponent,
     FooterComponent,
-    GameComponent
+    GameComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
