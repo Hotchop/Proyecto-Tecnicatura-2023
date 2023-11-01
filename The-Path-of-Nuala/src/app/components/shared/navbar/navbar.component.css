@@ -1,0 +1,15 @@
+.enlace{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    width: 6rem;
+    height: 1.5rem;
+    display: inline-flex;
+    margin: 0rem .5rem 0rem 0rem;
+}
+
+.navbar{
+    display: flex;
+    justify-content: right;
+}
