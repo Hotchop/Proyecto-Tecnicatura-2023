@@ -1,15 +1,42 @@
-.enlace{
-    display: flex;
-    justify-content: center;
-    background-color: black;
-    color: white;
-    width: 6rem;
-    height: 1.5rem;
+.enlace{   
+    color: rgba(255, 255, 255, 0.596);
     display: inline-flex;
-    margin: 0rem .5rem 0rem 0rem;
+    margin: 0.6rem 0rem 0rem 0rem;
+    width: 100%;
+    height: 80%;
+    justify-content: center;
+    font-family: 'Abhaya Libre';
+    letter-spacing: 0;
+    transition: all 0.5s;
+}
+.enlace:hover{
+    letter-spacing: 0.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.596);
 }
 
+
+.nav-boton{
+    display: flex;
+    justify-content: center;
+    width:12%;
+    height: 80%;
+    margin-right: 2rem;
+    margin-top: .3rem;
+    border-radius: 0.5rem;
+}
+.cabecera{
+    position:fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+}
 .navbar{
     display: flex;
-    justify-content: right;
+    justify-content: space-around;
+    height: 3rem;
+    width: 70%;
+    margin-top: 2rem;
+    
 }

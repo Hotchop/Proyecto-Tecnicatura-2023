@@ -1,0 +1,57 @@
+.cities-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+.cities-text h2{
+    font-weight: normal;
+    margin-bottom: .2rem;
+    font-size: 2rem;
+}
+.cities-text hr{
+    width: 40%;
+}
+.cities-text p{
+    text-align: center;
+    width: 40%;
+    letter-spacing: 0.1rem;
+    font-size: 0.9rem;
+}
+.cities{
+    background-color: black;
+    height: 43rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cities-images{
+    margin-top: 2rem;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+ 
+}
+.city-img{
+    height: 18rem;
+    width: 15rem;
+    opacity: 0.7;
+}
+.city-img:hover{
+    opacity: 0.5;
+}
+.city-descr{
+    display: flex;
+    justify-content: center;
+}
+.city-descr p{
+    color: white;
+    position: absolute;
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    margin-top: 14.5rem;
+}
+.city-name{
+    font-size: 1.3rem;
+}

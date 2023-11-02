@@ -1,11 +1,22 @@
-<header>
+<header class="cabecera">
     <nav class="navbar">
-        <a class="enlace" [routerLink]="['/home']">Home</a>
-        <a class="enlace" [routerLink]="['/play']">Play</a>
-        <a class="enlace" [routerLink]="['/contact-us']">Contact Us</a>
-        <a class="enlace" [routerLink]="['/how-to-play']">How To Play</a>
-        <a class="enlace" [routerLink]="['/login']">Sign in</a>
-        <a class="enlace" [routerLink]="['/register']">Sign up</a>
+        <div class="nav-boton">
+            <a class="enlace" [routerLink]="['/home']">Home</a>
+        </div>
+        <div class="nav-boton"> 
+            <a class="enlace" [routerLink]="['/how-to-play']">How To Play</a>
+        </div>  
+        <div class="nav-boton">
+            <a class="enlace" [routerLink]="['/play']">Play</a>
+        </div>
+        <div class="nav-boton">
+            <a class="enlace" [routerLink]="['/login']">Sign in</a>
+        </div>
+        <div class="nav-boton"> 
+            <a class="enlace" [routerLink]="['/contact-us']">Contact Us</a>
+        </div>
+        <div class="nav-boton">
+            <a class="enlace" [routerLink]="['/register']">Sign up</a>
+        </div>
     </nav>
-    <hr>
 </header>

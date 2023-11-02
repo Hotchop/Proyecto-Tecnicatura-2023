@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -15,6 +14,8 @@ import { GameComponent } from './components/game/game.component';
 import { NewUserComponent } from './components/new-user/new-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { HomeSectionComponent } from './components/home-parts/home-section/home-section.component';
+import { HomeSectionCitiesComponent } from './components/home-parts/home-section-cities/home-section-cities.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { FormsModule } from '@angular/forms';
     NavbarComponent,
     FooterComponent,
     GameComponent,
-    NewUserComponent
+    NewUserComponent,
+    HomeSectionComponent,
+    HomeSectionCitiesComponent
   ],
   imports: [
     BrowserModule,
