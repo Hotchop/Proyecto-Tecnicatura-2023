@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HomeSectionComponent } from './components/home-parts/home-section/home-section.component';
 import { HomeSectionCitiesComponent } from './components/home-parts/home-section-cities/home-section-cities.component';
+import { HomeSectionCharactersComponent } from './components/home-parts/home-section-characters/home-section-characters.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HomeSectionCitiesComponent } from './components/home-parts/home-section
     GameComponent,
     NewUserComponent,
     HomeSectionComponent,
-    HomeSectionCitiesComponent
+    HomeSectionCitiesComponent,
+    HomeSectionCharactersComponent
   ],
   imports: [
     BrowserModule,
