@@ -41,7 +41,7 @@ export class NewUserComponent {
 
     if(foundUser){
       alert('El usuario elegido ya existe');
-      this.newUser.reset
+      this.newUser.reset();
       return;
     } //Fallo por usuario ya existente
 

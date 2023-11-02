@@ -9,7 +9,6 @@ import * as PIXI from 'pixi.js';
 export class GameComponent implements OnInit{
 
   private app: PIXI.Application<HTMLCanvasElement> = new PIXI.Application({
-    
   });
 
   ngOnInit(): void {

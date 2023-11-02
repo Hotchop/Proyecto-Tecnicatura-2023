@@ -18,6 +18,7 @@ import { HomeSectionComponent } from './components/home-parts/home-section/home-
 import { HomeSectionCitiesComponent } from './components/home-parts/home-section-cities/home-section-cities.component';
 import { HomeSectionCharactersComponent } from './components/home-parts/home-section-characters/home-section-characters.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LogUserComponent } from './components/log-user/log-user.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { HttpClientModule } from '@angular/common/http';
     NewUserComponent,
     HomeSectionComponent,
     HomeSectionCitiesComponent,
-    HomeSectionCharactersComponent
+    HomeSectionCharactersComponent,
+    LogUserComponent
   ],
   imports: [
     BrowserModule,
