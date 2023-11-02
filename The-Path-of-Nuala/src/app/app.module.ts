@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { HomeSectionComponent } from './components/home-parts/home-section/home-section.component';
 import { HomeSectionCitiesComponent } from './components/home-parts/home-section-cities/home-section-cities.component';
 import { HomeSectionCharactersComponent } from './components/home-parts/home-section-characters/home-section-characters.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HomeSectionCharactersComponent } from './components/home-parts/home-sec
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

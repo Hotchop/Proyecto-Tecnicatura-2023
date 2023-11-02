@@ -1,4 +1,4 @@
-import { user } from './../interfaces/user';
+import { user } from '../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 

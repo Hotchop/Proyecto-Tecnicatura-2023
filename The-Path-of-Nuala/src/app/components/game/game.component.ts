@@ -13,6 +13,6 @@ export class GameComponent implements OnInit{
   });
 
   ngOnInit(): void {
-    document.body.appendChild(this.app.view);
+    document.getElementById('window')!.appendChild(this.app.view);
   }
 }

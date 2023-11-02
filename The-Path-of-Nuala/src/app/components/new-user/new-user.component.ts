@@ -1,7 +1,7 @@
 import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn,ValidationErrors } from '@angular/forms';
 import { Component } from '@angular/core';
 import { UserbaseService } from 'src/app/services/userbase.service';
-import { user } from 'src/app/interfaces/user';
+import { user } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-new-user',
@@ -11,8 +11,11 @@ import { user } from 'src/app/interfaces/user';
 export class NewUserComponent {
 
   
-  constructor(private formBuilder: FormBuilder,private userbase: UserbaseService){}
-  
+  constructor(private formBuilder: FormBuilder,private userbase: UserbaseService){
+
+  }
+
+
   list: user[] = [];
   
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { //Validator para verificar contraseñas iguales
