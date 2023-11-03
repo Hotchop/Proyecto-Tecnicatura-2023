@@ -1,0 +1,44 @@
+.section-play-now{
+    height: 43rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    font-family: 'Raleway', sans-serif;
+    color:white
+}
+.txt-play-now{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 7rem;
+}
+.txt-play-now hr{
+    width: 50%;
+}
+.txt-play-now h2{
+    font-weight: normal;
+    font-size: 2.5rem;
+    margin-bottom: .5rem;
+}
+.txt-play-now p{
+    width: 50%;
+}
+.play-now{
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+    background-color: rgb(1, 48, 48);
+    width: 20%;
+    height: 5rem;
+    border: .5rem ridge rgba(117, 100, 4, 0.575);
+    border-radius: 2px;
+}
+.play-now a{
+    color:rgb(119, 102, 4);
+    font-family: 'Abhaya Libre';
+    font-size: 3rem;
+    margin-top: .3rem;
+    
+}

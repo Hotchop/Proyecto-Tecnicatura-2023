@@ -1,5 +1,6 @@
-<header class="cabecera">
-    <nav class="navbar">
+<header class="cabecera" [ngClass]="{'scrolled':scrolled}">
+    <nav class="navbar" >
+       
         <div class="nav-boton">
             <a class="enlace" [routerLink]="['/home']">Home</a>
         </div>
@@ -18,5 +19,6 @@
         <div class="nav-boton">
             <a class="enlace" [routerLink]="['/register']">Sign up</a>
         </div>
+        <div class="background-img-navbar"><img src="../../../../assets/navbarshadow.png" alt=""></div>
     </nav>
 </header>

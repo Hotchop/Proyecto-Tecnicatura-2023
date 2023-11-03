@@ -31,6 +31,7 @@
     z-index: 9999;
     display: flex;
     justify-content: center;
+    transition: all 4s ease-out;
 }
 .navbar{
     display: flex;
@@ -39,4 +40,22 @@
     width: 70%;
     margin-top: 2rem;
     
+}
+.background-img-navbar{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6rem;
+    opacity: 0;
+    transition: opacity 0.3s; /* Add a transition for opacity */
+    z-index: -1;
+  }
+  .background-img-navbar img{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+.cabecera.scrolled .background-img-navbar{
+   opacity:0.7;
 }

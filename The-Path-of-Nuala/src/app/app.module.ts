@@ -19,6 +19,7 @@ import { HomeSectionCitiesComponent } from './components/home-parts/home-section
 import { HomeSectionCharactersComponent } from './components/home-parts/home-section-characters/home-section-characters.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LogUserComponent } from './components/log-user/log-user.component';
+import { HomeSectionPlayNowComponent } from './components/home-parts/home-section-play-now/home-section-play-now.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LogUserComponent } from './components/log-user/log-user.component';
     HomeSectionComponent,
     HomeSectionCitiesComponent,
     HomeSectionCharactersComponent,
-    LogUserComponent
+    LogUserComponent,
+    HomeSectionPlayNowComponent
   ],
   imports: [
     BrowserModule,

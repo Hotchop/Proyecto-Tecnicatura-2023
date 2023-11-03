@@ -39,9 +39,9 @@
     width: 50%;
  
 }
-.char-img img{
+#imagen{
     height: 100%;
     width: 100%;
-    margin-top: 3.5rem;
     opacity: 1;
+
 }
