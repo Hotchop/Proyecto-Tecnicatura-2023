@@ -1,7 +1,7 @@
 .background{
     background-image: url('src/assets/characterSec.png');
     background-size: cover;
-    height: 80rem;
+    height: 100%;
     width: 100%;
     position: absolute;
 }

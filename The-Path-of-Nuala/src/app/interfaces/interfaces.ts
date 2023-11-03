@@ -3,14 +3,16 @@ export interface user{
     usuario: string,
     constraseña: string,
     avatar: string,
-    partidas: partida[]
+    partidas: partida[],
+    id?: number
 }
 
 /**Interfaz Partidas */
 export interface partida{
     fecha: Date,
     personaje: personaje,
-    puntaje: number
+    puntaje: number,
+    id?: number
 }
 
 /**Interfaz Personaje */

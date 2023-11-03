@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LogUserComponent } from './components/log-user/log-user.component';
 import { HomeSectionPlayNowComponent } from './components/home-parts/home-section-play-now/home-section-play-now.component';
 import { ContactsectionComponent } from './components/contactus-parts/contactsection/contactsection.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ContactsectionComponent } from './components/contactus-parts/contactsec
     HomeSectionCharactersComponent,
     LogUserComponent,
     HomeSectionPlayNowComponent,
-    ContactsectionComponent
+    ContactsectionComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
