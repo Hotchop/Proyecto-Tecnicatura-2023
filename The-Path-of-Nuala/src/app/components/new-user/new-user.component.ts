@@ -27,7 +27,8 @@ export class NewUserComponent {
   newUser: FormGroup = this.formBuilder.group({
     username:['',[Validators.required,Validators.minLength(3)]],
     password:['',[Validators.required,Validators.minLength(3)]],
-    confirmPassword:['',[Validators.required]]
+    confirmPassword:['',[Validators.required]],
+    avatar:['']
   }, { validators: this.checkPasswords })
   
   async registraUsuario(){
@@ -45,9 +46,24 @@ export class NewUserComponent {
       return;
     } //Fallo por usuario ya existente
 
+    let avatarLink:string = '';
+    
+    switch(this.newUser.controls['avatar'].value){
+      default:
+        avatarLink = 'src/assets/avatars/warrior-avatar.png'
+        break;
+      case 'option2':
+        avatarLink = 'src/assets/avatars/mage-avatar.png'
+        break;
+      case 'option3':
+        avatarLink = 'src/assets/avatars/ranger-avatar.png'
+        break;
+    }
+
     const usuario: user = {
       usuario: this.newUser.controls['username'].value,
       constraseña: this.newUser.controls['password'].value,
+      avatar: avatarLink,
       partidas: []
     }
     this.userbase.postUser(usuario);

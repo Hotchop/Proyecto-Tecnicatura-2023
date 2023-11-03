@@ -1,42 +1,73 @@
+<section class="background">
 <fieldset class="new-user">
-    <legend>Register</legend>
-    <form action="" class="registro" (ngSubmit)="registraUsuario()" [formGroup]="newUser">
-        <div class="campo">
-            <label for="usuario">Username:</label>
-            <input type="text" formControlName="username">
-        </div>
-        <div class="error"
-            *ngIf="validar('username', 'required')">
-            <span>Field is required</span>
+      <legend>REGISTER</legend>
+      <form action="" class="registro" (ngSubmit)="registraUsuario()" [formGroup]="newUser">
+  
+          <div class="campo">
+              <label for="usuario">Username:</label>
+              <input type="text" formControlName="username">
           </div>
+  
           <div class="error"
-            *ngIf="validar('username', 'minlength')">
-            <span>Minimun 3 characters</span>
+              *ngIf="validar('username', 'required')">
+              <span>Field is required</span>
+            </div>
+            <div class="error"
+              *ngIf="validar('username', 'minlength')">
+              <span>Minimun 3 characters</span>
+            </div>
+  
+          <div class="campo">
+              <label for="">Password:</label>
+              <input type="password" formControlName="password">
           </div>
-        <div class="campo">
-            <label for="">Password:</label>
-            <input type="password" formControlName="password">
-        </div>
-        <div class="error"
-            *ngIf="validar('password', 'required')">
-            <span>Field is required</span>
-          </div>
+  
           <div class="error"
-            *ngIf="validar('password', 'minlength')">
-            <span>Minimun 3 characters</span>
+              *ngIf="validar('password', 'required')">
+              <span>Field is required</span>
+            </div>
+            <div class="error"
+              *ngIf="validar('password', 'minlength')">
+              <span>Minimun 3 characters</span>
+            </div>
+  
+          <div class="campo">
+              <label for="">Verify Password:</label>
+              <input type="password" formControlName="confirmPassword">
           </div>
-        <div class="campo">
-            <label for="">Verify Password:</label>
-            <input type="password" formControlName="confirmPassword">
-        </div>
-        <div class="error"
-            *ngIf="validar('confirmPassword', 'required')">
-            <span>Field is required</span>
-          </div>
+  
           <div class="error"
-            *ngIf="newUser.hasError('notSame') && newUser.controls['confirmPassword'].touched">
-            <span>Passwords don't match</span>
-          </div>
-        <input type="submit" id="submit" value="Crear Cuenta">
-    </form>
+              *ngIf="validar('confirmPassword', 'required')">
+              <span>Field is required</span>
+            </div>
+            <div class="error"
+              *ngIf="newUser.hasError('notSame') && newUser.controls['confirmPassword'].touched">
+              <span>Passwords don't match</span>
+            </div>
+  
+            <legend id="avatar-legend">CHOOSE YOUR AVATAR</legend>
+            <section class="avatar-selector">
+  
+              <div class="avatar-field">
+                <p>Warrior</p>
+                <img src="../../../assets/avatars/warrior-avatar.png" alt="Warrior">
+                <input type="radio" name="avatar-choise" value="option1" formControlName="avatar">
+              </div>
+  
+              <div class="avatar-field">
+                <p>Mage</p>
+                <img src="../../../assets/avatars/mage-avatar.png" alt="Warrior">
+                <input type="radio" name="avatar-choise" value="option2" formControlName="avatar">
+              </div>
+  
+              <div class="avatar-field">
+                <p>Ranger</p>
+                <img src="../../../assets/avatars/ranger-avatar.png" alt="Warrior">
+                <input type="radio" name="avatar-choise" value="option3" formControlName="avatar">
+              </div>
+            </section>
+  
+          <input type="submit" id="submit" value="Create Account">
+      </form>
 </fieldset>
+</section>

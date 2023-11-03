@@ -2,6 +2,7 @@
 export interface user{
     usuario: string,
     constraseña: string,
+    avatar: string,
     partidas: partida[]
 }
 
