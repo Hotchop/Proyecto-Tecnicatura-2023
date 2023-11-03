@@ -1,6 +1,6 @@
 .hero{
     /*background-image: url("../../../assets/heroimg.png");*/
-    height: 43rem;
+    height: 80rem;
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -15,11 +15,11 @@ img{
     align-items: center;
     color: white;
     width: 100%;
-    margin: 12rem 0rem 0rem 0rem;
+    margin: 24rem 0rem 0rem 0rem;
 }
 .hero-txt h1{
     font-family: 'Abhaya Libre';
-    font-size: 6.5rem;
+    font-size: 9rem;
     font-weight: normal;
     display: inline-block;
     
@@ -28,7 +28,7 @@ img{
 .hero-txt p{
     font-family: 'Raleway', sans-serif;
     position: absolute;
-    margin: 12rem;
-    font-size: 1.5rem;
+    margin: 17rem;
+    font-size: 2rem;
     font-weight: 300;
 }

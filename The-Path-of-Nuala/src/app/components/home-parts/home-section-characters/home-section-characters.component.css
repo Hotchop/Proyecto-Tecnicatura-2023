@@ -2,7 +2,7 @@
     background-image: url("../../../../assets/characterSec.png");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 43rem;
+    height: 80rem;
     display: flex;
 
 }
@@ -23,12 +23,16 @@
     color: white;
     font-family: 'Raleway', sans-serif;
     width: 80%;
-    margin-top: 15rem;
+    margin-top: 30rem;
 }
 .char-txt h2{
     font-weight: normal;
-    font-size: 3.2rem;
+    font-size: 4rem;
     margin-bottom: 0;
+}
+.char-txt p{
+    font-size: 2rem;
+    text-align: justify;
 }
 .char-content{
     display: flex;

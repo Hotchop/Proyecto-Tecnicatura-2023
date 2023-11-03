@@ -1,5 +1,5 @@
 .section-play-now{
-    height: 43rem;
+    height: 80rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,33 +12,34 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-top: 7rem;
+    margin-top: 14rem;
 }
 .txt-play-now hr{
     width: 50%;
 }
 .txt-play-now h2{
     font-weight: normal;
-    font-size: 2.5rem;
-    margin-bottom: .5rem;
+    font-size: 4rem;
+    margin-bottom: 1rem;
 }
 .txt-play-now p{
     width: 50%;
+    font-size: 2rem;
 }
 .play-now{
     display: flex;
     justify-content: center;
-    margin-top: 6rem;
+    margin-top: 9rem;
     background-color: rgb(1, 48, 48);
     width: 20%;
-    height: 5rem;
-    border: .5rem ridge rgba(117, 100, 4, 0.575);
-    border-radius: 2px;
+    height: 10rem;
+    border: 1rem ridge rgba(117, 100, 4, 0.575);
+    border-radius: 4px;
 }
 .play-now a{
     color:rgb(119, 102, 4);
     font-family: 'Abhaya Libre';
-    font-size: 3rem;
-    margin-top: .3rem;
+    font-size: 5.5rem;
+    margin-top: .6rem;
     
 }
