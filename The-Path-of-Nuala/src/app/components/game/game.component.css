@@ -1,0 +1,19 @@
+.game-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin:  12rem auto;
+}
+
+#window{
+    margin: 0 auto;
+    padding: 50px 0;
+    width: 900px;
+    height: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(29, 29, 29);
+    border-radius: 2rem;
+}

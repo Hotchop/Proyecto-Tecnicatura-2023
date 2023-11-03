@@ -1,0 +1,51 @@
+.characters-section{
+    background-image: url("../../../../assets/characterSec.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80rem;
+    display: flex;
+
+}
+.black-backgr{
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.616);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.char-txt hr{
+    width: 100%;
+}
+.char-txt{
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    width: 80%;
+    margin-top: 30rem;
+}
+.char-txt h2{
+    font-weight: normal;
+    font-size: 4rem;
+    margin-bottom: 0;
+}
+.char-txt p{
+    font-size: 2rem;
+    text-align: justify;
+}
+.char-content{
+    display: flex;
+}
+.char-img{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+ 
+}
+#imagen{
+    height: 100%;
+    width: 100%;
+    opacity: 1;
+
+}

@@ -1,0 +1,58 @@
+.new-user{
+    height: 50%;
+    margin: 10rem auto;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.new-user legend{
+    width: 100%;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.registro{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.campo{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+}
+
+.campo label{
+    width: 30%;
+    margin-left: auto;
+    
+}
+
+.campo input{
+    width: 50%;
+    margin-right: auto;
+}
+
+.error{
+    width: 80%;
+    margin: auto;
+    background-color: rgb(235, 153, 153);
+    color: rgb(136, 3, 3);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#submit{
+    margin-top: 1rem;
+}
+

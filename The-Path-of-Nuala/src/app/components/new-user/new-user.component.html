@@ -1,0 +1,42 @@
+<fieldset class="new-user">
+    <legend>Registro</legend>
+    <form action="" class="registro" (ngSubmit)="registraUsuario()" [formGroup]="newUser">
+        <div class="campo">
+            <label for="usuario">Nombre de Usuario:</label>
+            <input type="text" formControlName="username">
+        </div>
+        <div class="error"
+            *ngIf="validar('username', 'required')">
+            <span>El campo es requerido</span>
+          </div>
+          <div class="error"
+            *ngIf="validar('username', 'minlength')">
+            <span>Minimo 3 caracteres</span>
+          </div>
+        <div class="campo">
+            <label for="">Contraseña:</label>
+            <input type="password" formControlName="password">
+        </div>
+        <div class="error"
+            *ngIf="validar('password', 'required')">
+            <span>El campo es requerido</span>
+          </div>
+          <div class="error"
+            *ngIf="validar('password', 'minlength')">
+            <span>Minimo 3 caracteres</span>
+          </div>
+        <div class="campo">
+            <label for="">Verifique Contraseña:</label>
+            <input type="password" formControlName="confirmPassword">
+        </div>
+        <div class="error"
+            *ngIf="validar('confirmPassword', 'required')">
+            <span>El campo es requerido</span>
+          </div>
+          <div class="error"
+            *ngIf="newUser.hasError('notSame') && newUser.controls['confirmPassword'].touched">
+            <span>Las contraseñas no son iguales</span>
+          </div>
+        <input type="submit" id="submit" value="Crear Cuenta">
+    </form>
+</fieldset>

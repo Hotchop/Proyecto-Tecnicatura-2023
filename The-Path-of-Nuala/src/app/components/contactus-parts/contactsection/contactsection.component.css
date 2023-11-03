@@ -1,0 +1,73 @@
+.fondo {
+    position: relative;
+    height: 100rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    color: white;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .fondo-txt h1 {
+    font-family: 'Abhaya Libre';
+    font-size: 9rem;
+    font-weight: normal;
+    display: inline-block;
+    color: inherit;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  
+  .developer {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    font-weight: 300;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    width: 200px;
+    background-color: #1f2a36; /* Fondo azul oscuro */
+    border: 2px solid #1f2a36; /* Borde azul oscuro */
+    color: #fff; /* Texto blanco */
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .developer a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    margin: 10px 0;
+  }
+  h3{
+    font-family: 'Abhaya Libre';
+  }
+  .developer a:hover {
+    background-color: #284056; /* Cambio de color al pasar el cursor */
+    border-color: #284056; /* Cambio de color del borde al pasar el cursor */
+  }
+  
+  
+  
+  
+  
+  
+
+    
