@@ -1,10 +1,25 @@
+.background{
+    background-image: url('src/assets/characterSec.png');
+    background-size: cover;
+    height: 80rem;
+    width: 100%;
+    position: absolute;
+}
+
 .new-user{
-    height: 50%;
-    margin: 30rem auto;
+    height: auto;
+    width: 30%;
+    margin: 15rem auto;
     font-size: 1.5rem;
     display: flex;
     flex-direction: column;
-    padding: 4rem 0rem;
+    font-family: 'Raleway', sans-serif;
+    background-color: rgba(0, 0, 0, 0.469);
+    font-weight: bold;
+}
+
+legend{
+    font-family: 'Abhaya Libre';
 }
 
 .new-user legend{
@@ -14,7 +29,6 @@
     color: white;
     padding: 1rem;
     border-radius: 0.5rem;
-    font-weight: bold;
 }
 
 .registro{
@@ -32,14 +46,14 @@
 }
 
 .campo label{
-    width: 30%;
-    margin-left: auto;
+    width: 40%;
+    margin-right: auto;
     
 }
 
 .campo input{
     width: 50%;
-    margin-right: auto;
+    margin-left: auto;
 }
 
 .error{
@@ -48,7 +62,6 @@
     background-color: rgb(235, 153, 153);
     color: rgb(136, 3, 3);
     font-size: 1.5rem;
-    font-weight: bold;
     border-radius: 0.5rem;
     text-align: center;
     padding: 0.5rem;
@@ -56,5 +69,31 @@
 
 #submit{
     margin-top: 1rem;
+}
+
+.avatar-selector{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.avatar-field{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar-field img{
+    width: 75%;
+    padding: .5rem 0;
+}
+
+.avatar-field P{
+    margin: 0rem;
+    padding: 1rem 0 .5rem 0;
+}
+
+#avatar-legend{
+    margin-top: 2rem;
 }
 
