@@ -85,8 +85,23 @@ legend{
 
 .avatar-field img{
     width: 75%;
-    padding: .5rem 0;
+    border-radius: 25%;
+    border: 3px solid rgb(0, 0, 0, 0);
 }
+.avatar-field img:hover{
+    border: 3px solid white;
+    transition: ease 0.3s;
+    cursor: pointer;
+}
+
+.avatar-field img:active {
+    cursor: pointer;
+}
+
+input[type=radio]{
+    display: hidden;
+}
+
 
 .avatar-field P{
     margin: 0rem;
@@ -96,4 +111,21 @@ legend{
 #avatar-legend{
     margin-top: 2rem;
 }
+
+input[type="radio"]{
+    width: 0rem;
+    height: 0rem;
+    margin: 0rem;
+    opacity: 0%;
+}
+
+.avatar-field label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type=radio]:checked + label > img {
+    border: 3px solid #0075ff;
+  }
 

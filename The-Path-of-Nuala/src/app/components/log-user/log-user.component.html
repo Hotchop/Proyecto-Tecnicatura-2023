@@ -1,1 +1,23 @@
-<p>log-user works!</p>
+<section class="background">
+    <fieldset class="new-user">
+          <legend>LOGIN</legend>
+          <form action="" (ngSubmit)="login()" [formGroup]="form" class="registro">
+      
+              <div class="campo">
+                  <label for="usuario">Username</label>
+                  <input type="text" formControlName="username">
+              </div>
+      
+              <div class="campo">
+                  <label for="">Password</label>
+                  <input type="password" formControlName="password">
+              </div>
+      
+              <input type="submit" id="submit" value="Log In">
+
+              <span>Don't have an account?</span>
+
+              <input type="button" routerLink="/register" id="create" value="Create Account">
+          </form>
+    </fieldset>
+    </section>

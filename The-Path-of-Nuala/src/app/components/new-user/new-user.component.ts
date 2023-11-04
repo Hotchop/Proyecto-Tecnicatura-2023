@@ -9,7 +9,6 @@ import { user } from 'src/app/interfaces/interfaces';
   styleUrls: ['./new-user.component.css']
 })
 export class NewUserComponent {
-
   
   constructor(private formBuilder: FormBuilder,private userbase: UserbaseService){
 
@@ -28,7 +27,7 @@ export class NewUserComponent {
     username:['',[Validators.required,Validators.minLength(3)]],
     password:['',[Validators.required,Validators.minLength(3)]],
     confirmPassword:['',[Validators.required]],
-    avatar:['']
+    avatar:['option1']
   }, { validators: this.checkPasswords })
   
   async registraUsuario(){
@@ -67,6 +66,7 @@ export class NewUserComponent {
       partidas: []
     }
     this.userbase.postUser(usuario);
+    alert('Your account was created!')
   }
 
   validar(field: string, error: string){

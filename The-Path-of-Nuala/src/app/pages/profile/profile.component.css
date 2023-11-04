@@ -1,0 +1,10 @@
+a{
+    color: red;
+    background-color: rgb(230, 116, 116);
+    text-align: center;
+    font-size: 5rem;
+    font-weight: bold;
+    width: 30%;
+    margin: 12rem auto;
+    position:  absolute;
+}

@@ -17,7 +17,7 @@ export class UserbaseService {
       const list = response.json();
       return list;
     } catch (error) {
-      alert('Error al recibir usuarios')
+      alert('Error while getting users')
     }
   }
 
@@ -29,9 +29,18 @@ export class UserbaseService {
         body: JSON.stringify(user),
         headers:{'Content-type':'application/json'}
       })
-      this.router.navigate(['login']);
+      this.router.navigate(['/login']);
     } catch (error) {
-      alert('Error al crear usuario')
+      alert('Error while creating user')
+    }
+  }
+
+  async deleteUser(id: number){
+    try {
+      await fetch(`${this.url}/${id}`,{method: 'DELETE'});
+      this.router.navigate(['/home']);
+    } catch (error) {
+      alert('Error while deleting user')
     }
   }
 }
