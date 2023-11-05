@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserbaseService } from 'src/app/services/userbase.service';
 
 @Component({
   templateUrl: './profile.component.html',
@@ -7,14 +6,5 @@ import { UserbaseService } from 'src/app/services/userbase.service';
 })
 export class ProfileComponent {
 
-  constructor(private userbase: UserbaseService){}
-
-  async delete(){
-    try {
-      await this.userbase.deleteUser(1);
-    } catch (error) {
-      
-    }
-  }
 
 }

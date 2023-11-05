@@ -1,23 +1,37 @@
 <section class="background">
-    <fieldset class="new-user">
-          <legend>LOGIN</legend>
-          <form action="" (ngSubmit)="login()" [formGroup]="form" class="registro">
-      
-              <div class="campo">
-                  <label for="usuario">Username</label>
-                  <input type="text" formControlName="username">
-              </div>
-      
-              <div class="campo">
-                  <label for="">Password</label>
-                  <input type="password" formControlName="password">
-              </div>
-      
-              <input type="submit" id="submit" value="Log In">
-
-              <span>Don't have an account?</span>
-
-              <input type="button" routerLink="/register" id="create" value="Create Account">
-          </form>
-    </fieldset>
+    <section class="login">
+        <fieldset class="new-user">
+              <legend>LOGIN</legend>
+              <form action="" (ngSubmit)="login()" [formGroup]="form" class="registro">
+          
+                  <div class="campo">
+                      <label for="usuario">Username</label>
+                      <input type="text" formControlName="username">
+                  </div>
+          
+                  <div class="campo">
+                      <label for="">Password</label>
+                      <input type="password" formControlName="password">
+                  </div>
+                  
+                  <div class="options">
+                      <input type="submit" id="submit" value="Log In" class="buttons">
+                      <input type="button" routerLink="/home" value="Back" class="buttons">
+                  </div>
+    
+                  <span>Don't have an account?</span>
+    
+                  <input type="button" routerLink="/register" id="create" value="Create Account" class="buttons">
+              </form>
+        </fieldset>
     </section>
+
+    <section class="info">
+        <div class="text">
+            <h2>Join Us Now!</h2>
+            <p>The Path of Nuala is a web based where your choises and actions affect the story of your characters.<br>
+                Join now to be able to create your own characters and record their progress and continue their legacy!
+            </p>
+        </div>
+    </section>
+</section>

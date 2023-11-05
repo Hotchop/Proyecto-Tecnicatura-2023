@@ -22,6 +22,8 @@ import { LogUserComponent } from './components/log-user/log-user.component';
 import { HomeSectionPlayNowComponent } from './components/home-parts/home-section-play-now/home-section-play-now.component';
 import { ContactsectionComponent } from './components/contactus-parts/contactsection/contactsection.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UserInfoComponent } from './components/profile-parts/user-info/user-info.component';
+import { UserScoresComponent } from './components/profile-parts/user-scores/user-scores.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
     LogUserComponent,
     HomeSectionPlayNowComponent,
     ContactsectionComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserInfoComponent,
+    UserScoresComponent
   ],
   imports: [
     BrowserModule,

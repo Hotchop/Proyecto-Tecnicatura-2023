@@ -12,11 +12,11 @@ import { AuthGuard } from './guards/auth-guard';
 
 const routes: Routes = [
   {path:'home',component:HomeComponent},
-  {path:'login',component:LoginComponent,canActivate:[LoginGuard]},
+  {path:'login',component:LoginComponent,canActivate:[LoginGuard]}, //Puede accederse al login y register si no estas logueado
   {path:'register',component:RegisterComponent,canActivate:[LoginGuard]},
   {path:'contact-us', component:ContactUsComponent},
   {path:'how-to-play', component:HowToPlayComponent},
-  {path:'play',component:PlayComponent},
+  {path:'play',component:PlayComponent,canActivate:[AuthGuard]},  //Puede accederse al perfil y al juego si esta logueado
   {path:'profile',component:ProfileComponent,canActivate:[AuthGuard]},
   {path:'**',redirectTo:'home'}
 ];

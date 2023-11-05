@@ -129,3 +129,12 @@ input[type=radio]:checked + label > img {
     border: 3px solid #0075ff;
   }
 
+.buttons input{
+    margin: 0 1rem;
+    font-size: 1.5rem;
+    font-weight: 525;
+    color: white;
+    background-color: rgb(17, 17, 17);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}

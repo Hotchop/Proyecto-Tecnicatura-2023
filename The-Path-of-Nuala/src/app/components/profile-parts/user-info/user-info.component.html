@@ -1,0 +1,13 @@
+<section class="user-info">
+    <img src="{{getUser?.avatar}}" alt="">
+    <h2>{{getUser?.usuario}}</h2>
+    <div class="options">
+        <fieldset class="profile-options">
+            <legend>Profile Options</legend>
+            <form action="" class="buttons">
+                <input type="button" (click)="onLogOut()" value="Log Out">
+                <input type="button" (click)="delete()" value="Delete Account" id="deletion">
+            </form>
+        </fieldset>
+    </div>
+</section>

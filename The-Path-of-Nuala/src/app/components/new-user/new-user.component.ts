@@ -49,13 +49,13 @@ export class NewUserComponent {
     
     switch(this.newUser.controls['avatar'].value){
       default:
-        avatarLink = 'src/assets/avatars/warrior-avatar.png'
+        avatarLink = '/assets/avatars/warrior-avatar.png'
         break;
       case 'option2':
-        avatarLink = 'src/assets/avatars/mage-avatar.png'
+        avatarLink = '/assets/avatars/mage-avatar.png'
         break;
       case 'option3':
-        avatarLink = 'src/assets/avatars/ranger-avatar.png'
+        avatarLink = 'assets/avatars/ranger-avatar.png'
         break;
     }
 

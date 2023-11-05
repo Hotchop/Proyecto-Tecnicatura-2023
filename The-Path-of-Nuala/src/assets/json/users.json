@@ -1,3 +1,60 @@
 {
-  "users": []
+  "users": [
+    {
+      "usuario": "Admin",
+      "constraseña": "admin",
+      "avatar": "assets/avatars/ranger-avatar.png",
+      "partidas": [
+        {
+          "fecha": "2023-11-01",
+          "personaje":{
+            "charName":"Reiner"
+          },
+          "puntaje": 100000,
+          "id": 1
+        },
+        {
+          "fecha": "2023-11-01",
+          "personaje":{
+            "charName":"Annie"
+          },
+          "puntaje": 100000,
+          "id": 2
+        },
+        {
+          "fecha": "2023-11-01",
+          "personaje":{
+            "charName":"Eren"
+          },
+          "puntaje": 100000,
+          "id": 3
+        },
+        {
+          "fecha": "2023-11-01",
+          "personaje":{
+            "charName":"Armin"
+          },
+          "puntaje": 100000,
+          "id": 4
+        },
+        {
+          "fecha": "2023-11-01",
+          "personaje":{
+            "charName":"Piek"
+          },
+          "puntaje": 100000,
+          "id": 5
+        },
+        {
+          "fecha": "2023-11-01",
+          "personaje":{
+            "charName":"Zeke"
+          },
+          "puntaje": 100000,
+          "id": 6
+        }
+      ],
+      "id": 1
+    }
+  ]
 }

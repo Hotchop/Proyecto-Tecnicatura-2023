@@ -14,8 +14,7 @@
             <a class="enlace" [routerLink]="['/contact-us']">Contact Us</a>
         </div>
         <div class="nav-boton">
-            <a class="enlace" *ngIf="!loggedStatus" [routerLink]="['/login']">Login</a>
-            <a class="enlace" *ngIf="loggedStatus" [routerLink]="['/profile']">Profile</a>
+            <a class="enlace"  [routerLink]="['/profile']">Profile</a>
         </div>
         <div class="background-img-navbar"><img src="../../../../assets/navbarshadow.png" alt=""></div>
     </nav>

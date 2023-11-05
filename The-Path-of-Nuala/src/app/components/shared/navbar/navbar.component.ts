@@ -1,5 +1,4 @@
-import { Component, HostListener } from '@angular/core';
-import { AuthGuard } from 'src/app/guards/auth-guard';
+import { Component, HostListener} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,12 +6,6 @@ import { AuthGuard } from 'src/app/guards/auth-guard';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-
-  loggedStatus;
-
-  constructor(){
-    this.loggedStatus = AuthGuard;
-  }
 
   scrolled:boolean=false;
   @HostListener('window:scroll',[])

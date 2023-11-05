@@ -52,7 +52,7 @@
                 <p>Warrior</p>
                 <input type="radio" id="option1" value="option1" formControlName="avatar" checked>
                 <label for="option1">
-                  <img src="../../../assets/avatars/warrior-avatar.png" alt="Warrior" class="avatar-img">
+                  <img src="/assets/avatars/warrior-avatar.png" alt="Warrior" class="avatar-img">
                 </label>
               </div>
   
@@ -60,7 +60,7 @@
                 <p>Mage</p>
                 <input type="radio" id="option2" value="option2" formControlName="avatar">
                 <label for="option2">
-                  <img src="../../../assets/avatars/mage-avatar.png" alt="Mage" class="avatar-img">
+                  <img src="/assets/avatars/mage-avatar.png" alt="Mage" class="avatar-img">
                 </label>
               </div>
   
@@ -68,12 +68,15 @@
                 <p>Ranger</p>
                 <input type="radio" id="option3" value="option3" formControlName="avatar">
                 <label for="option3">
-                  <img src="../../../assets/avatars/ranger-avatar.png" alt="Mage" class="avatar-img">
+                  <img src="/assets/avatars/ranger-avatar.png" alt="Mage" class="avatar-img">
                 </label>
               </div>
             </section>
-  
-          <input type="submit" id="submit" value="Create Account">
+            
+            <div class="buttons">
+              <input type="submit" id="submit" value="Create Account">
+              <input type="button" id="back" value="Back to Login" routerLink="/login">
+            </div>
       </form>
 </fieldset>
 </section>

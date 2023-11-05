@@ -1,10 +1,37 @@
-a{
-    color: red;
-    background-color: rgb(230, 116, 116);
-    text-align: center;
-    font-size: 5rem;
-    font-weight: bold;
-    width: 30%;
-    margin: 12rem auto;
-    position:  absolute;
+.user-profile{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-image: url(../../../assets/tavern-background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.navbar{
+    position: fixed;
+    width: 100%;
+    height: 8rem;
+    background-color: rgba(0, 0, 0, 0.514);
+}
+
+.user-content{
+    width:100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 16rem;
+}
+
+.user-info{
+    width: 40%;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-scores{
+    width: 60%;
+    margin-left: auto;
 }

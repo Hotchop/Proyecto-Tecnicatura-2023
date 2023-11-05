@@ -17,6 +17,7 @@ export interface partida{
 
 /**Interfaz Personaje */
 export interface personaje{
+    charName: string;
     //Para completar con estadisticas para el juego
 }
 
