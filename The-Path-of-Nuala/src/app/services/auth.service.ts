@@ -33,9 +33,6 @@ export class AuthService {
           this.user = u;
           localStorage.setItem('token',u.id!.toString())
           this.router.navigate(['/profile'])
-        }else{
-          alert('Login information incorrect');
-          return
         }
       })
     })
