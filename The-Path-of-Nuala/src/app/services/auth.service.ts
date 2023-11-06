@@ -26,16 +26,19 @@ export class AuthService {
   }
 
   /**Verifica que el usuario y contraseña son correctos y existen */
-  verficaUserAndPass(user: string, pass: string){
+  verficaUserAndPass(username: string, pass: string, onComplete: (user?: user) => void): void {
     this.getUsers().subscribe(users => {
-      users.find(u => {
-        if(u.constraseña === pass && u.usuario === user){
-          this.user = u;
-          localStorage.setItem('token',u.id!.toString())
-          this.router.navigate(['/profile'])
-        }
-      })
-    })
+      const user: user | undefined = users.find(u => u.usuario === username)
+
+      if (user === undefined || user.constraseña !== pass){
+        onComplete(undefined);
+      }else{
+        this.user = user;
+        localStorage.setItem('token',user.id!.toString())
+        this.router.navigate(['/profile'])
+        onComplete(user);
+      }
+    })  
   }
 
   /**Verifica si el usuario esta logueado o no */

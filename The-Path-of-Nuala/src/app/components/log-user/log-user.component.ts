@@ -21,8 +21,13 @@ export class LogUserComponent {
     if (this.form.invalid) return;
     this.auth.verficaUserAndPass(
       this.form.controls['username'].value,
-      this.form.controls['password'].value
-    )
+      this.form.controls['password'].value,
+      (user) => {
+        if(user === undefined){
+          alert("Can't verify user and password")
+        }
+      }
+      )
   }
 
 }
