@@ -55,6 +55,13 @@
         }
       ],
       "id": 1
+    },
+    {
+      "usuario": "Espinaca",
+      "constraseña": "pvj6pz68ao",
+      "avatar": "assets/avatars/ranger-avatar.png",
+      "partidas": [],
+      "id": 2
     }
   ]
 }
