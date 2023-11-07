@@ -1,37 +1,40 @@
+import { Sprite } from "pixi.js";
+import { chartNumber } from "../enums/enums";
+
 /**Interfaz Usuario */
-export interface user{
+export interface User{
     usuario: string,
     constraseña: string,
     avatar: string,
-    partidas: partida[],
+    partidas: Partida[],
     id?: number
 }
 
 /**Interfaz Partidas */
-export interface partida{
+export interface Partida{
     fecha: Date,
-    personaje: personaje,
+    personaje: Personaje,
     puntaje: number,
     id?: number
 }
 
 /**Interfaz Personaje */
-export interface personaje{
+export interface Personaje{
     charName: string;
     //Para completar con estadisticas para el juego
 }
 
 /**Interfaz de Objetos Chart de Chartopia API */
-export interface chart{
+export interface Chart{
     chart_name: string,
     chart_url: string,
     results: [ string ]
   }
 
 /**Interfaz Enemigo */
-export interface enemy{
+export interface Enemy{
     name: string,
-    chartID: 76281,
     hp: number,
-    dmg: number
+    dmg: number,
+    sprite: Sprite
 }

@@ -2,12 +2,12 @@ import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router} from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { user } from '../interfaces/interfaces';
+import { User } from '../interfaces/interfaces';
 
 function checkAuthStatus(): boolean | Observable<boolean>{
   const authService = inject(AuthService);
   const  router = inject(Router);
-  const user:user | undefined = authService.currentUser
+  const user:User | undefined = authService.currentUser
 
   return authService.checkStatusAutentication()
                     .pipe(

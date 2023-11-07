@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { user } from 'src/app/interfaces/interfaces';
+import { User } from 'src/app/interfaces/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserbaseService } from 'src/app/services/userbase.service';
 
@@ -13,14 +13,14 @@ export class UserInfoComponent {
 
   constructor(private userbase: UserbaseService,private auth: AuthService, private router: Router){}
 
-  get getUser():user | undefined{
+  get getUser():User | undefined{
     return this.auth.currentUser;
   }
 
   async delete(){
     try {
       if(confirm('Are you sure you want to delete your account? This action is irreversible!')){
-        const user: user | undefined  = this.getUser 
+        const user: User | undefined  = this.getUser 
         if (user){
           await this.userbase.deleteUser(user.id!);
         }else{

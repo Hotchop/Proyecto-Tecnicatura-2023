@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { user } from './../interfaces/interfaces';
+import { User } from './../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of, tap, map } from 'rxjs';
 
@@ -10,25 +10,25 @@ import { Observable, catchError, of, tap, map } from 'rxjs';
 export class AuthService {
 
   private url = 'http://localhost:4000/users'
-  private user? : user;
+  private user? : User;
 
   constructor(private http: HttpClient, private router: Router) { }
 
   /**Si lo encuentra devuelve el user, sino undefined */
-  get currentUser(): user | undefined {
+  get currentUser(): User | undefined {
     if(!this.user) return undefined
     return {...this.user}
   }
 
   /**Realiza un get del listado de usuarios observable*/
-  getUsers(): Observable<user[]>{
-    return this.http.get<user[]>(this.url)
+  getUsers(): Observable<User[]>{
+    return this.http.get<User[]>(this.url)
   }
 
   /**Verifica que el usuario y contraseña son correctos y existen */
-  verficaUserAndPass(username: string, pass: string, onComplete: (user?: user) => void): void {
+  verficaUserAndPass(username: string, pass: string, onComplete: (user?: User) => void): void {
     this.getUsers().subscribe(users => {
-      const user: user | undefined = users.find(u => u.usuario === username)
+      const user: User | undefined = users.find(u => u.usuario === username)
 
       if (user === undefined || user.constraseña !== pass){
         onComplete(undefined);
@@ -47,7 +47,7 @@ export class AuthService {
       if (!token) {
         return of(false)
       }
-      return this.http.get<user>(`${this.url}/${token}`)
+      return this.http.get<User>(`${this.url}/${token}`)
         .pipe(
           tap(u => this.user = u),
           map(u => !!u),

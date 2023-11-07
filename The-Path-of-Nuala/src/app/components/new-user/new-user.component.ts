@@ -1,7 +1,7 @@
 import { AbstractControl, FormBuilder, FormGroup, Validators,ValidatorFn,ValidationErrors } from '@angular/forms';
 import { Component } from '@angular/core';
 import { UserbaseService } from 'src/app/services/userbase.service';
-import { user } from 'src/app/interfaces/interfaces';
+import { User } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-new-user',
@@ -15,7 +15,7 @@ export class NewUserComponent {
   }
 
 
-  list: user[] = [];
+  list: User[] = [];
   
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => { //Validator para verificar contraseñas iguales
     let pass = group.get('password')!.value;
@@ -37,7 +37,7 @@ export class NewUserComponent {
     } //Fallo por formulario invalido
 
     this.list = await this.userbase.getUsers();
-    const foundUser: user|undefined = this.list.find((i) => i.usuario === this.newUser.controls['username'].value);
+    const foundUser: User|undefined = this.list.find((i) => i.usuario === this.newUser.controls['username'].value);
 
     if(foundUser){
       alert('El usuario elegido ya existe');
@@ -59,7 +59,7 @@ export class NewUserComponent {
         break;
     }
 
-    const usuario: user = {
+    const usuario: User = {
       usuario: this.newUser.controls['username'].value,
       constraseña: this.newUser.controls['password'].value,
       avatar: avatarLink,

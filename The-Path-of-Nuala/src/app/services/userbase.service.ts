@@ -1,4 +1,4 @@
-import { user } from '../interfaces/interfaces';
+import { User } from '../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -22,7 +22,7 @@ export class UserbaseService {
   }
 
 
-  async postUser(user: user){
+  async postUser(user: User){
     try {
       await fetch(this.url,{
         method: 'POST',
