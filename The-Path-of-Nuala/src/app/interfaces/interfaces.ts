@@ -1,4 +1,4 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Text } from "pixi.js";
 import { chartNumber } from "../enums/enums";
 
 /**Interfaz Usuario */
@@ -36,5 +36,6 @@ export interface Enemy{
     name: string,
     hp: number,
     dmg: number,
-    sprite: Sprite
+    sprite: Sprite,
+    namePlate: Text
 }

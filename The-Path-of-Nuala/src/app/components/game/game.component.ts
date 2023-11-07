@@ -1,9 +1,8 @@
 import { chartNumber } from './../../enums/enums';
 import { ChartopiaService } from './../../services/chartopia.service';
 import { Chart, Enemy } from './../../interfaces/interfaces';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import * as PIXI from 'pixi.js';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -11,6 +10,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./game.component.css']
 })
 export class GameComponent implements OnInit{
+
+  enemy: Enemy
 
   constructor(private chartopia: ChartopiaService){}
 
@@ -35,9 +36,10 @@ export class GameComponent implements OnInit{
       hp: number;
       dmg: number;
       sprite: PIXI.Sprite;
+      namePlate: PIXI.Text;
   
-      constructor(name: string,hp: number, dmg: number) {
-        this.name = name;
+      constructor(hp: number, dmg: number,chartopia: ChartopiaService) {
+        this.name = '';
         this.hp = hp;
         this.dmg = dmg;
         this.sprite = PIXI.Sprite.from('/assets/game-assets/enemy-ph.png');
@@ -45,35 +47,40 @@ export class GameComponent implements OnInit{
         this.sprite.x = 650;
         this.sprite.y = 300;
         this.sprite.scale.x *= -1;
+        this.namePlate = new PIXI.Text(this.name,style);
+        this.namePlate.anchor.set(0.5);
+        this.namePlate.y = this.sprite.y - 150;
+        this.namePlate.x = this.sprite.x;
+
+        getRandomName(chartNumber.NAME,chartopia,(error,result) => {
+          if(result !== undefined){
+            this.name = result;
+            this.namePlate.text = this.name;
+          }else{
+            this.name = 'Enemy';
+            this.namePlate.text = this.name;
+          }
+        })
       }
+
     }
 
-    let randomName: string;
-    this.chartopia.rollChart(chartNumber.NAME).subscribe(
-      (response: Chart) => {
-        if(response){
-           randomName = response.results[0];
-           console.log(randomName);
-        }else{
-          randomName = 'Default'
-          console.log(randomName);
-        }
-      },
-      (error) =>{
-        console.error('Error',error);
-      }
-    )
-    
+    function getRandomName(chartNumber:chartNumber,chartopia:ChartopiaService,callback: (error: Error | null, result?: string) => void){
+        chartopia.rollChart(chartNumber).subscribe(
+          (response: Chart) => {
+            if(response){
+               callback(null,response.results[0]);
+            }else{
+              callback(new Error('No response'), undefined)
+            }
+          }
+        )
+    }
 
-    let newEnemy = new enemy(randomName!,100,5)
-
-    let enemyName = new PIXI.Text(newEnemy.name,style);
-    enemyName.anchor.set(0.5);
-    enemyName.y = newEnemy.sprite.y - 150;
-    enemyName.x = newEnemy.sprite.x;
+    const newEnemy = new enemy(100,5,this.chartopia);
 
     this.app.stage.addChild(newEnemy.sprite)
-    this.app.stage.addChild(enemyName)
+    this.app.stage.addChild(newEnemy.namePlate)
     this.app.stage.render
     
 
