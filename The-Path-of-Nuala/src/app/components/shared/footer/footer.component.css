@@ -1,0 +1,58 @@
+footer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+/* Imagen de fondo del footer */
+.background-img-navbar img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: auto;
+    z-index: -1;
+    transition: opacity 0.3s;
+}
+
+/* Estilos de la cuadrícula */
+.contenedor1 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+    padding: 4rem 2rem;
+    align-items: start;
+}
+
+/* Imágenes dentro de la cuadrícula */
+.contenedor1 img {
+    max-width: 17rem;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Cajas en la cuadrícula */
+.contenedor1 .box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Contenedor 2 - Texto centrado */
+.contenedor2 {
+    text-align: center;
+}
+
+/* Enlaces con texto blanco */
+.enlace {
+    color: white;
+}
+
+/* Espaciado entre párrafos */
+.contenedor1 p {
+    margin-top: 1rem;
+}
