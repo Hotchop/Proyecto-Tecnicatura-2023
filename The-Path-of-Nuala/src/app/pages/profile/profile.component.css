@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
-
+    padding-bottom: 16rem;
 }
 
 .navbar{
