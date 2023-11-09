@@ -33,6 +33,25 @@ export class UserScoresComponent {
     }
   }
 
-  //Hacer g
+  sortOldDate(){
+    this.list.sort((a,b) => a.fecha < b.fecha? -1:1)
+  }
+
+  sortNewDate(){
+    this.list.sort((a,b) => a.fecha < b.fecha? 1:-1)
+  }
+
+  sortHeroName(){
+    this.list.sort((a,b) => a.personaje.charName < b.personaje.charName? -1:1)
+  }
+  
+  sortLowScore(){
+    this.list.sort((a,b) => a.puntaje < b.puntaje? -1:1)
+  }
+
+  sortHighScore(){
+    this.list.sort((a,b) => a.puntaje < b.puntaje? 1:-1)
+  }
+
   
 }

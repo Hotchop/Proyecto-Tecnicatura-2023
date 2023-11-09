@@ -18,7 +18,7 @@
           "personaje": {
             "charName": "Annie"
           },
-          "puntaje": 100000,
+          "puntaje": 80000,
           "id": 2
         },
         {
@@ -26,7 +26,7 @@
           "personaje": {
             "charName": "Eren"
           },
-          "puntaje": 100000,
+          "puntaje": 200000,
           "id": 3
         },
         {
@@ -38,15 +38,15 @@
           "id": 4
         },
         {
-          "fecha": "2023-11-01",
+          "fecha": "2023-11-05",
           "personaje": {
             "charName": "Piek"
           },
-          "puntaje": 100000,
+          "puntaje": 150000,
           "id": 5
         },
         {
-          "fecha": "2023-11-01",
+          "fecha": "2023-11-07",
           "personaje": {
             "charName": "Zeke"
           },
@@ -55,13 +55,6 @@
         }
       ],
       "id": 1
-    },
-    {
-      "usuario": "Espinaca",
-      "constraseña": "pvj6pz68ao",
-      "avatar": "assets/avatars/ranger-avatar.png",
-      "partidas": [],
-      "id": 2
     }
   ]
 }

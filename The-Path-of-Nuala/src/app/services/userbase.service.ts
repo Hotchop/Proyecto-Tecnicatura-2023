@@ -1,4 +1,4 @@
-import { User } from '../interfaces/interfaces';
+import { Partida, User } from '../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -41,6 +41,29 @@ export class UserbaseService {
       this.router.navigate(['/home']);
     } catch (error) {
       alert('Error while deleting user')
+    }
+  }
+
+  /**
+   * PATCH method for adding new scores to the user profile
+   * @param scores The updated list of scores with the most recent game included
+   * @param id The logged user id that is saving the scores
+   */
+  async addScore(scores:Partida[],id: number){
+    try {
+      if(scores !== null){
+        await fetch(`${this.url}/${id}`,{
+          method: 'PATCH',
+          body: JSON.stringify({partidas: scores}),
+          headers:({'Content-type':'application/json'})
+        })
+        this.router.navigate(['/profile'])
+      }
+      else{
+        alert("Can't send empty scores")
+      }
+    } catch (error) {
+      alert('Error saving score')
     }
   }
 }
