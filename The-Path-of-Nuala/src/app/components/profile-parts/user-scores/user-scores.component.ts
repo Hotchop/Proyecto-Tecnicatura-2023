@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { UserbaseService } from 'src/app/services/userbase.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Partida, User } from 'src/app/interfaces/interfaces';
+import { Save, User } from 'src/app/interfaces/interfaces';
 
 @Component({
   selector: 'app-user-scores',
@@ -13,7 +13,7 @@ export class UserScoresComponent {
 
   constructor(private userbase: UserbaseService,private auth:AuthService,private router: Router){}
 
-  list: Partida[] = [];
+  list: Save[] = [];
 
   get getUser():User | undefined{
     return this.auth.currentUser;

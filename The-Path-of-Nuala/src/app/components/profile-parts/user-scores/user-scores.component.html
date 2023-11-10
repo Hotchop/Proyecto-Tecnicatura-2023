@@ -11,14 +11,14 @@
                 <th>Date</th>
                 <th>Hero</th>
                 <th>Score</th>
-                <th>Info</th>
+                <!-- <th>Info</th> --> <!-- For future feature -->
             </thead>
             <tbody *ngFor="let item of list">
                 <tr>
                     <td>{{ fortmatDate(item.fecha ) }}</td>
                     <td>{{item.personaje.charName}}</td>
                     <td>{{item.puntaje}}</td>
-                    <td><a href="#"><img src="/assets/lupa.png" alt="More Info" id="search-icon"></a></td>
+                    <!-- <td><a href="#"><img src="/assets/lupa.png" alt="More Info" id="search-icon"></a></td> --> <!-- For future feature -->
                 </tr>
             </tbody>
         </table>

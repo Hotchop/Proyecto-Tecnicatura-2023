@@ -6,21 +6,25 @@ export interface User{
     usuario: string,
     constraseña: string,
     avatar: string,
-    partidas: Partida[],
+    partidas: Save[],
     id?: number
 }
 
 /**Interfaz Partidas */
-export interface Partida{
+export interface Save{
     fecha: Date,
-    personaje: Personaje,
+    personaje: Character,
     puntaje: number,
     id?: number
 }
 
 /**Interfaz Personaje */
-export interface Personaje{
-    charName: string;
+export interface Character{
+    charName: string,
+    MAX_HP: number,
+    hp:number,
+    dmgMod:number,
+    defenseMod:number
     //Para completar con estadisticas para el juego
 }
 
@@ -36,6 +40,8 @@ export interface Enemy{
     name: string,
     hp: number,
     dmg: number,
+    dmgMod: number,
+    defenseMod: number,
     sprite: Sprite,
     namePlate: Text
 }

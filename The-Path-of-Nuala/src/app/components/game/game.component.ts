@@ -5,7 +5,7 @@ import { Component, OnInit} from '@angular/core';
 import * as PIXI from 'pixi.js';
 import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
-import { Personaje } from 'src/app/interfaces/interfaces';
+import { Character } from 'src/app/interfaces/interfaces';
 
 
 

@@ -1,4 +1,4 @@
-import { Partida, User } from '../interfaces/interfaces';
+import { Save, User } from '../interfaces/interfaces';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -49,7 +49,7 @@ export class UserbaseService {
    * @param scores The updated list of scores with the most recent game included
    * @param id The logged user id that is saving the scores
    */
-  async addScore(scores:Partida[],id: number){
+  async addScore(scores:Save[],id: number){
     try {
       if(scores !== null){
         await fetch(`${this.url}/${id}`,{
