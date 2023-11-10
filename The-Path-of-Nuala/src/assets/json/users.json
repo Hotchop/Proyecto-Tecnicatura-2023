@@ -6,7 +6,7 @@
       "avatar": "assets/avatars/ranger-avatar.png",
       "partidas": [
         {
-          "fecha": "2023-11-01",
+          "fecha": "2023-11-01T00:00:00.000Z",
           "personaje": {
             "charName": "Reiner"
           },
@@ -14,7 +14,7 @@
           "id": 1
         },
         {
-          "fecha": "2023-11-01",
+          "fecha": "2023-11-01T00:00:00.000Z",
           "personaje": {
             "charName": "Annie"
           },
@@ -22,7 +22,7 @@
           "id": 2
         },
         {
-          "fecha": "2023-11-01",
+          "fecha": "2023-11-01T00:00:00.000Z",
           "personaje": {
             "charName": "Eren"
           },
@@ -30,7 +30,7 @@
           "id": 3
         },
         {
-          "fecha": "2023-11-01",
+          "fecha": "2023-11-01T00:00:00.000Z",
           "personaje": {
             "charName": "Armin"
           },
@@ -38,7 +38,7 @@
           "id": 4
         },
         {
-          "fecha": "2023-11-05",
+          "fecha": "2023-11-05T00:00:00.000Z",
           "personaje": {
             "charName": "Piek"
           },
@@ -46,12 +46,19 @@
           "id": 5
         },
         {
-          "fecha": "2023-11-07",
+          "fecha": "2023-11-07T00:00:00.000Z",
           "personaje": {
             "charName": "Zeke"
           },
           "puntaje": 100000,
           "id": 6
+        },
+        {
+          "fecha": "2023-11-10T04:21:49.774Z",
+          "personaje": {
+            "charName": "Mikasa"
+          },
+          "puntaje": 50000
         }
       ],
       "id": 1

@@ -10,7 +10,7 @@ import { Observable, catchError, of, tap, map } from 'rxjs';
 export class AuthService {
 
   private url = 'http://localhost:4000/users'
-  private user? : User;
+  public user? : User;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -33,7 +33,8 @@ export class AuthService {
       if (user === undefined || user.constraseña !== pass){
         onComplete(undefined);
       }else{
-        this.user = user;
+        this.user = this.normalizeUser(user);
+        console.log(this.user);
         localStorage.setItem('token',user.id!.toString())
         this.router.navigate(['/profile'])
         onComplete(user);
@@ -49,7 +50,7 @@ export class AuthService {
       }
       return this.http.get<User>(`${this.url}/${token}`)
         .pipe(
-          tap(u => this.user = u),
+          tap(u => this.user = this.normalizeUser(u)),
           map(u => !!u),
           catchError(err => of(false))
         )
@@ -60,5 +61,15 @@ export class AuthService {
     logout(){
       this.user = undefined;
       localStorage.clear()
+    }
+
+    normalizeUser(user: any){
+      return{
+        ...user,
+        partidas: user.partidas.map((partida:any) => ({
+            ...partida,
+            fecha: new Date(partida.fecha),
+        })),
+      };
     }
 }

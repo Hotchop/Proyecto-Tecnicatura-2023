@@ -53,5 +53,10 @@ export class UserScoresComponent {
     this.list.sort((a,b) => a.puntaje < b.puntaje? 1:-1)
   }
 
+  private dateFormat = new Intl.DateTimeFormat();
+  fortmatDate(date: Date){
+    return this.dateFormat.format(date);
+  }
+
   
 }
