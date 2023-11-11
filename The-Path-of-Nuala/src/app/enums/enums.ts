@@ -15,3 +15,14 @@ export enum enemyActions{
     BUFF,
     STRONG_BUFF,
 }
+
+export enum actionIcons{
+    ATTACK = "/assets/game-assets/action-icons/attack.png",
+    STRONG_ATTACK = "/assets/game-assets/action-icons/strong_attack.png",
+    DEFEND = "/assets/game-assets/action-icons/defend.png",
+    STRONG_DEFEND = "/assets/game-assets/action-icons/strong_defend.png",
+    DEBUFF = "/assets/game-assets/action-icons/debuff.png",
+    STRONG_DEBUFF = "/assets/game-assets/action-icons/strong_debuff.png",
+    BUFF = "/assets/game-assets/action-icons/buff.png",
+    STRONG_BUFF = "/assets/game-assets/action-icons/strong_buff.png",
+}

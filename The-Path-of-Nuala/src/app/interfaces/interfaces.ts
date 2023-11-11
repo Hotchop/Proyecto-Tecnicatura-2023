@@ -38,6 +38,7 @@ export interface Chart{
 /**Interfaz Enemigo */
 export interface Enemy{
     name: string,
+    MAX_HP: number
     hp: number,
     dmg: number,
     dmgMod: number,

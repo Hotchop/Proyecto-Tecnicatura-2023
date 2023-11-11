@@ -6,6 +6,7 @@ import * as PIXI from 'pixi.js';
 import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { Character } from 'src/app/interfaces/interfaces';
+import { player } from './scripts/player';
 
 
 
@@ -33,8 +34,13 @@ export class GameComponent implements OnInit{
   fight() {
     const newEnemy = new enemy(100,5,this.chartopia);
 
-    this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate)
+    this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite)
     this.app.stage.render
+
+    const newPlayer = new player('Test');
+
+    newEnemy.sprite.eventMode = 'static';
+    newEnemy.sprite.addEventListener('click',()=>{newEnemy.enemyTurn(newPlayer)})
 
     /* *
      * Esta es una prueba para ver si los eventos de click y la carga de partidas funciona
