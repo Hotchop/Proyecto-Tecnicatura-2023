@@ -44,5 +44,5 @@ export interface Enemy{
     dmgMod: number,
     defenseMod: number,
     sprite: Sprite,
-    namePlate: Text
+    namePlate: Text,
 }

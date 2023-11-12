@@ -8,6 +8,7 @@ import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
 import { mainTitleStyle, nameplateStyle } from './scripts/randomNameGenerator';
+import { enemyActions } from 'src/app/enums/enums';
 
 
 
@@ -28,6 +29,7 @@ export class GameComponent implements OnInit{
   private animationLogic = new animationLogic(this.app);
   private loadScreen = new PIXI.Graphics();
   private player = new player('');
+  private score = 0;
 
 
   ngOnInit(): void {
@@ -42,6 +44,8 @@ export class GameComponent implements OnInit{
     this.startScreen()
 
   }
+
+  //GAME SCREENS
 
   /**
    * Main title screen of the game
@@ -86,26 +90,64 @@ export class GameComponent implements OnInit{
    */
   async fight() {
     const newEnemy = new enemy(100,5,this.chartopia);
+    
+    let surrender = new PIXI.Text('SURRENDER',nameplateStyle)
+    surrender.anchor.set(0.5);
+    surrender.position.set(400,550)
+    
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite)
+    this.app.stage.addChild(surrender)
     
     await this.loadScreenEnter();
-
-
     
-    
-
-    const newPlayer = new player('Test');
-
     newEnemy.sprite.eventMode = 'static';
-    newEnemy.sprite.addEventListener('click',()=>{newEnemy.enemyTurn(newPlayer)})
+    newEnemy.sprite.addEventListener('click', async()=>{
+      await this.enemyPhaseLogic(newEnemy)
+    })
+
+    surrender.eventMode = 'static'
+    surrender.addEventListener('click',async () => {
+      await this.loadScreenOut();
+      this.endScreen();
+    })
   }
 
   /**
    * End Game Screen
    */
   async endScreen(){
+    
+    //Add background image
+
+    //Adds main title
+    let title = new PIXI.Text('YOUR LEGEND HAS ENDED',mainTitleStyle);
+    title.anchor.set(0.5);
+    title.position.set(400,200)
+    title.style.fontSize = 50;
+    title.style.fontWeight = 'bold';
+    title.style.fill = ["#ff0000","#570000"]
+
+    //Adds subtitle
+    let subtitle = new PIXI.Text('Save your score',nameplateStyle)
+    subtitle.anchor.set(0.5);
+    subtitle.position.set(title.x,title.y + 100)
+
+    //Renders scene and animations
+    this.app.stage.addChild(title,subtitle)
+    this.animationLogic.faddingText(title,0.005);
+    this.animationLogic.faddingText(subtitle,0.003);
+    
+    //Transitions logic with loading screen
+    subtitle.eventMode = 'static'
+    subtitle.addEventListener('click', async() =>{
+      await this.loadScreenOut()
+      this.scoring.addSave(this.player,this.score);
+    })
 
   }
+
+
+  //GAME FUNCTIONS
 
   /**
    * Resets stage to add new items and events after transition
@@ -133,6 +175,19 @@ export class GameComponent implements OnInit{
     this.animationLogic.fadeFromBlack(this.loadScreen,0.05)
     await this.animationLogic.timer(1000)
     this.app.stage.removeChildAt(this.app.stage.children.length-1)
+  }
+
+  /**
+   * The animation and logic for the enemy phase
+   * @param enemy The enemy about to take it's turn
+   */
+  async enemyPhaseLogic(enemy: enemy){
+    if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK || enemy.nextTurn === enemyActions.DEBUFF || enemy.nextTurn === enemyActions.STRONG_DEBUFF){
+      this.animationLogic.enemyAttack(enemy,5)
+    }else{
+      this.animationLogic.enemyBuff(enemy,5)
+    }
+    enemy.enemyTurn(this.player)
   }
 
 

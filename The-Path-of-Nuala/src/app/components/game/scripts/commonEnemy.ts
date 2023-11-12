@@ -136,7 +136,6 @@ export class enemy implements Enemy {
         default: console.log("Did't choose an action!");
       }
 
-      //Animate sprite
 
       //Choose next action. If the last was a buff, the enext is an attack (75% Normal, 25% Strong)
       if(this.nextTurn === enemyActions.BUFF || this.nextTurn === enemyActions.STRONG_BUFF){
