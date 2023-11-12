@@ -30,15 +30,15 @@ export class GameComponent implements OnInit{
   private player = new player('');
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
-      volume: 0.1, // ajusta el volumen según sea necesario
+      volume: 0.0, // ajusta el volumen según sea necesario
   });
   private battleOst = new Howl({
     src: ['/assets/music/battleost1.mp3',
           '/assets/music/battleost2.mp3',
           '/assets/music/battleost3.mp3',
-          
+
         ],
-    volume: 0.1, // ajusta el volumen según sea necesario
+    volume: 0.0, // ajusta el volumen según sea necesario
 });
   ngOnInit(): void {
     document.getElementById('window')!.appendChild(this.app.view);
