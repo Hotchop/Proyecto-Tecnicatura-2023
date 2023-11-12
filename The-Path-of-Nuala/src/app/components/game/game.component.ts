@@ -8,8 +8,7 @@ import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
 import { mainTitleStyle, nameplateStyle } from './scripts/randomNameGenerator';
-
-
+import {Howl, Howler} from 'howler';
 
 @Component({
   selector: 'app-game',
@@ -19,17 +18,28 @@ import { mainTitleStyle, nameplateStyle } from './scripts/randomNameGenerator';
 export class GameComponent implements OnInit{
 
   private scoring: scorer;
-  
+
   constructor(private chartopia: ChartopiaService, private auth: AuthService, private userbase: UserbaseService){
     this.scoring = new scorer(auth,userbase);
+
   }
 
   private app: PIXI.Application<HTMLCanvasElement> = new PIXI.Application({});
   private animationLogic = new animationLogic(this.app);
   private loadScreen = new PIXI.Graphics();
   private player = new player('');
-
-
+  private mainMenuOst = new Howl({
+      src: ['/assets/music/mainmenuost.mp3',],
+      volume: 0.1, // ajusta el volumen según sea necesario
+  });
+  private battleOst = new Howl({
+    src: ['/assets/music/battleost1.mp3',
+          '/assets/music/battleost2.mp3',
+          '/assets/music/battleost3.mp3',
+          
+        ],
+    volume: 0.1, // ajusta el volumen según sea necesario
+});
   ngOnInit(): void {
     document.getElementById('window')!.appendChild(this.app.view);
 
@@ -42,7 +52,11 @@ export class GameComponent implements OnInit{
     this.startScreen()
 
   }
-
+  ngOnDestroy(): void {
+    // Este método se llama cuando el componente se destruye, es un buen lugar para limpiar recursos
+    this.mainMenuOst.stop();
+    this.battleOst.stop();
+  }
   /**
    * Main title screen of the game
    */
@@ -52,6 +66,7 @@ export class GameComponent implements OnInit{
 
     //Adds main title
     let title = new PIXI.Text('The Path of Nuala',mainTitleStyle);
+    this.mainMenuOst.play()
     title.anchor.set(0.5);
     title.position.set(400,200)
 
@@ -129,6 +144,8 @@ export class GameComponent implements OnInit{
    * Loading screen loggin when launching a scene. Goes right after loaging the main sprites with an await
    */
   async loadScreenEnter(){
+    this.mainMenuOst.stop();
+    this.battleOst.play();
     this.app.stage.addChild(this.loadScreen)
     this.animationLogic.fadeFromBlack(this.loadScreen,0.05)
     await this.animationLogic.timer(1000)
