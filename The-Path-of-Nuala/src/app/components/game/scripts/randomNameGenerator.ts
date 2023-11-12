@@ -29,3 +29,16 @@ export const nameplateStyle: PIXI.TextStyle = new PIXI.TextStyle({
     fontFamily: "\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
     fontVariant: "small-caps"
 });
+
+export const mainTitleStyle = new PIXI.TextStyle({
+  dropShadow: true,
+  dropShadowAngle: 1.1,
+  dropShadowBlur: 7,
+  fill: "#ffffff",
+  fillGradientStops: [
+      0.5
+  ],
+  fontFamily: "Abhaya Libre",
+  fontSize: 70,
+  strokeThickness: 1
+});
