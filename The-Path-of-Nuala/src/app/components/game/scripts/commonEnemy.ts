@@ -9,6 +9,9 @@ import { player } from './player';
 const enemyDefaultName = 'Enemy'
 const enemyDefaultSprite = '/assets/game-assets/enemy-ph.png'
 const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
+const enemyDefaultHealth = 100;
+const enemyDefaultDamage = 5;
+const enemyDefaultScore = 100;
 
 /**
  * Common enemy class. Sets name and nameplate using the getRandomName function
@@ -21,26 +24,28 @@ export class enemy implements Enemy {
     sprite: PIXI.Sprite;
     dmgMod: number;
     defenseMod: number;
+    score: number;
     namePlate: PIXI.Text;
     nextTurn: enemyActions;
     nextTurnSprite: PIXI.Sprite;
     currentStatusSprite: PIXI.Sprite;
     hittedIcon: PIXI.Sprite;
 
-    constructor(MAX_HP: number, dmg: number,chartopia: ChartopiaService) {
+    constructor(difficulty: number,chartopia: ChartopiaService) {
       //Stats setup
-      this.MAX_HP = MAX_HP
+      this.MAX_HP = enemyDefaultHealth * difficulty;
       this.hp = this.MAX_HP;
-      this.dmg = dmg;
+      this.dmg = enemyDefaultDamage * difficulty;
       this.dmgMod = 1;
       this.defenseMod = 1;
+      this.score = enemyDefaultScore * difficulty;
       this.nextTurn = enemyActions.ATTACK;
       
       //Sprite setup
       this.sprite = PIXI.Sprite.from(enemyDefaultSprite);
       this.sprite.anchor.set(0.5);
       this.sprite.x = 600;
-      this.sprite.y = 300;
+      this.sprite.y = 350;
       this.sprite.scale.x *= -1;
       
       //PIXI text setup
@@ -69,8 +74,8 @@ export class enemy implements Enemy {
 
       this.currentStatusSprite = PIXI.Sprite.from(actionIcons.DEFEND)
       this.currentStatusSprite.anchor.set(0.5)
-      this.currentStatusSprite.y = this.sprite.y + 150;
-      this.currentStatusSprite.x = this.sprite.x;
+      this.currentStatusSprite.y = this.sprite.y;
+      this.currentStatusSprite.x = this.sprite.x + 75;
       this.currentStatusSprite.visible = false
 
       this.hittedIcon = PIXI.Sprite.from(hitSprite)
@@ -177,6 +182,10 @@ export class enemy implements Enemy {
         default: console.log("Did't choose an action!");
       }
       
+    }
+
+    get getHp(){
+      return this.hp;
     }
 
     getHit(damage: number){

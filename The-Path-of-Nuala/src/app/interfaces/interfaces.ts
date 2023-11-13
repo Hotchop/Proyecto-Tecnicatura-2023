@@ -43,6 +43,7 @@ export interface Enemy{
     dmg: number,
     dmgMod: number,
     defenseMod: number,
+    score: number,
     sprite: Sprite,
     namePlate: Text,
     nextTurn: enemyActions;

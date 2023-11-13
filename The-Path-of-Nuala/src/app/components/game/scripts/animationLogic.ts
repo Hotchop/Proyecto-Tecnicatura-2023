@@ -108,21 +108,18 @@ export class animationLogic{
             if(animate === true){
                 if(enemy.sprite.x > destination){
                     enemy.sprite.x -= speed * delta
-                    console.log('Attacking');
                 }
-                if(enemy.sprite.x === destination){
+                if(enemy.sprite.x <= destination){
                     animate = false
-                    console.log('Stopped');
                 }
             }
             if(animate === false){
                 if(enemy.sprite.x < posX){
                     enemy.sprite.x += speed * delta
-                    console.log('Returning');
                 }
                 else{
-                    if(enemy.sprite.x === posX){
-                        console.log('Finished');
+                    if(enemy.sprite.x >= posX){
+                        enemy.sprite.x = posX
                         this.app.ticker.remove(attackTicker)
                     }
                 }
@@ -150,35 +147,33 @@ export class animationLogic{
                 if(animate === 0){
                     if(enemy.sprite.x > destinationLeft){
                         enemy.sprite.x -= speed * delta
-                        console.log('1');
                     }
                     if(enemy.sprite.x <= destinationLeft){
                         animate = 1
-                        console.log('2');
                     }
+                }else{
+                    if(animate === 1){
+                        if(enemy.sprite.x < destinationRight){
+                            enemy.sprite.x += speed * delta
+                        }
+                        if(enemy.sprite.x >= destinationRight){
+                            animate = 2
+                        }
+                    }else{
+                        if(animate === 2){
+                            if(enemy.sprite.x > posX){
+                                enemy.sprite.x -= speed * delta
+                            }
+                            if(enemy.sprite.x <= posX){
+                                animate = 0
+                                enemy.sprite.x = posX
+                                this.app.ticker.remove(buffTicker)
+                            }
+                        }
+
+                    }
+
                 }
-                if(animate === 1){
-                    if(enemy.sprite.x < destinationRight){
-                        enemy.sprite.x += speed * delta
-                        console.log('3');
-                    }
-                    if(enemy.sprite.x >= destinationRight){
-                        animate = 2
-                        console.log('4');
-                    }
-                }
-                if(animate === 2){
-                    if(enemy.sprite.x > posX){
-                        enemy.sprite.x -= speed * delta
-                        console.log('5');
-                    }
-                    if(enemy.sprite.x === posX){
-                        animate = 0
-                        console.log('6');
-                        this.app.ticker.remove(buffTicker)
-                    }
-                }
-            
         };
 
         this.app.ticker.add(buffTicker)
@@ -216,7 +211,6 @@ export class animationLogic{
 
         const turnTextTicker = (delta:number) => {
             elapsedTime += delta;
-            console.log(elapsedTime);
             if(animate === true){
                 if(text.alpha < 1){
                     text.alpha += speed * delta;

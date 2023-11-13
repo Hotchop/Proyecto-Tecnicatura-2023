@@ -8,8 +8,6 @@ import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
 import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle } from './scripts/randomNameGenerator';
-import { enemyActions } from 'src/app/enums/enums';
-import { mainTitleStyle, nameplateStyle } from './scripts/randomNameGenerator';
 import {enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
@@ -35,6 +33,7 @@ export class GameComponent implements OnInit{
   private player = new player('');
   private score = 0;
   private stageNum=1;
+  private difficulty = 1; ///0,75 - 1.00 - 1,25
 
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
@@ -117,17 +116,13 @@ export class GameComponent implements OnInit{
      */
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
-    const newEnemy = new enemy(100,5,this.chartopia);
+    const newEnemy = new enemy(this.difficulty,this.chartopia);
     
 
-
-    this.app.stage.addChild(backSprite.sprite)
-    this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon)
-    this.app.stage.addChild(fightMenu.menuBack)
-    this.app.stage.addChild(fightMenu.attackButton)
-    this.app.stage.addChild(fightMenu.guardButton)
-    this.app.stage.addChild(fightMenu.runButton)
-    this.app.stage.addChild(fightMenu.itemButton)
+    this.app.stage.addChild(backSprite.sprite)  //Background
+    this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon) //Enemy
+    this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
+    this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     
     await this.loadScreenEnter();
     
@@ -135,25 +130,32 @@ export class GameComponent implements OnInit{
     while(onFight === true){
       //Start Player Turn
       this.animationLogic.turnTextAnimation(playerTurnTitle,0.05);
-      await this.animationLogic.timer(5000);
+      await this.animationLogic.timer(3000);
 
       //Player Turn Logic
 
       //Enemy Turn
       this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
-      await this.animationLogic.timer(5000);
+      await this.animationLogic.timer(3000);
 
       //Enemy Turn Logic
       await this.enemyPhaseLogic(newEnemy)
+      await this.animationLogic.timer(2000);
       if(this.player.getHp <= 0){
         onFight = false;
-        return
       }
     }
 
     if(this.player.getHp <= 0){
+      //Play player Death
       await this.loadScreenOut();
       this.endScreen();
+    }else{
+      if(newEnemy.getHp <= 0){
+        this.score += newEnemy.score;
+        //Play enemy death
+        //Load Next Level Menu
+      }
     }
 
 
