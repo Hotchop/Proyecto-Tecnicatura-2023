@@ -29,6 +29,7 @@ export interface Character{
     nextTurnSprite:Sprite,
     currentTurnSprite:Sprite,
     dmg:number,
+    hittedIcon: Sprite,
 }
 
 /**Interfaz de Objetos Chart de Chartopia API */

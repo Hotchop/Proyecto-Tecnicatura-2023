@@ -213,6 +213,7 @@ export class animationLogic{
                 icon.width -= speed * delta;
                 icon.height -= speed * delta;
                 icon.alpha -= speed * delta;
+                console.log('hitanimation');
             }else{
                 this.app.ticker.remove(hitTicker);
                 icon.width = defaultWidht;
@@ -246,9 +247,24 @@ export class animationLogic{
                 }
 
             }
-            
         } 
-        
+
         this.app.ticker.add(turnTextTicker);
+    }
+
+    deathAnimation(creature: PIXI.Sprite,speed: number){
+        
+        const deathTicker = (delta:number) => {
+            if(creature.alpha > 0){
+                creature.alpha -= speed * delta;
+                creature.rotation += speed / 4 * delta;
+                creature.width -= speed * 100 * delta;
+                creature.height -= speed * 100 * delta;
+            }else{
+                this.app.ticker.remove(deathTicker);
+            }
+        }
+
+        this.app.ticker.add(deathTicker);
     }
 }

@@ -4,6 +4,8 @@ import { Character } from "src/app/interfaces/interfaces";
 import { enemy } from './commonEnemy';
 import { healthbar } from './healthbarLogic';
 
+const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
+
 export class player implements Character{
     charName: string;
     MAX_HP: number;
@@ -14,6 +16,7 @@ export class player implements Character{
     nextTurnSprite:PIXI.Sprite;
     currentTurnSprite:PIXI.Sprite;
     dmg:number;
+    hittedIcon: PIXI.Sprite;
 
     constructor(name: string){
         this.charName = name;
@@ -21,11 +24,19 @@ export class player implements Character{
         this.hp = this.MAX_HP;
         this.dmgMod = 1;
         this.defenseMod = 1;
+        this.dmg = 10;
         this.currentTurnSprite=new PIXI.Sprite(PIXI.Texture.from(playerSprites.EXAMPLE));
-        this.currentTurnSprite.x=100;
-        this.currentTurnSprite.y=100;
+        this.currentTurnSprite.anchor.set(0.5)
+        this.currentTurnSprite.x=200;
+        this.currentTurnSprite.y=275;
         this.currentTurnSprite.width=200;
         this.currentTurnSprite.height=400;
+
+        this.hittedIcon = PIXI.Sprite.from(hitSprite)
+        this.hittedIcon.anchor.set(0.5)
+        this.hittedIcon.y = this.currentTurnSprite.y-50;
+        this.hittedIcon.x = this.currentTurnSprite.x;
+        this.hittedIcon.alpha = 0;
     }
 
     get getCharName(){

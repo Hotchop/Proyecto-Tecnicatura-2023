@@ -78,12 +78,12 @@ export const turnTitleStyle = new PIXI.TextStyle({
  * PIXI Text Constants
  */
 
-export const playerTurnTitle = new PIXI.Text(`Player\nTurn`,turnTitleStyle);
+export const playerTurnTitle = new PIXI.Text(`Player's\nTurn`,turnTitleStyle);
     playerTurnTitle.anchor.set(0.5)
-    playerTurnTitle.position.set(400,100)
+    playerTurnTitle.position.set(400,150)
     playerTurnTitle.alpha = 0;
     
-export const enemyTurnTitle = new PIXI.Text(`Enemy\nTurn`,turnTitleStyle);
+export const enemyTurnTitle = new PIXI.Text(`Enemy's\nTurn`,turnTitleStyle);
     enemyTurnTitle.anchor.set(0.5)
-    enemyTurnTitle.position.set(400,100)
+    enemyTurnTitle.position.set(400,150)
     enemyTurnTitle.alpha = 0;

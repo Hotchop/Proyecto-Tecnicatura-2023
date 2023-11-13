@@ -124,7 +124,7 @@ export class GameComponent implements OnInit{
 
     this.app.stage.addChild(backSprite.sprite)  //Background
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon) //Enemy
-    this.app.stage.addChild(this.player.currentTurnSprite);
+    this.app.stage.addChild(this.player.currentTurnSprite,this.player.hittedIcon);
     this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     this.app.stage.addChild(this.playerHealthBar.barHealth);
@@ -144,7 +144,9 @@ export class GameComponent implements OnInit{
       playerPlayed=await this.playerTurn(fightMenu,newEnemy);
       console.log(playerPlayed)
       await this.animationLogic.timer(2000);
-
+      if(newEnemy.getHp <= 0){
+        onFight = false;
+      }else{
         //Enemy Turn
       if(playerPlayed==true){
           this.menuUnavailable(fightMenu);
@@ -157,28 +159,27 @@ export class GameComponent implements OnInit{
           onFight = false;
         }
       }
+
+      }
+
     }
 
     if(this.player.getHp <= 0){
-      //Play player Death
+      await this.animationLogic.deathAnimation(this.player.currentTurnSprite,0.05)
+      await this.animationLogic.timer(1000);
       await this.loadScreenOut();
       this.endScreen();
     }else{
       if(newEnemy.getHp <= 0){
         this.score += newEnemy.score;
-        //Play enemy death
+        newEnemy.namePlate.alpha = 0;
+        newEnemy.currentStatusSprite.alpha = 0;
+        newEnemy.nextTurnSprite.alpha = 0;
+        await this.animationLogic.deathAnimation(newEnemy.sprite,0.05)
+        await this.animationLogic.timer(1000);
         //Load Next Level Menu
       }
     }
-
-
-
-
-
-    /* newEnemy.sprite.eventMode = 'static';
-    newEnemy.sprite.addEventListener('click', async()=>{
-      await this.enemyPhaseLogic(newEnemy)
-    }) */
 
     
 
@@ -196,6 +197,7 @@ export class GameComponent implements OnInit{
       fightMenu.attackButton.addEventListener('click',()=>{
           this.player.nextTurn=playerActions.ATTACK;
           this.player.action(newEnemy,this.playerHealthBar);
+          this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
           resolve(true)
     })
     fightMenu.guardButton.eventMode='static';
@@ -297,10 +299,10 @@ export class GameComponent implements OnInit{
   async enemyPhaseLogic(enemy: enemy){
     if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK || enemy.nextTurn === enemyActions.DEBUFF || enemy.nextTurn === enemyActions.STRONG_DEBUFF){
       this.animationLogic.enemyAttack(enemy,5)
+      await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
     }else{
       this.animationLogic.enemyBuff(enemy,5)
     }
-    this.animationLogic.hitIconAnimation(enemy.hittedIcon,0.01) //Test - Remove later
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
