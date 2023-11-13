@@ -48,3 +48,7 @@ export enum menuButtons{
 export enum playerSprites{
     EXAMPLE = "/assets/game-assets/anacleto_pj.png"
 }
+export enum healthbarEn{
+    HEALTH_BAR = "/assets/game-assets/gui/healthbar.png",
+    BAR="/assets/game-assets/gui/bar.png"
+}

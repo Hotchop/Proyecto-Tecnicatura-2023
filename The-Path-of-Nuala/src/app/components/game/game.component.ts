@@ -12,6 +12,7 @@ import {enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
 import { fightMenuClass } from './scripts/fightMenu';
+import { healthbar } from './scripts/healthbarLogic';
 
 @Component({
   selector: 'app-game',
@@ -34,7 +35,7 @@ export class GameComponent implements OnInit{
   private score = 0;
   private stageNum=1;
   private difficulty = 1; ///0,75 - 1.00 - 1,25
-
+  private playerHealthBar:healthbar;
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
       volume: 0.0, // ajusta el volumen según sea necesario
@@ -116,6 +117,8 @@ export class GameComponent implements OnInit{
      */
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
+    this.playerHealthBar=new healthbar();
+
     const newEnemy = new enemy(this.difficulty,this.chartopia);
     
 
@@ -124,7 +127,8 @@ export class GameComponent implements OnInit{
     this.app.stage.addChild(this.player.currentTurnSprite);
     this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
-    
+    this.app.stage.addChild(this.playerHealthBar.barHealth);
+    this.app.stage.addChild(this.playerHealthBar.playerHealth);
 
 
     await this.loadScreenEnter();
@@ -191,20 +195,20 @@ export class GameComponent implements OnInit{
       fightMenu.attackButton.eventMode='static';
       fightMenu.attackButton.addEventListener('click',()=>{
           this.player.nextTurn=playerActions.ATTACK;
-          this.player.action(newEnemy);
+          this.player.action(newEnemy,this.playerHealthBar);
           resolve(true)
     })
     fightMenu.guardButton.eventMode='static';
     fightMenu.guardButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.GUARD;
-        this.player.action(newEnemy);
+        this.player.action(newEnemy,this.playerHealthBar);
         resolve(true)
     })
 
     fightMenu.itemButton.eventMode='static';
     fightMenu.itemButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.HEALTH_UP;
-        this.player.action(newEnemy);
+        this.player.action(newEnemy,this.playerHealthBar);
         resolve(true)
     })
     fightMenu.runButton.eventMode='static';
@@ -297,7 +301,7 @@ export class GameComponent implements OnInit{
       this.animationLogic.enemyBuff(enemy,5)
     }
     this.animationLogic.hitIconAnimation(enemy.hittedIcon,0.01) //Test - Remove later
-    enemy.enemyTurn(this.player)
+    enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
 

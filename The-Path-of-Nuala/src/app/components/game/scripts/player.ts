@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import { playerActions, playerSprites } from "src/app/enums/enums";
 import { Character } from "src/app/interfaces/interfaces";
 import { enemy } from './commonEnemy';
+import { healthbar } from './healthbarLogic';
 
 export class player implements Character{
     charName: string;
@@ -58,14 +59,17 @@ export class player implements Character{
         this.defenseMod = mod;
     }
 
-    getHit(damage: number){
+    getHit(damage: number,playerhealthbar:healthbar){
         this.hp -= damage;
+        playerhealthbar.barHealth.width-=(1.65*damage);
+        playerhealthbar.barHealth.x+=1.3;
         if(this.hp <= 0){
             console.log('DEAD');
+            playerhealthbar.barHealth.visible=false;
         }
     }
 
-    action(enemy:enemy){
+    action(enemy:enemy,playerhealthbar:healthbar){
         switch(this.nextTurn){
             case playerActions.ATTACK:{
                 enemy.getHit(this.dmgMod*this.dmg);
@@ -79,6 +83,12 @@ export class player implements Character{
             break
             case playerActions.HEALTH_UP:{
                 this.hp+=10;
+                if(playerhealthbar.barHealth.width+(1.65*10)>=165){
+                    playerhealthbar.barHealth.width=165;
+                }else{
+                    playerhealthbar.barHealth.width+=(1.65*10);
+                    playerhealthbar.barHealth.x-=1.3;
+                }    
                 console.log("CURITA")
             }
             break

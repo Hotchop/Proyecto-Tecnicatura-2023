@@ -4,13 +4,14 @@ import { enemyActions, chartNumber, actionIcons } from 'src/app/enums/enums';
 import { ChartopiaService } from 'src/app/services/chartopia.service';
 import { getRandomName, nameplateStyle } from './randomNameGenerator';
 import { player } from './player';
+import { healthbar } from './healthbarLogic';
 
 /**Common Enemy Constants */
 const enemyDefaultName = 'Enemy'
 const enemyDefaultSprite = '/assets/game-assets/enemy-ph.png'
 const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
 const enemyDefaultHealth = 100;
-const enemyDefaultDamage = 100;
+const enemyDefaultDamage = 10;
 const enemyDefaultScore = 100;
 
 /**
@@ -85,7 +86,7 @@ export class enemy implements Enemy {
       this.hittedIcon.alpha = 0;
     }
 
-    enemyTurn(player: player){
+    enemyTurn(player: player, playerHealthBar:healthbar){
       //Clear status. If it defended last turn, set back to normal
       if(this.defenseMod > 1){
         this.defenseMod = 1
@@ -95,14 +96,14 @@ export class enemy implements Enemy {
       //Use action. If its a buffed attack, clear buff after.
       switch(this.nextTurn){
         case enemyActions.ATTACK: {
-          player.getHit(this.dmg * this.dmgMod)
+          player.getHit(this.dmg * this.dmgMod,playerHealthBar)
           this.dmgMod = 1;
           this.currentStatusSprite.visible = false
           console.log('Attack');
         }
         break
         case enemyActions.STRONG_ATTACK: {
-          player.getHit(this.dmg * this.dmgMod * 0.25)
+          player.getHit(this.dmg * this.dmgMod * 0.25,playerHealthBar)
           this.dmgMod = 1;
           this.currentStatusSprite.visible = false
           console.log('Strong Attack');
