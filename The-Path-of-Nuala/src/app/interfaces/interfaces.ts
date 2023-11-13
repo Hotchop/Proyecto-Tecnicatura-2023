@@ -1,5 +1,5 @@
 import { Sprite, Text } from "pixi.js";
-import { chartNumber } from "../enums/enums";
+import { chartNumber, enemyActions } from "../enums/enums";
 
 /**Interfaz Usuario */
 export interface User{
@@ -45,4 +45,8 @@ export interface Enemy{
     defenseMod: number,
     sprite: Sprite,
     namePlate: Text,
+    nextTurn: enemyActions;
+    nextTurnSprite: Sprite;
+    currentStatusSprite: Sprite;
+    hittedIcon: Sprite;
 }

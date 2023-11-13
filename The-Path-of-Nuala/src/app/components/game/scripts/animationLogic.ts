@@ -185,5 +185,59 @@ export class animationLogic{
 
     }
     
+    /**
+     * Fade out animation for the hit sprite when attacking entities
+     * @param icon The hit icon that is goind to be animated, be it the enemy icon or the player icon
+     * @param speed Speed of the animation
+     */
+    hitIconAnimation(icon: PIXI.Sprite,speed: number){
+        const defaultWidht = icon.width;
+        const defaultHeight = icon.height;
+        icon.alpha = 1;
 
+        const hitTicker = (delta:number) => {
+            if(icon.alpha > 0){
+                icon.width -= speed * delta;
+                icon.height -= speed * delta;
+                icon.alpha -= speed * delta;
+            }else{
+                this.app.ticker.remove(hitTicker);
+                icon.width = defaultWidht;
+                icon.height = defaultHeight;
+            }
+        } 
+
+        this.app.ticker.add(hitTicker);
+    }
+
+    turnTextAnimation(text: PIXI.Text,speed: number){
+        let elapsedTime = 0;
+        let animate = true;
+
+        const turnTextTicker = (delta:number) => {
+            elapsedTime += delta;
+            console.log(elapsedTime);
+            if(animate === true){
+                if(text.alpha < 1){
+                    text.alpha += speed * delta;
+                }else{
+                    if(text.alpha >= 1 && elapsedTime > 100){
+                        animate = false
+                    }
+                }
+            }else{
+                if(text.alpha  > 0){
+                     text.alpha -= speed * delta;
+                }else{
+                    if(text.alpha <= 0){
+                         this.app.ticker.remove(turnTextTicker)
+                    }
+                }
+
+            }
+            
+        } 
+        
+        this.app.ticker.add(turnTextTicker);
+    }
 }

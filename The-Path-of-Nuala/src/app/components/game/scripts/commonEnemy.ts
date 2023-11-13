@@ -8,6 +8,7 @@ import { player } from './player';
 /**Common Enemy Constants */
 const enemyDefaultName = 'Enemy'
 const enemyDefaultSprite = '/assets/game-assets/enemy-ph.png'
+const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
 
 /**
  * Common enemy class. Sets name and nameplate using the getRandomName function
@@ -24,6 +25,7 @@ export class enemy implements Enemy {
     nextTurn: enemyActions;
     nextTurnSprite: PIXI.Sprite;
     currentStatusSprite: PIXI.Sprite;
+    hittedIcon: PIXI.Sprite;
 
     constructor(MAX_HP: number, dmg: number,chartopia: ChartopiaService) {
       //Stats setup
@@ -70,6 +72,12 @@ export class enemy implements Enemy {
       this.currentStatusSprite.y = this.sprite.y + 150;
       this.currentStatusSprite.x = this.sprite.x;
       this.currentStatusSprite.visible = false
+
+      this.hittedIcon = PIXI.Sprite.from(hitSprite)
+      this.hittedIcon.anchor.set(0.5)
+      this.hittedIcon.y = this.sprite.y;
+      this.hittedIcon.x = this.sprite.x;
+      this.hittedIcon.alpha = 0;
     }
 
     enemyTurn(player: player){

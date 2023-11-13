@@ -7,7 +7,7 @@ import * as PIXI from 'pixi.js';
 import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
-import { mainTitleStyle, nameplateStyle } from './scripts/randomNameGenerator';
+import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle } from './scripts/randomNameGenerator';
 import { enemyActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
 
@@ -105,21 +105,51 @@ export class GameComponent implements OnInit{
    * Fight scene
    */
   async fight() {
-    const newEnemy = new enemy(100,5,this.chartopia);
+    const newEnemy = new enemy(100,20,this.chartopia);
     
     let surrender = new PIXI.Text('SURRENDER',nameplateStyle)
     surrender.anchor.set(0.5);
     surrender.position.set(400,550)
     
-    this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite)
-    this.app.stage.addChild(surrender)
+    
+    this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon)
+    this.app.stage.addChild(surrender,playerTurnTitle,enemyTurnTitle)
     
     await this.loadScreenEnter();
     
-    newEnemy.sprite.eventMode = 'static';
+    let onFight = true;
+    while(onFight === true){
+      //Start Player Turn
+      this.animationLogic.turnTextAnimation(playerTurnTitle,0.05);
+      await this.animationLogic.timer(5000);
+
+      //Player Turn Logic
+
+      //Enemy Turn
+      this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
+      await this.animationLogic.timer(5000);
+
+      //Enemy Turn Logic
+      await this.enemyPhaseLogic(newEnemy)
+      if(this.player.getHp <= 0){
+        onFight = false;
+        return
+      }
+    }
+
+    if(this.player.getHp <= 0){
+      await this.loadScreenOut();
+      this.endScreen();
+    }
+
+
+
+
+
+    /* newEnemy.sprite.eventMode = 'static';
     newEnemy.sprite.addEventListener('click', async()=>{
       await this.enemyPhaseLogic(newEnemy)
-    })
+    }) */
 
     surrender.eventMode = 'static'
     surrender.addEventListener('click',async () => {
@@ -136,12 +166,9 @@ export class GameComponent implements OnInit{
     //Add background image
 
     //Adds main title
-    let title = new PIXI.Text('YOUR LEGEND HAS ENDED',mainTitleStyle);
+    let title = new PIXI.Text('YOUR LEGEND HAS ENDED',endTitleStyle);
     title.anchor.set(0.5);
     title.position.set(400,200)
-    title.style.fontSize = 50;
-    title.style.fontWeight = 'bold';
-    title.style.fill = ["#ff0000","#570000"]
 
     //Adds subtitle
     let subtitle = new PIXI.Text('Save your score',nameplateStyle)
@@ -205,6 +232,7 @@ export class GameComponent implements OnInit{
     }else{
       this.animationLogic.enemyBuff(enemy,5)
     }
+    this.animationLogic.hitIconAnimation(enemy.hittedIcon,0.01) //Test - Remove later
     enemy.enemyTurn(this.player)
   }
 

@@ -21,6 +21,7 @@ export function getRandomName(chartNumber:chartNumber,chartopia:ChartopiaService
     )
 }
 
+
 /**
  * PIXI Style element for the entities nameplates. Can be assigned during construction.
  */
@@ -42,3 +43,47 @@ export const mainTitleStyle = new PIXI.TextStyle({
   fontSize: 70,
   strokeThickness: 1
 });
+
+export const endTitleStyle = new PIXI.TextStyle({
+  dropShadow: true,
+  dropShadowAngle: 1.1,
+  dropShadowBlur: 7,
+  fill: ["#ff0000","#570000"],
+  fillGradientStops: [
+      0.5
+  ],
+  fontFamily: "Abhaya Libre",
+  fontSize: 50,
+  strokeThickness: 1,
+  fontWeight: 'bold',
+});
+
+export const turnTitleStyle = new PIXI.TextStyle({
+  align: "center",
+  breakWords: true,
+  dropShadow: true,
+  dropShadowAngle: 1.1,
+  dropShadowBlur: 7,
+  fill: "#ffffff",
+  fillGradientStops: [
+      0.5
+  ],
+  fontFamily: "Abhaya Libre",
+  fontSize: 40,
+  lineHeight: 50,
+  strokeThickness: 1
+});
+
+/**
+ * PIXI Text Constants
+ */
+
+export const playerTurnTitle = new PIXI.Text(`Player\nTurn`,turnTitleStyle);
+    playerTurnTitle.anchor.set(0.5)
+    playerTurnTitle.position.set(400,100)
+    playerTurnTitle.alpha = 0;
+    
+export const enemyTurnTitle = new PIXI.Text(`Enemy\nTurn`,turnTitleStyle);
+    enemyTurnTitle.anchor.set(0.5)
+    enemyTurnTitle.position.set(400,100)
+    enemyTurnTitle.alpha = 0;
