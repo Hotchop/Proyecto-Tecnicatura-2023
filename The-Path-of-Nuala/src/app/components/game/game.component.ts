@@ -247,7 +247,7 @@ export class GameComponent implements OnInit{
     subtitle.eventMode = 'static'
     subtitle.addEventListener('click', async() =>{
       await this.loadScreenOut()
-      this.scoring.addSave(this.player,this.score);
+      this.scoring.addSave(this.player.charName,this.score);
       
     })
 

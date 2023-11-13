@@ -13,6 +13,7 @@ export class player implements Character{
     nextTurnSprite:PIXI.Sprite;
     currentTurnSprite:PIXI.Sprite;
     dmg:number;
+
     constructor(name: string){
         this.charName = name;
         this.MAX_HP = 100;

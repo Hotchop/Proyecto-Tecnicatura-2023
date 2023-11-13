@@ -7,57 +7,43 @@
       "partidas": [
         {
           "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": {
-            "charName": "Reiner"
-          },
+          "personaje": "Reiner",
           "puntaje": 100000,
           "id": 1
         },
         {
           "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": {
-            "charName": "Annie"
-          },
+          "personaje": "Annie",
           "puntaje": 80000,
           "id": 2
         },
         {
           "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": {
-            "charName": "Eren"
-          },
+          "personaje": "Eren",
           "puntaje": 200000,
           "id": 3
         },
         {
           "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": {
-            "charName": "Armin"
-          },
+          "personaje": "Armin",
           "puntaje": 100000,
           "id": 4
         },
         {
           "fecha": "2023-11-05T00:00:00.000Z",
-          "personaje": {
-            "charName": "Piek"
-          },
+          "personaje": "Piek",
           "puntaje": 150000,
           "id": 5
         },
         {
           "fecha": "2023-11-07T00:00:00.000Z",
-          "personaje": {
-            "charName": "Zeke"
-          },
+          "personaje": "Zeke",
           "puntaje": 100000,
           "id": 6
         },
         {
           "fecha": "2023-11-10T04:21:49.774Z",
-          "personaje": {
-            "charName": "Mikasa"
-          },
+          "personaje": "Mikasa",
           "puntaje": 50000
         }
       ],

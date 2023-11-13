@@ -1,5 +1,5 @@
 import { Sprite, Text } from "pixi.js";
-import { chartNumber, enemyActions } from "../enums/enums";
+import { chartNumber, enemyActions, playerActions } from "../enums/enums";
 
 /**Interfaz Usuario */
 export interface User{
@@ -13,7 +13,7 @@ export interface User{
 /**Interfaz Partidas */
 export interface Save{
     fecha: Date,
-    personaje: Character,
+    personaje: string,
     puntaje: number,
     id?: number
 }
@@ -22,10 +22,13 @@ export interface Save{
 export interface Character{
     charName: string,
     MAX_HP: number,
-    hp:number,
-    dmgMod:number,
-    defenseMod:number
-    //Para completar con estadisticas para el juego
+    hp: number,
+    dmgMod: number,
+    defenseMod: number,
+    nextTurn:playerActions,
+    nextTurnSprite:Sprite,
+    currentTurnSprite:Sprite,
+    dmg:number,
 }
 
 /**Interfaz de Objetos Chart de Chartopia API */
@@ -46,8 +49,8 @@ export interface Enemy{
     score: number,
     sprite: Sprite,
     namePlate: Text,
-    nextTurn: enemyActions;
-    nextTurnSprite: Sprite;
-    currentStatusSprite: Sprite;
-    hittedIcon: Sprite;
+    nextTurn: enemyActions,
+    nextTurnSprite: Sprite,
+    currentStatusSprite: Sprite,
+    hittedIcon: Sprite,
 }

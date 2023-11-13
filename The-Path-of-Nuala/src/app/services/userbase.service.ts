@@ -52,6 +52,8 @@ export class UserbaseService {
   async addScore(scores:Save[],id: number){
     try {
       if(scores !== null){
+        console.log(scores);
+        console.log(id);
         await fetch(`${this.url}/${id}`,{
           method: 'PATCH',
           body: JSON.stringify({partidas: scores}),
@@ -63,7 +65,8 @@ export class UserbaseService {
         alert("Can't send empty scores")
       }
     } catch (error) {
-      alert('Error saving score')
+      console.log(error);
+      alert('Error saving score 2')
     }
   }
 }

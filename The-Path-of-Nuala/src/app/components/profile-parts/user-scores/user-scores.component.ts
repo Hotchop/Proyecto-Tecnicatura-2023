@@ -42,7 +42,7 @@ export class UserScoresComponent {
   }
 
   sortHeroName(){
-    this.list.sort((a,b) => a.personaje.charName < b.personaje.charName? -1:1)
+    this.list.sort((a,b) => a.personaje < b.personaje? -1:1)
   }
   
   sortLowScore(){
