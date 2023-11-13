@@ -253,13 +253,13 @@ export class animationLogic{
     }
 
     deathAnimation(creature: PIXI.Sprite,speed: number){
-        
         const deathTicker = (delta:number) => {
             if(creature.alpha > 0){
                 creature.alpha -= speed * delta;
                 creature.rotation += speed / 4 * delta;
                 creature.width -= speed * 100 * delta;
                 creature.height -= speed * 100 * delta;
+                
             }else{
                 this.app.ticker.remove(deathTicker);
             }
@@ -267,4 +267,41 @@ export class animationLogic{
 
         this.app.ticker.add(deathTicker);
     }
-}
+
+    nextLevelAnimation(menu: PIXI.Sprite,speed: number, background?: PIXI.Graphics){
+        menu.alpha = 0
+
+        const menuTicker = (delta:number) => {
+            if(menu.y < 200){
+                menu.y += speed * delta
+                menu.alpha += speed * delta
+            }else{
+                if(menu.alpha < 1){
+                    menu.alpha += speed * delta
+                }else{
+                    this.app.ticker.remove(menuTicker);
+                }
+            }
+        }
+
+        this.app.ticker.add(menuTicker);
+
+        if(background){
+            
+            background.alpha = 0;
+
+            const backgroundTicker = (delta:number) => {
+            if(background.alpha < 0.75){
+                    background.alpha += speed/10 * delta
+                
+            }else{
+                this.app.ticker.remove(backgroundTicker);
+                }
+            }
+            this.app.ticker.add(backgroundTicker);
+        }
+    }
+
+}      
+
+

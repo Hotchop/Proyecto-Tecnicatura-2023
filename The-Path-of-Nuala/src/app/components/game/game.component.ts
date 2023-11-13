@@ -8,7 +8,7 @@ import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
 import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle } from './scripts/randomNameGenerator';
-import {enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
+import {actionIcons, enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
 import { fightMenuClass } from './scripts/fightMenu';
@@ -178,6 +178,19 @@ export class GameComponent implements OnInit{
         await this.animationLogic.deathAnimation(newEnemy.sprite,0.05)
         await this.animationLogic.timer(1000);
         //Load Next Level Menu
+        this.app.stage.addChild(this.loadScreen);
+        const nextLevel = PIXI.Sprite.from('/assets/game-assets/gui/continue-button.png')
+        nextLevel.anchor.set(0.5)
+        nextLevel.position.set(400,-100)
+        nextLevel.width = 140;
+        nextLevel.height = 51;
+        this.app.stage.addChild(nextLevel);
+        await this.animationLogic.nextLevelAnimation(nextLevel,2.5,this.loadScreen)
+        nextLevel.interactive = true;
+        nextLevel.on('mousedown',async() =>{
+          await this.loadScreenOut();
+          this.fight();
+        })
       }
     }
 
@@ -297,11 +310,23 @@ export class GameComponent implements OnInit{
    * @param enemy The enemy about to take it's turn
    */
   async enemyPhaseLogic(enemy: enemy){
-    if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK || enemy.nextTurn === enemyActions.DEBUFF || enemy.nextTurn === enemyActions.STRONG_DEBUFF){
+    if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK){
       this.animationLogic.enemyAttack(enemy,5)
       await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
     }else{
-      this.animationLogic.enemyBuff(enemy,5)
+      if(enemy.nextTurn === enemyActions.DEBUFF){
+        this.animationLogic.enemyAttack(enemy,5)
+        this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.DEBUFF);
+        this.player.currentStatusSprite.visible = true;
+      }else{
+        if(enemy.nextTurn === enemyActions.STRONG_DEBUFF){
+          this.animationLogic.enemyAttack(enemy,5)
+          this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
+          this.player.currentStatusSprite.visible = true;
+        }else{
+          this.animationLogic.enemyBuff(enemy,5)
+        }
+      }
     }
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }

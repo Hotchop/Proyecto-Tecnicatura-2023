@@ -28,6 +28,7 @@ export interface Character{
     nextTurn:playerActions,
     nextTurnSprite:Sprite,
     currentTurnSprite:Sprite,
+    currentStatusSprite: Sprite;
     dmg:number,
     hittedIcon: Sprite,
 }

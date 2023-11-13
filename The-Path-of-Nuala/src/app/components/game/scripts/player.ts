@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { playerActions, playerSprites } from "src/app/enums/enums";
+import { actionIcons, playerActions, playerSprites } from "src/app/enums/enums";
 import { Character } from "src/app/interfaces/interfaces";
 import { enemy } from './commonEnemy';
 import { healthbar } from './healthbarLogic';
@@ -15,6 +15,7 @@ export class player implements Character{
     nextTurn:playerActions;
     nextTurnSprite:PIXI.Sprite;
     currentTurnSprite:PIXI.Sprite;
+    currentStatusSprite: PIXI.Sprite;
     dmg:number;
     hittedIcon: PIXI.Sprite;
 
@@ -31,6 +32,13 @@ export class player implements Character{
         this.currentTurnSprite.y=275;
         this.currentTurnSprite.width=200;
         this.currentTurnSprite.height=400;
+
+
+        this.currentStatusSprite = PIXI.Sprite.from(actionIcons.DEFEND)
+        this.currentStatusSprite.anchor.set(0.5)
+        this.currentStatusSprite.y = this.currentTurnSprite.y;
+        this.currentStatusSprite.x = this.currentTurnSprite.x - 75;
+        this.currentStatusSprite.visible = false
 
         this.hittedIcon = PIXI.Sprite.from(hitSprite)
         this.hittedIcon.anchor.set(0.5)
@@ -81,14 +89,22 @@ export class player implements Character{
     }
 
     action(enemy:enemy,playerhealthbar:healthbar){
+        if(this.defenseMod > 1){
+            this.defenseMod = 1
+            this.currentStatusSprite.visible = false
+          }
+        
         switch(this.nextTurn){
             case playerActions.ATTACK:{
                 enemy.getHit(this.dmgMod*this.dmg);
+                this.currentStatusSprite.visible = false;
                 console.log('playerAttack');
             }
             break
             case playerActions.GUARD:{
                 this.defenseMod=1.1;
+                this.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.DEFEND)
+                this.currentStatusSprite.visible = true;
                 console.log('Player Defend');
             }
             break
@@ -100,11 +116,17 @@ export class player implements Character{
                     playerhealthbar.barHealth.width+=(1.65*10);
                     playerhealthbar.barHealth.x-=1.3;
                 }    
+                this.currentStatusSprite.visible = false;
                 console.log("CURITA")
             }
             break
             
         }
+
+        if(this.dmgMod != 1){
+            this.dmgMod = 1
+            this.currentStatusSprite.visible = false
+          }
 
     }
     
