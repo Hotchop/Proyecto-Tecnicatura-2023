@@ -174,6 +174,24 @@ export class animationLogic{
                     }
 
                 }
+
+                if(animate === 1){
+                    if(enemy.sprite.x < destinationRight){
+                        enemy.sprite.x += speed * delta
+                    }
+                    if(enemy.sprite.x >= destinationRight){
+                        animate = 2
+                    }
+                }
+                if(animate === 2){
+                    if(enemy.sprite.x > posX){
+                        enemy.sprite.x -= speed * delta
+                    }
+                    if(enemy.sprite.x === posX){
+                        animate = 0
+                        this.app.ticker.remove(buffTicker)
+                    }
+                }
         };
 
         this.app.ticker.add(buffTicker)
@@ -208,7 +226,6 @@ export class animationLogic{
     turnTextAnimation(text: PIXI.Text,speed: number){
         let elapsedTime = 0;
         let animate = true;
-
         const turnTextTicker = (delta:number) => {
             elapsedTime += delta;
             if(animate === true){

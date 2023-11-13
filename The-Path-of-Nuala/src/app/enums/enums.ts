@@ -44,3 +44,7 @@ export enum menuButtons{
     RUN = "/assets/game-assets/gui/run_button.png",
     MENUBACK = "/assets/game-assets/gui/menu_back.png"
 }
+
+export enum playerSprites{
+    EXAMPLE = "/assets/game-assets/anacleto_pj.png"
+}

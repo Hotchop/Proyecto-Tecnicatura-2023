@@ -10,7 +10,7 @@ const enemyDefaultName = 'Enemy'
 const enemyDefaultSprite = '/assets/game-assets/enemy-ph.png'
 const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
 const enemyDefaultHealth = 100;
-const enemyDefaultDamage = 5;
+const enemyDefaultDamage = 100;
 const enemyDefaultScore = 100;
 
 /**

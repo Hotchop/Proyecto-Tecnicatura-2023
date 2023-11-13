@@ -121,28 +121,37 @@ export class GameComponent implements OnInit{
 
     this.app.stage.addChild(backSprite.sprite)  //Background
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon) //Enemy
+    this.app.stage.addChild(this.player.currentTurnSprite);
     this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     
+
+
     await this.loadScreenEnter();
     
     let onFight = true;
     while(onFight === true){
+      let playerPlayed;
       //Start Player Turn
       this.animationLogic.turnTextAnimation(playerTurnTitle,0.05);
-      await this.animationLogic.timer(3000);
+      await this.animationLogic.timer(1000);
 
       //Player Turn Logic
-
-      //Enemy Turn
-      this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
-      await this.animationLogic.timer(3000);
-
-      //Enemy Turn Logic
-      await this.enemyPhaseLogic(newEnemy)
+      playerPlayed=await this.playerTurn(fightMenu,newEnemy);
+      console.log(playerPlayed)
       await this.animationLogic.timer(2000);
-      if(this.player.getHp <= 0){
-        onFight = false;
+
+        //Enemy Turn
+      if(playerPlayed==true){
+          this.menuUnavailable(fightMenu);
+          this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
+          await this.animationLogic.timer(1000);
+      //Enemy Turn Logic
+        await this.enemyPhaseLogic(newEnemy)
+        await this.animationLogic.timer(2000);
+        if(this.player.getHp <= 0){
+          onFight = false;
+        }
       }
     }
 
@@ -167,23 +176,7 @@ export class GameComponent implements OnInit{
       await this.enemyPhaseLogic(newEnemy)
     }) */
 
-    fightMenu.attackButton.eventMode='static';
-    fightMenu.attackButton.addEventListener('click',()=>{
-          this.player.nextTurn=playerActions.ATTACK;
-          this.player.action(newEnemy);
-    })
-
-    fightMenu.guardButton.eventMode='static';
-    fightMenu.guardButton.addEventListener('click',()=>{
-        this.player.nextTurn=playerActions.GUARD;
-        this.player.action(newEnemy);
-    })
-
-    fightMenu.itemButton.eventMode='static';
-    fightMenu.itemButton.addEventListener('click',()=>{
-        this.player.nextTurn=playerActions.HEALTH_UP;
-        this.player.action(newEnemy);
-    })
+    
 
     fightMenu.runButton.eventMode = 'static'
     fightMenu.runButton.addEventListener('click',async () => {
@@ -193,6 +186,41 @@ export class GameComponent implements OnInit{
 
   }
 
+  async playerTurn(fightMenu:fightMenuClass, newEnemy:enemy):Promise<boolean>{
+    return new Promise(resolve=>{
+      fightMenu.attackButton.eventMode='static';
+      fightMenu.attackButton.addEventListener('click',()=>{
+          this.player.nextTurn=playerActions.ATTACK;
+          this.player.action(newEnemy);
+          resolve(true)
+    })
+    fightMenu.guardButton.eventMode='static';
+    fightMenu.guardButton.addEventListener('click',()=>{
+        this.player.nextTurn=playerActions.GUARD;
+        this.player.action(newEnemy);
+        resolve(true)
+    })
+
+    fightMenu.itemButton.eventMode='static';
+    fightMenu.itemButton.addEventListener('click',()=>{
+        this.player.nextTurn=playerActions.HEALTH_UP;
+        this.player.action(newEnemy);
+        resolve(true)
+    })
+    fightMenu.runButton.eventMode='static';
+    fightMenu.runButton.addEventListener('click',async ()=>{
+      await this.loadScreenOut();
+      this.endScreen();
+    })
+    })
+  }
+
+  menuUnavailable(fightMenu:fightMenuClass){
+    fightMenu.attackButton.eventMode='none';
+    fightMenu.guardButton.eventMode='none';
+    fightMenu.itemButton.eventMode='none';
+    fightMenu.runButton.eventMode='none';
+  }
   /**
    * End Game Screen
    */
@@ -220,6 +248,7 @@ export class GameComponent implements OnInit{
     subtitle.addEventListener('click', async() =>{
       await this.loadScreenOut()
       this.scoring.addSave(this.player,this.score);
+      
     })
 
   }

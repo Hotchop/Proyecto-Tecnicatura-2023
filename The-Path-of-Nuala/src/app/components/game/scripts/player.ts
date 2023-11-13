@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { playerActions } from "src/app/enums/enums";
+import { playerActions, playerSprites } from "src/app/enums/enums";
 import { Character } from "src/app/interfaces/interfaces";
 import { enemy } from './commonEnemy';
 
@@ -7,19 +7,23 @@ export class player implements Character{
     charName: string;
     MAX_HP: number;
     hp: number;
-    dmg:number;
     dmgMod: number;
     defenseMod: number;
     nextTurn:playerActions;
     nextTurnSprite:PIXI.Sprite;
     currentTurnSprite:PIXI.Sprite;
-
+    dmg:number;
     constructor(name: string){
         this.charName = name;
         this.MAX_HP = 100;
         this.hp = this.MAX_HP;
         this.dmgMod = 1;
         this.defenseMod = 1;
+        this.currentTurnSprite=new PIXI.Sprite(PIXI.Texture.from(playerSprites.EXAMPLE));
+        this.currentTurnSprite.x=100;
+        this.currentTurnSprite.y=100;
+        this.currentTurnSprite.width=200;
+        this.currentTurnSprite.height=400;
     }
 
     get getCharName(){
