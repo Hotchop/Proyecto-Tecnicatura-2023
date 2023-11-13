@@ -15,6 +15,11 @@ export enum enemyActions{
     BUFF,
     STRONG_BUFF,
 }
+export enum playerActions{
+    ATTACK,
+    GUARD,
+    HEALTH_UP
+}
 
 export enum actionIcons{
     ATTACK = "/assets/game-assets/action-icons/attack.png",
@@ -25,4 +30,17 @@ export enum actionIcons{
     STRONG_DEBUFF = "/assets/game-assets/action-icons/strong_debuff.png",
     BUFF = "/assets/game-assets/action-icons/buff.png",
     STRONG_BUFF = "/assets/game-assets/action-icons/strong_buff.png",
+}
+
+export enum backgrounds{
+    FIGHT1= "/assets/game-assets/backgrounds/naberoa_tav_v2.png"
+}
+
+export enum menuButtons{
+    SURRENDER = "/assets/game-assets/gui/surrenderButton.png",
+    ATTACK = "/assets/game-assets/gui/attack_button.png",
+    GUARD = "/assets/game-assets/gui/guard_button.png",
+    ITEM = "/assets/game-assets/gui/item_button.png",
+    RUN = "/assets/game-assets/gui/run_button.png",
+    MENUBACK = "/assets/game-assets/gui/menu_back.png"
 }

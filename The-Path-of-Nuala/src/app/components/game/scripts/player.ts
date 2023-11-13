@@ -1,11 +1,18 @@
+import * as PIXI from 'pixi.js';
+import { playerActions } from "src/app/enums/enums";
 import { Character } from "src/app/interfaces/interfaces";
+import { enemy } from './commonEnemy';
 
 export class player implements Character{
     charName: string;
     MAX_HP: number;
     hp: number;
+    dmg:number;
     dmgMod: number;
     defenseMod: number;
+    nextTurn:playerActions;
+    nextTurnSprite:PIXI.Sprite;
+    currentTurnSprite:PIXI.Sprite;
 
     constructor(name: string){
         this.charName = name;
@@ -53,5 +60,26 @@ export class player implements Character{
         }
     }
 
+    action(enemy:enemy){
+        switch(this.nextTurn){
+            case playerActions.ATTACK:{
+                enemy.getHit(this.dmgMod*this.dmg);
+                console.log('playerAttack');
+            }
+            break
+            case playerActions.GUARD:{
+                this.defenseMod=1.1;
+                console.log('Player Defend');
+            }
+            break
+            case playerActions.HEALTH_UP:{
+                this.hp+=10;
+                console.log("CURITA")
+            }
+            break
+            
+        }
 
+    }
+    
 }

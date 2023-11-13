@@ -9,7 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
 import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle } from './scripts/randomNameGenerator';
 import { enemyActions } from 'src/app/enums/enums';
+import { mainTitleStyle, nameplateStyle } from './scripts/randomNameGenerator';
+import {enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
+import { backgroundClass } from './scripts/background';
+import { fightMenuClass } from './scripts/fightMenu';
 
 @Component({
   selector: 'app-game',
@@ -30,6 +34,8 @@ export class GameComponent implements OnInit{
   private loadScreen = new PIXI.Graphics();
   private player = new player('');
   private score = 0;
+  private stageNum=1;
+
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
       volume: 0.0, // ajusta el volumen según sea necesario
@@ -68,7 +74,7 @@ export class GameComponent implements OnInit{
   async startScreen(){
 
     //Add background image
-
+  
     //Adds main title
     let title = new PIXI.Text('The Path of Nuala',mainTitleStyle);
     this.mainMenuOst.play()
@@ -92,6 +98,7 @@ export class GameComponent implements OnInit{
       await this.loadScreenOut()
       this.fight()
     })
+    
   }
 
   /**
@@ -105,15 +112,22 @@ export class GameComponent implements OnInit{
    * Fight scene
    */
   async fight() {
-    const newEnemy = new enemy(100,20,this.chartopia);
+    /**
+     * Background 
+     */
+    const backSprite= new backgroundClass(this.stageNum);
+    const fightMenu=new fightMenuClass();
+    const newEnemy = new enemy(100,5,this.chartopia);
     
-    let surrender = new PIXI.Text('SURRENDER',nameplateStyle)
-    surrender.anchor.set(0.5);
-    surrender.position.set(400,550)
-    
-    
+
+
+    this.app.stage.addChild(backSprite.sprite)
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon)
-    this.app.stage.addChild(surrender,playerTurnTitle,enemyTurnTitle)
+    this.app.stage.addChild(fightMenu.menuBack)
+    this.app.stage.addChild(fightMenu.attackButton)
+    this.app.stage.addChild(fightMenu.guardButton)
+    this.app.stage.addChild(fightMenu.runButton)
+    this.app.stage.addChild(fightMenu.itemButton)
     
     await this.loadScreenEnter();
     
@@ -151,11 +165,30 @@ export class GameComponent implements OnInit{
       await this.enemyPhaseLogic(newEnemy)
     }) */
 
-    surrender.eventMode = 'static'
-    surrender.addEventListener('click',async () => {
+    fightMenu.attackButton.eventMode='static';
+    fightMenu.attackButton.addEventListener('click',()=>{
+          this.player.nextTurn=playerActions.ATTACK;
+          this.player.action(newEnemy);
+    })
+
+    fightMenu.guardButton.eventMode='static';
+    fightMenu.guardButton.addEventListener('click',()=>{
+        this.player.nextTurn=playerActions.GUARD;
+        this.player.action(newEnemy);
+    })
+
+    fightMenu.itemButton.eventMode='static';
+    fightMenu.itemButton.addEventListener('click',()=>{
+        this.player.nextTurn=playerActions.HEALTH_UP;
+        this.player.action(newEnemy);
+    })
+
+    fightMenu.runButton.eventMode = 'static'
+    fightMenu.runButton.addEventListener('click',async () => {
       await this.loadScreenOut();
       this.endScreen();
     })
+
   }
 
   /**
