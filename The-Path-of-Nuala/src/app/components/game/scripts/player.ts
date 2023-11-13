@@ -37,7 +37,7 @@ export class player implements Character{
         this.currentStatusSprite = PIXI.Sprite.from(actionIcons.DEFEND)
         this.currentStatusSprite.anchor.set(0.5)
         this.currentStatusSprite.y = this.currentTurnSprite.y;
-        this.currentStatusSprite.x = this.currentTurnSprite.x - 75;
+        this.currentStatusSprite.x = this.currentTurnSprite.x - 125;
         this.currentStatusSprite.visible = false
 
         this.hittedIcon = PIXI.Sprite.from(hitSprite)

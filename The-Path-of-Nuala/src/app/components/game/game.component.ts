@@ -124,7 +124,7 @@ export class GameComponent implements OnInit{
 
     this.app.stage.addChild(backSprite.sprite)  //Background
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon) //Enemy
-    this.app.stage.addChild(this.player.currentTurnSprite,this.player.hittedIcon);
+    this.app.stage.addChild(this.player.currentTurnSprite,this.player.hittedIcon,this.player.currentStatusSprite);
     this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     this.app.stage.addChild(this.playerHealthBar.barHealth);
