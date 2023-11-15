@@ -36,6 +36,7 @@ export class GameComponent implements OnInit{
   private stageNum=1;
   private difficulty = 1; ///0,75 - 1.00 - 1,25
   private playerHealthBar:healthbar;
+  
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
       volume: 0.0, // ajusta el volumen según sea necesario
@@ -96,7 +97,7 @@ export class GameComponent implements OnInit{
     this.app.stage.eventMode = 'static'
     this.app.stage.addEventListener('click', async() =>{
       await this.loadScreenOut()
-      this.fight()
+      this.createCharacterScreen()
     })
     
   }
@@ -104,8 +105,78 @@ export class GameComponent implements OnInit{
   /**
    * Character creation screen
    */
-  async createCharacterScreen(){
-
+  async createCharacterScreen() {
+    // Background image for the character creation screen
+    // Example: const backgroundImage = new PIXI.Sprite(PIXI.Texture.from('path/to/background-image.png'));
+    // Set the position, size, and other properties of the background image
+  
+    // Title for the character creation screen
+    const title = new PIXI.Text('Character Creation', mainTitleStyle);
+    title.anchor.set(0.5);
+    title.position.set(400, 100);
+  
+    // Text to choose the class
+    const classLabel = new PIXI.Text('Choose your class:', nameplateStyle);
+    classLabel.anchor.set(0.5);
+    classLabel.position.set(200, 200);
+  
+    // Buttons to choose the class
+    const warriorButton = new PIXI.Text('Warrior', nameplateStyle);
+    warriorButton.anchor.set(0.5);
+    warriorButton.position.set(title.x - 100, title.y + 300);
+    warriorButton.interactive = true;
+  
+    const mageButton = new PIXI.Text('Mage', nameplateStyle);
+    mageButton.anchor.set(0.5);
+    mageButton.position.set(title.x, title.y + 300);
+    mageButton.interactive = true;
+  
+    const rogueButton = new PIXI.Text('Rogue', nameplateStyle);
+    rogueButton.anchor.set(0.5);
+    rogueButton.position.set(title.x + 100, title.y + 300);
+    rogueButton.interactive = true;
+  
+    // Icon for the chosen class
+    const classIcon = new PIXI.Sprite();
+    classIcon.anchor.set(0.5);
+    classIcon.position.set(200, 250); // Adjust the position as needed
+  
+    // Event listeners for the class buttons
+    warriorButton.on('click', async () => {
+      const characterClass = 'Warrior';
+      // Character creation logic with the chosen class, e.g., create a new player object
+      const newPlayer = new player(characterClass);
+      // Continue with the game flow
+      await this.loadScreenOut();
+      this.fight();
+    });
+  
+    mageButton.on('click', async () => {
+      const characterClass = 'Mage';
+      // Character creation logic with the chosen class, e.g., create a new player object
+      const newPlayer = new player(characterClass);
+      // Continue with the game flow
+      await this.loadScreenOut();
+      this.fight();
+    });
+  
+    rogueButton.on('click', async () => {
+      const characterClass = 'Rogue';
+      // Character creation logic with the chosen class, e.g., create a new player object
+      const newPlayer = new player(characterClass);
+      // Continue with the game flow
+      await this.loadScreenOut();
+      this.fight();
+    });
+  
+    // Add elements to the stage
+    this.app.stage.addChild(title, classLabel);
+    this.app.stage.addChild(warriorButton, mageButton, rogueButton, classIcon);
+  
+    // Render and animate elements
+    this.app.stage.render;
+    this.animationLogic.faddingText(title, 0.005);
+    this.animationLogic.faddingText(classLabel, 0.003);
   }
   
   /**
