@@ -2,6 +2,8 @@ import { Enemy } from 'src/app/interfaces/interfaces';
 import { enemy } from './commonEnemy';
 import * as PIXI from 'pixi.js';
 import { player } from './player';
+
+
 export class animationLogic{
 
     app: PIXI.Application<HTMLCanvasElement>
@@ -224,7 +226,7 @@ export class animationLogic{
      * @param player The enemy to animate
      * @param speed Speed of the animation
      */
-    charcterBuff(player: player,speed: number){
+    characterBuff(player: player,speed: number){
         let animate = 0;
         let posX = player.currentTurnSprite.x;
         let destinationLeft = posX - 15;

@@ -13,6 +13,7 @@ import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
 import { fightMenuClass } from './scripts/fightMenu';
 import { healthbar } from './scripts/healthbarLogic';
+import { soundEffect } from './scripts/soundLogic';
 
 @Component({
   selector: 'app-game',
@@ -36,6 +37,7 @@ export class GameComponent implements OnInit{
   private stageNum=1;
   private difficulty = 1; ///0,75 - 1.00 - 1,25
   private playerHealthBar:healthbar = new healthbar();
+  private sounds = new soundEffect();
   
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
@@ -282,13 +284,15 @@ export class GameComponent implements OnInit{
           this.player.action(newEnemy,this.playerHealthBar);
           this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
           this.animationLogic.characterAttack(this.player,5)
+          this.sounds.attackEffect();
           resolve(true)
     })
     fightMenu.guardButton.eventMode='static';
     fightMenu.guardButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.GUARD;
         this.player.action(newEnemy,this.playerHealthBar);
-        this.animationLogic.charcterBuff(this.player,5)
+        this.animationLogic.characterBuff(this.player,5)
+        this.sounds.shieldEffect();
         resolve(true)
     })
 
@@ -296,7 +300,8 @@ export class GameComponent implements OnInit{
     fightMenu.itemButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.HEALTH_UP;
         this.player.action(newEnemy,this.playerHealthBar);
-        this.animationLogic.charcterBuff(this.player,5)
+        this.animationLogic.characterBuff(this.player,5)
+        this.sounds.healEffect();
         resolve(true)
     })
     fightMenu.runButton.eventMode='static';
@@ -384,24 +389,55 @@ export class GameComponent implements OnInit{
    * @param enemy The enemy about to take it's turn
    */
   async enemyPhaseLogic(enemy: enemy){
-    if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK){
-      this.animationLogic.enemyAttack(enemy,5)
-      await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
-    }else{
-      if(enemy.nextTurn === enemyActions.DEBUFF){
+    switch(enemy.nextTurn){
+      case enemyActions.ATTACK:{
         this.animationLogic.enemyAttack(enemy,5)
+        this.sounds.attackEffect();
+        await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
+      }
+      break
+      case enemyActions.STRONG_ATTACK:{
+        this.animationLogic.enemyAttack(enemy,5)
+        this.sounds.attackEffect();
+        await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
+      }
+      break
+      case enemyActions.DEFEND:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.shieldEffect()
+      }
+      break
+      case enemyActions.STRONG_DEFEND:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.shieldEffect()
+      }
+      break
+      case enemyActions.DEBUFF:{
+        this.animationLogic.enemyAttack(enemy,5)
+        this.sounds.debuffEffect();
         this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.DEBUFF);
         this.player.currentStatusSprite.visible = true;
-      }else{
-        if(enemy.nextTurn === enemyActions.STRONG_DEBUFF){
-          this.animationLogic.enemyAttack(enemy,5)
-          this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
-          this.player.currentStatusSprite.visible = true;
-        }else{
-          this.animationLogic.enemyBuff(enemy,5)
-        }
       }
+      break
+      case enemyActions.STRONG_DEBUFF:{
+        this.animationLogic.enemyAttack(enemy,5)
+        this.sounds.debuffEffect();
+        this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
+        this.player.currentStatusSprite.visible = true;
+      }
+      break
+      case enemyActions.BUFF:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.buffEffect()
+      }
+      break
+      case enemyActions.STRONG_BUFF:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.buffEffect()
+      }
+      break
     }
+
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
