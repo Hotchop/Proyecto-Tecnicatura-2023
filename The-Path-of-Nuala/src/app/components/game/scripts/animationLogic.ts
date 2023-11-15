@@ -1,6 +1,7 @@
 import { Enemy } from 'src/app/interfaces/interfaces';
 import { enemy } from './commonEnemy';
 import * as PIXI from 'pixi.js';
+import { player } from './player';
 export class animationLogic{
 
     app: PIXI.Application<HTMLCanvasElement>
@@ -175,22 +176,92 @@ export class animationLogic{
 
                 }
 
-                if(animate === 1){
-                    if(enemy.sprite.x < destinationRight){
-                        enemy.sprite.x += speed * delta
-                    }
-                    if(enemy.sprite.x >= destinationRight){
-                        animate = 2
+        };
+
+        this.app.ticker.add(buffTicker)
+
+    }
+
+    /**
+     * 
+     * @param player The enemy to animate
+     * @param speed Speed of the animation
+     */
+    characterAttack(player: player,speed: number){
+        let animate = true;
+        let posX = player.currentTurnSprite.x;
+        let destination = posX + 30;
+
+        
+        const attackTicker = (delta: number) => {
+            if(animate === true){
+                if(player.currentTurnSprite.x < destination){
+                    player.currentTurnSprite.x += speed * delta
+                }
+                if(player.currentTurnSprite.x >= destination){
+                    animate = false
+                }
+            }
+            if(animate === false){
+                if(player.currentTurnSprite.x > posX){
+                    player.currentTurnSprite.x -= speed * delta
+                }
+                else{
+                    if(player.currentTurnSprite.x <= posX){
+                        player.currentTurnSprite.x = posX
+                        this.app.ticker.remove(attackTicker)
                     }
                 }
-                if(animate === 2){
-                    if(enemy.sprite.x > posX){
-                        enemy.sprite.x -= speed * delta
+            }
+        };
+
+        this.app.ticker.add(attackTicker)
+
+    }
+
+    /**
+     * 
+     * @param player The enemy to animate
+     * @param speed Speed of the animation
+     */
+    charcterBuff(player: player,speed: number){
+        let animate = 0;
+        let posX = player.currentTurnSprite.x;
+        let destinationLeft = posX - 15;
+        let destinationRight = posX + 15;
+
+        
+        const buffTicker = (delta: number) => {
+           
+                if(animate === 0){
+                    if(player.currentTurnSprite.x > destinationLeft){
+                        player.currentTurnSprite.x -= speed * delta
                     }
-                    if(enemy.sprite.x === posX){
-                        animate = 0
-                        this.app.ticker.remove(buffTicker)
+                    if(player.currentTurnSprite.x <= destinationLeft){
+                        animate = 1
                     }
+                }else{
+                    if(animate === 1){
+                        if(player.currentTurnSprite.x < destinationRight){
+                            player.currentTurnSprite.x += speed * delta
+                        }
+                        if(player.currentTurnSprite.x >= destinationRight){
+                            animate = 2
+                        }
+                    }else{
+                        if(animate === 2){
+                            if(player.currentTurnSprite.x > posX){
+                                player.currentTurnSprite.x -= speed * delta
+                            }
+                            if(player.currentTurnSprite.x <= posX){
+                                animate = 0
+                                player.currentTurnSprite.x = posX
+                                this.app.ticker.remove(buffTicker)
+                            }
+                        }
+
+                    }
+
                 }
         };
 

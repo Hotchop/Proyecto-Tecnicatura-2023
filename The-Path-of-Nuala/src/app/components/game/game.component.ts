@@ -35,7 +35,7 @@ export class GameComponent implements OnInit{
   private score = 0;
   private stageNum=1;
   private difficulty = 1; ///0,75 - 1.00 - 1,25
-  private playerHealthBar:healthbar;
+  private playerHealthBar:healthbar = new healthbar();
   
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
@@ -188,7 +188,6 @@ export class GameComponent implements OnInit{
      */
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
-    this.playerHealthBar=new healthbar();
 
     const newEnemy = new enemy(this.difficulty,this.chartopia);
     
@@ -213,14 +212,14 @@ export class GameComponent implements OnInit{
 
       //Player Turn Logic
       playerPlayed=await this.playerTurn(fightMenu,newEnemy);
-      console.log(playerPlayed)
+      await this.menuUnavailable(fightMenu);
+      console.log(playerPlayed);
       await this.animationLogic.timer(2000);
       if(newEnemy.getHp <= 0){
         onFight = false;
       }else{
         //Enemy Turn
       if(playerPlayed==true){
-          this.menuUnavailable(fightMenu);
           this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
           await this.animationLogic.timer(1000);
       //Enemy Turn Logic
@@ -282,12 +281,14 @@ export class GameComponent implements OnInit{
           this.player.nextTurn=playerActions.ATTACK;
           this.player.action(newEnemy,this.playerHealthBar);
           this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
+          this.animationLogic.characterAttack(this.player,5)
           resolve(true)
     })
     fightMenu.guardButton.eventMode='static';
     fightMenu.guardButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.GUARD;
         this.player.action(newEnemy,this.playerHealthBar);
+        this.animationLogic.charcterBuff(this.player,5)
         resolve(true)
     })
 
@@ -295,17 +296,19 @@ export class GameComponent implements OnInit{
     fightMenu.itemButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.HEALTH_UP;
         this.player.action(newEnemy,this.playerHealthBar);
+        this.animationLogic.charcterBuff(this.player,5)
         resolve(true)
     })
     fightMenu.runButton.eventMode='static';
     fightMenu.runButton.addEventListener('click',async ()=>{
+      await this.animationLogic.deathAnimation(this.player.currentTurnSprite,0.05);
       await this.loadScreenOut();
       this.endScreen();
     })
     })
   }
 
-  menuUnavailable(fightMenu:fightMenuClass){
+  async menuUnavailable(fightMenu:fightMenuClass){
     fightMenu.attackButton.eventMode='none';
     fightMenu.guardButton.eventMode='none';
     fightMenu.itemButton.eventMode='none';

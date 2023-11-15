@@ -124,12 +124,12 @@ export class enemy implements Enemy {
         }
         break
         case enemyActions.DEBUFF: {
-          player.setDmgMod = 0.9
+          player.setDmgMod = player.getDmgMod - 0.1
           console.log('Debuff');
         }
         break
         case enemyActions.STRONG_DEBUFF: {
-          player.setDmgMod = 0.75
+          player.setDmgMod = player.getDmgMod - 0.25
           console.log('Strong Debuff');
         }
         break
