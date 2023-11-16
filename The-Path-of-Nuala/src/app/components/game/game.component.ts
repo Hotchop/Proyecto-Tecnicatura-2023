@@ -7,7 +7,7 @@ import * as PIXI from 'pixi.js';
 import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
-import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle } from './scripts/randomNameGenerator';
+import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle, selectednameplateStyle } from './scripts/randomNameGenerator';
 import {actionIcons, enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
@@ -114,65 +114,100 @@ export class GameComponent implements OnInit{
     this.app.stage.eventMode = 'static';
     const title = new PIXI.Text('Character Creation', mainTitleStyle);
     title.anchor.set(0.5);
-    title.position.set(400, 100);
-    const startGameButton = this.createButton('Start Game', 400, 500);
+    title.position.set(400, 50);
+    const startGameButton = this.createButton('Start Game', 400, 550);
     // Text to choose the difficulty
     const difficultyLabel = new PIXI.Text('Choose your difficulty:', nameplateStyle);
     difficultyLabel.anchor.set(0.5);
-    difficultyLabel.position.set(400, 400);
-  
-    // Buttons to choose the difficulty
+    difficultyLabel.position.set(400,200);
+    const nameLabel = new PIXI.Text('Enter your name:', nameplateStyle);
+    nameLabel.anchor.set(0.5);
+    nameLabel.position.set(400,400);
+  const inputText = new PIXI.Text('', nameplateStyle);
+  inputText.x = 400;
+  inputText.y = 450;
+  inputText.anchor.set(0.5);
+  this.app.stage.addChild(inputText);
+  let nombrePersonaje: string = '';
+  let nombreClase: string = '';
+// Input text para el nombre
+
+window.addEventListener('keydown', (event) => {
+  if (event.key.length === 1) {
+    inputText.text += event.key;
+    nombrePersonaje += event.key; // Actualizar la variable al agregar caracteres
+  } else if (event.key === 'Backspace') {
+    inputText.text = inputText.text.slice(0, -1);
+    nombrePersonaje = nombrePersonaje.slice(0, -1); // Actualizar la variable al borrar caracteres
+  }
+});
+    // Botones para la dificultad
     const easyButton = this.createButton('Easy', title.x - 100, title.y + 200);
     const normalButton = this.createButton('Normal', title.x, title.y + 200);
     const hardButton = this.createButton('Hard', title.x + 100, title.y + 200);
   
-    // Event listeners for the difficulty buttons
+    // Eventos para la dificultad
     easyButton.on('click', () => {
       this.difficulty = 0.75;
+      easyButton.style = selectednameplateStyle;
+      normalButton.style = nameplateStyle;
+      hardButton.style = nameplateStyle;
+
     });
     
     normalButton.on('click', () => {
       this.difficulty = 1;
+      easyButton.style = nameplateStyle;
+      normalButton.style = selectednameplateStyle;
+      hardButton.style = nameplateStyle;
     });
     
     hardButton.on('click', () => {
       this.difficulty = 1.25;
+      easyButton.style = nameplateStyle;
+      normalButton.style = nameplateStyle;
+      hardButton.style = selectednameplateStyle;
     });
   
     // Text to choose the class
     const classLabel = new PIXI.Text('Choose your class:', nameplateStyle);
     classLabel.anchor.set(0.5);
-    classLabel.position.set(400, 200);
+    classLabel.position.set(400, 300);
   
     // Buttons to choose the class
     const warriorButton = this.createButton('Warrior', title.x - 100, title.y + 300);
     const mageButton = this.createButton('Mage', title.x, title.y + 300);
     const rogueButton = this.createButton('Rogue', title.x + 100, title.y + 300);
   
-    // Icon for the chosen class
-    const classIcon = new PIXI.Sprite();
-    classIcon.anchor.set(0.5);
-    classIcon.position.set(200, 250); // Adjust the position as needed
-  
     // Event listeners for the class buttons
     warriorButton.on('click', () => {
-      this.player = new player('', 'Warrior');
+      nombreClase = "Warrior";
+      warriorButton.style = selectednameplateStyle;
+      mageButton.style = nameplateStyle;
+      rogueButton.style = nameplateStyle;
     });
     
     mageButton.on('click', () => {
-      this.player = new player('', 'Mage');
+      nombreClase = "Mage";
+      warriorButton.style = nameplateStyle;
+      mageButton.style = selectednameplateStyle;
+      rogueButton.style = nameplateStyle;
     });
     
     rogueButton.on('click', () => {
-      this.player = new player('', 'Rogue');
+      nombreClase = "Rogue";
+      warriorButton.style = nameplateStyle
+      mageButton.style = nameplateStyle;
+      rogueButton.style = selectednameplateStyle;
     });
     startGameButton.on('click', async () => {
       // Verificar si se ha seleccionado la dificultad y la clase
-      if (this.difficulty !== undefined && this.player) {
+      if (this.difficulty !== undefined && nombreClase) {
+        this.player = new player(nombrePersonaje,nombreClase);
         console.log('Game is starting...');
         console.log('Selected Difficulty:', this.difficulty);
         console.log('Selected Class:', this.player.charClass);
-        
+        console.log('Name: ', this.player.charName);
         // Aquí puedes agregar la lógica para iniciar el juego
         await this.loadScreenOut();
         this.mainMenuOst.stop();
@@ -184,15 +219,16 @@ export class GameComponent implements OnInit{
     });
     // Add elements to the stage
     this.app.stage.addChild(title, classLabel);
-    this.app.stage.addChild(warriorButton, mageButton, rogueButton, classIcon);
+    this.app.stage.addChild(warriorButton, mageButton, rogueButton);
     this.app.stage.addChild(easyButton, normalButton, hardButton);
     this.app.stage.addChild(startGameButton);
+    this.app.stage.addChild(difficultyLabel);
+    this.app.stage.addChild(nameLabel);
     // Render and animate elements
     this.app.stage.render;
     this.animationLogic.faddingText(title, 0.005);
     this.animationLogic.faddingText(classLabel, 0.003);
   }
-  
   createButton(text:string, x:number, y:number) {
     const button = new PIXI.Text(text, nameplateStyle);
     button.anchor.set(0.5);
@@ -480,3 +516,11 @@ export class GameComponent implements OnInit{
   
 
 }
+function resetDifficultyButtons() {
+  throw new Error('Function not implemented.');
+}
+
+function resetClassButtons() {
+  throw new Error('Function not implemented.');
+}
+

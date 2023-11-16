@@ -73,6 +73,11 @@ export const turnTitleStyle = new PIXI.TextStyle({
   lineHeight: 50,
   strokeThickness: 1
 });
+export const selectednameplateStyle: PIXI.TextStyle = new PIXI.TextStyle({
+  fill: "#FFFF00",
+  fontFamily: "\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
+  fontVariant: "small-caps"
+});
 
 /**
  * PIXI Text Constants
