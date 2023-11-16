@@ -250,7 +250,7 @@ window.addEventListener('keydown', (event) => {
 
     const newEnemy = new enemy(this.difficulty,this.chartopia);
 
-    await this.randomLevelName(this.levelName);
+    await this.randomLevelName(this.levelName,this.stageNum);
     this.levelName.anchor.set(0.5);
     this.levelName.position.set(400,20);
     
@@ -593,16 +593,30 @@ window.addEventListener('keydown', (event) => {
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
-  async randomLevelName(nameplate: PIXI.Text){
-    getRandomName(chartNumber.TAVERN,this.chartopia,(error,result) => {
-      if(error || result === undefined){
-        nameplate.text = '';
-        console.log(result);
-      }else{
-          nameplate.text = result;
+  async randomLevelName(nameplate: PIXI.Text,name: chartNumber){
+    if(name === chartNumber.TAVERN){
+      getRandomName(chartNumber.TAVERN,this.chartopia,(error,result) => {
+        if(error || result === undefined){
+          nameplate.text = '';
           console.log(result);
-      }
-    })
+        }else{
+            nameplate.text = result;
+            console.log(result);
+        }
+      })
+    }
+    if(name === chartNumber.DUNGEON){
+      getRandomName(chartNumber.DUNGEON,this.chartopia,(error,result) => {
+        if(error || result === undefined){
+          nameplate.text = '';
+          console.log(result);
+        }else{
+            nameplate.text = result;
+            console.log(result);
+        }
+      })
+    }
+    
   }
   
   
