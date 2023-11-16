@@ -261,8 +261,6 @@ window.addEventListener('keydown', (event) => {
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     this.app.stage.addChild(this.playerHealthBar.barHealth);
     this.app.stage.addChild(this.playerHealthBar.playerHealth);
-
-
     await this.loadScreenEnter();
     
     let onFight = true;
@@ -303,6 +301,9 @@ window.addEventListener('keydown', (event) => {
       this.endScreen();
     }else{
       if(newEnemy.getHp <= 0){
+        if(this.stageNum==1){
+          this.stageNum=2
+        }
         this.score += newEnemy.score;
         newEnemy.namePlate.alpha = 0;
         newEnemy.currentStatusSprite.alpha = 0;
@@ -312,16 +313,39 @@ window.addEventListener('keydown', (event) => {
         //Load Next Level Menu
         this.app.stage.addChild(this.loadScreen);
         const nextLevel = PIXI.Sprite.from('/assets/game-assets/gui/continue-button.png')
+        const txtNextLevel1 = new PIXI.Text('You won!', mainTitleStyle);
+        const txtNextLevel2 = new PIXI.Text('You keep traveling', nameplateStyle);
+        txtNextLevel1.anchor.set(0.5);
+        txtNextLevel1.position.set(400, -200);
+        txtNextLevel2.anchor.set(0.5);
+        txtNextLevel2.position.set(400, -150);
         nextLevel.anchor.set(0.5)
         nextLevel.position.set(400,-100)
         nextLevel.width = 140;
         nextLevel.height = 51;
-        this.app.stage.addChild(nextLevel);
-        await this.animationLogic.nextLevelAnimation(nextLevel,2.5,this.loadScreen)
+        
+        this.app.stage.addChild(txtNextLevel1,txtNextLevel2,nextLevel);
+      
+        await this.animationLogic.nextLevelAnimation(nextLevel,txtNextLevel1,txtNextLevel2,2.5,this.loadScreen)
         nextLevel.interactive = true;
-        nextLevel.on('mousedown',async() =>{
-          await this.loadScreenOut();
-          this.fight();
+        nextLevel.on('click',async() =>{
+          const map= PIXI.Sprite.from('/assets/game-assets/gui/map.png');
+          const map_node=PIXI.Sprite.from('/assets/game-assets/gui/map_node.png');
+          map_node.eventMode='static';
+          map.anchor.set(0.5);
+          map.position.set(400,300);
+          map_node.anchor.set(0.5);
+          map_node.position.set(348,285);
+          map_node.width=55;
+          map_node.height=55;
+          this.app.stage.addChild(map);
+          this.app.stage.addChild(map_node);
+          this.sounds.mapSound();
+          map_node.addEventListener('click',async()=>{
+            await this.loadScreenOut();
+            this.fight();
+          })
+        
         })
       }
     }

@@ -46,4 +46,14 @@ export class soundEffect{
 
        sound.play();
     }    
+
+    mapSound(){
+       const sound = new Howl({
+        src: ['/assets/music/ui-sounds/map_sound.mp3'],
+        volume: 1,
+        loop: false,
+       })
+
+       sound.play();
+    }    
 }

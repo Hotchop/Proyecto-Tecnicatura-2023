@@ -33,7 +33,8 @@ export enum actionIcons{
 }
 
 export enum backgrounds{
-    FIGHT1= "/assets/game-assets/backgrounds/naberoa_tav_v2.png"
+    FIGHT1= "/assets/game-assets/backgrounds/naberoa_tav_v2.png",
+    FIGHT2="/assets/game-assets/backgrounds/naberoa_path.png"
 }
 
 export enum menuButtons{

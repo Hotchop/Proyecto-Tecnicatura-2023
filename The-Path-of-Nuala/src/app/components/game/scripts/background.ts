@@ -15,6 +15,15 @@ export class backgroundClass{
                 this.sprite.y=0;
                 this.sprite.width=800;
                 this.sprite.height=600;
+            break;
+            case 2:
+                this.stageName='Naberoa_Tavern'
+                this.sprite=new PIXI.Sprite(PIXI.Texture.from(backgrounds.FIGHT2));
+                this.sprite.x=0;
+                this.sprite.y=0;
+                this.sprite.width=800;
+                this.sprite.height=600;
+            break;
         }
     }
 }
