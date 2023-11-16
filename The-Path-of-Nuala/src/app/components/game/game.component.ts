@@ -7,8 +7,8 @@ import * as PIXI from 'pixi.js';
 import { enemy } from './scripts/commonEnemy';
 import { AuthService } from 'src/app/services/auth.service';
 import { player } from './scripts/player';
-import { endTitleStyle, enemyTurnTitle, mainTitleStyle, nameplateStyle, playerTurnTitle } from './scripts/randomNameGenerator';
-import {actionIcons, enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
+import { endTitleStyle, enemyTurnTitle, getRandomName, mainTitleStyle, nameplateStyle, playerTurnTitle, turnTitleStyle } from './scripts/randomNameGenerator';
+import {actionIcons, backgrounds, chartNumber, enemyActions, menuButtons, playerActions } from 'src/app/enums/enums';
 import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
 import { fightMenuClass } from './scripts/fightMenu';
@@ -38,6 +38,7 @@ export class GameComponent implements OnInit{
   private difficulty:number; ///0,75 - 1.00 - 1,25
   private playerHealthBar:healthbar = new healthbar();
   private sounds = new soundEffect()
+  private levelName: PIXI.Text = new PIXI.Text('',nameplateStyle)
   
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
@@ -212,9 +213,12 @@ export class GameComponent implements OnInit{
     const fightMenu=new fightMenuClass();
 
     const newEnemy = new enemy(this.difficulty,this.chartopia);
-    
 
-    this.app.stage.addChild(backSprite.sprite)  //Background
+    await this.randomLevelName(this.levelName);
+    this.levelName.anchor.set(0.5);
+    this.levelName.position.set(400,20);
+    
+    this.app.stage.addChild(backSprite.sprite,this.levelName)  //Background
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon) //Enemy
     this.app.stage.addChild(this.player.currentTurnSprite,this.player.hittedIcon,this.player.currentStatusSprite,this.player.namePlate);
     this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
@@ -454,28 +458,21 @@ export class GameComponent implements OnInit{
       }
         break
     }
-    /* if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK){
-      this.animationLogic.enemyAttack(enemy,5)
-      await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
-    }else{
-      if(enemy.nextTurn === enemyActions.DEBUFF){
-        this.animationLogic.enemyAttack(enemy,5)
-        this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.DEBUFF);
-        this.player.currentStatusSprite.visible = true;
-      }else{
-        if(enemy.nextTurn === enemyActions.STRONG_DEBUFF){
-          this.animationLogic.enemyAttack(enemy,5)
-          this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
-          this.player.currentStatusSprite.visible = true;
-        }else{
-          this.animationLogic.enemyBuff(enemy,5)
-        }
-      }
-    } */
+    
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
-
+  async randomLevelName(nameplate: PIXI.Text){
+    getRandomName(chartNumber.TAVERN,this.chartopia,(error,result) => {
+      if(error || result === undefined){
+        nameplate.text = '';
+        console.log(result);
+      }else{
+          nameplate.text = result;
+          console.log(result);
+      }
+    })
+  }
   
   
 
