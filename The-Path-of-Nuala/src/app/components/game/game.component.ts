@@ -373,8 +373,11 @@ window.addEventListener('keydown', (event) => {
         this.app.stage.removeChild(actionText);   
         buttonDescrp= new PIXI.Text("Press to attack \n"+newEnemy.name+"!",nameplateStyle);
         buttonDescrp.anchor.set(0.5);
-        buttonDescrp.position.set(400,485)
+        buttonDescrp.position.set(400  ,485)
         this.app.stage.addChild(buttonDescrp);
+      })
+      fightMenu.attackButton.addEventListener('mouseup',()=>{
+        this.app.stage.removeChild(buttonDescrp)
       })
       fightMenu.attackButton.addEventListener('pointerout',()=>{
         this.app.stage.removeChild(buttonDescrp);  
@@ -413,6 +416,9 @@ window.addEventListener('keydown', (event) => {
         this.animationLogic.characterBuff(this.player,5)
         resolve(true)
     })
+    fightMenu.guardButton.addEventListener('mouseup',()=>{
+      this.app.stage.removeChild(buttonDescrp)
+    })
 
     fightMenu.itemButton.eventMode='static';
     fightMenu.itemButton.addEventListener('pointerover',()=>{
@@ -436,10 +442,12 @@ window.addEventListener('keydown', (event) => {
         this.animationLogic.characterBuff(this.player,5)
         resolve(true)
     })
+    fightMenu.itemButton.addEventListener('mouseup',()=>{
+      this.app.stage.removeChild(buttonDescrp)
+    })
     fightMenu.runButton.eventMode='static';
     fightMenu.runButton.addEventListener('pointerover',()=>{
       this.app.stage.removeChild(actionText);   
-
       buttonDescrp= new PIXI.Text("Runaway!",nameplateStyle);
       buttonDescrp.anchor.set(0.5);
       buttonDescrp.position.set(415,480)
@@ -452,6 +460,7 @@ window.addEventListener('keydown', (event) => {
    
     })
     fightMenu.runButton.addEventListener('click',async ()=>{
+      this.app.stage.removeChild(actionText)
       await this.loadScreenOut();
       this.endScreen();
     })
