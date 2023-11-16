@@ -24,6 +24,7 @@ import { ContactsectionComponent } from './components/contactus-parts/contactsec
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UserInfoComponent } from './components/profile-parts/user-info/user-info.component';
 import { UserScoresComponent } from './components/profile-parts/user-scores/user-scores.component';
+import { InstructionsComponent } from './components/instructions/instructions.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { UserScoresComponent } from './components/profile-parts/user-scores/user
     ContactsectionComponent,
     ProfileComponent,
     UserInfoComponent,
-    UserScoresComponent
+    UserScoresComponent,
+    InstructionsComponent
   ],
   imports: [
     BrowserModule,
