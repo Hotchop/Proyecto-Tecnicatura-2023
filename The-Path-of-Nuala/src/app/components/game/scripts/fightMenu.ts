@@ -30,7 +30,6 @@ export class fightMenuClass{
         this.menuBack.height=180;
         this.menuBack.x=170;
         this.menuBack.y=418;
-    
     }
 
     private setterSize(button:PIXI.Sprite){

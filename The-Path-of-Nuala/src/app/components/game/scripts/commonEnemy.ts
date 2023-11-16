@@ -1,10 +1,12 @@
+import { Sprite } from 'pixi.js';
 import * as PIXI from 'pixi.js';
 import { Enemy} from 'src/app/interfaces/interfaces';
-import { enemyActions, chartNumber, actionIcons } from 'src/app/enums/enums';
+import { enemyActions, chartNumber, actionIcons, enemyTextures } from 'src/app/enums/enums';
 import { ChartopiaService } from 'src/app/services/chartopia.service';
 import { getRandomName, nameplateStyle } from './randomNameGenerator';
 import { player } from './player';
 import { healthbar } from './healthbarLogic';
+import { from } from 'rxjs';
 
 /**Common Enemy Constants */
 const enemyDefaultName = 'Enemy'
@@ -43,11 +45,8 @@ export class enemy implements Enemy {
       this.nextTurn = enemyActions.ATTACK;
       
       //Sprite setup
-      this.sprite = PIXI.Sprite.from(enemyDefaultSprite);
-      this.sprite.anchor.set(0.5);
-      this.sprite.x = 600;
-      this.sprite.y = 350;
-      this.sprite.scale.x *= -1;
+      this.sprite = this.getRandomEnemyTexture();
+  
       
       //PIXI text setup
       this.namePlate = new PIXI.Text('',nameplateStyle);
@@ -203,6 +202,25 @@ export class enemy implements Enemy {
     
       const randomIndex = Math.floor(Math.random() * enumValues.length);
       return enumValues[randomIndex];
+    }
+
+    getRandomEnemyTexture(): PIXI.Sprite{
+      const value = Math.random();
+      if(value < 0.5){
+        let sprite = PIXI.Sprite.from(enemyTextures.ASSASSIN)
+        sprite.anchor.set(0.5);
+        sprite.x = 600;
+        sprite.y = 350;
+        sprite.scale.x *= -1;
+        return sprite
+      }else{
+        let sprite = PIXI.Sprite.from(enemyTextures.SLIME);
+        sprite.anchor.set(0.5);
+        sprite.x = 600;
+        sprite.y = 375;
+        sprite.scale.x *= -1;
+        return sprite
+      }
     }
 
   }

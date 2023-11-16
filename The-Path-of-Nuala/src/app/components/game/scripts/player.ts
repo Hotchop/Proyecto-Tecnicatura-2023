@@ -3,6 +3,7 @@ import { actionIcons, playerActions, playerSprites } from "src/app/enums/enums";
 import { Character } from "src/app/interfaces/interfaces";
 import { enemy } from './commonEnemy';
 import { healthbar } from './healthbarLogic';
+import { nameplateStyle } from './randomNameGenerator';
 
 const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
 export class player implements Character {
@@ -18,6 +19,7 @@ export class player implements Character {
     currentStatusSprite: PIXI.Sprite;
     dmg: number;
     hittedIcon: PIXI.Sprite;
+    namePlate: PIXI.Text;
 
     constructor(name: string, charClass: string) {
         this.charName = name;
@@ -25,12 +27,15 @@ export class player implements Character {
         this.dmgMod = 1;
         this.charClass = charClass;
         this.defenseMod = 1;
-        this.currentTurnSprite = new PIXI.Sprite(PIXI.Texture.from(playerSprites.EXAMPLE));
+        this.currentTurnSprite = PIXI.Sprite.from(playerSprites.PLACEHOLDER);
         this.currentTurnSprite.anchor.set(0.5)
         this.currentTurnSprite.x = 200;
-        this.currentTurnSprite.y = 275;
-        this.currentTurnSprite.width = 200;
-        this.currentTurnSprite.height = 400;
+        this.currentTurnSprite.y = 350;
+
+        this.namePlate = new PIXI.Text(this.charName,nameplateStyle);
+        this.namePlate.anchor.set(0.5);
+        this.namePlate.y = this.currentTurnSprite.y - 150;
+        this.namePlate.x = this.currentTurnSprite.x;
 
         this.currentStatusSprite = PIXI.Sprite.from(actionIcons.DEFEND)
         this.currentStatusSprite.anchor.set(0.5)

@@ -98,6 +98,7 @@ export class GameComponent implements OnInit{
     //Transitions logic with loading screen
     this.app.stage.eventMode = 'static'
     this.app.stage.addEventListener('click', async() =>{
+      this.app.stage.eventMode = 'none'
       await this.loadScreenOut()
       this.createCharacterScreen()
     })
@@ -110,6 +111,7 @@ export class GameComponent implements OnInit{
   async createCharacterScreen() {
     
     // Title for the character creation screen
+    this.app.stage.eventMode = 'static';
     const title = new PIXI.Text('Character Creation', mainTitleStyle);
     title.anchor.set(0.5);
     title.position.set(400, 100);
@@ -173,6 +175,8 @@ export class GameComponent implements OnInit{
         
         // Aquí puedes agregar la lógica para iniciar el juego
         await this.loadScreenOut();
+        this.mainMenuOst.stop();
+        this.battleOst.play();
         this.fight();
       } else {
         console.log('Please select difficulty and class before starting the game.');
@@ -212,7 +216,7 @@ export class GameComponent implements OnInit{
 
     this.app.stage.addChild(backSprite.sprite)  //Background
     this.app.stage.addChild(newEnemy.sprite,newEnemy.namePlate,newEnemy.nextTurnSprite,newEnemy.currentStatusSprite,newEnemy.hittedIcon) //Enemy
-    this.app.stage.addChild(this.player.currentTurnSprite,this.player.hittedIcon,this.player.currentStatusSprite);
+    this.app.stage.addChild(this.player.currentTurnSprite,this.player.hittedIcon,this.player.currentStatusSprite,this.player.namePlate);
     this.app.stage.addChild(fightMenu.menuBack,fightMenu.attackButton,fightMenu.guardButton,fightMenu.runButton,fightMenu.itemButton) //Action Menu
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     this.app.stage.addChild(this.playerHealthBar.barHealth);
@@ -391,8 +395,6 @@ export class GameComponent implements OnInit{
    * Loading screen loggin when launching a scene. Goes right after loaging the main sprites with an await
    */
   async loadScreenEnter(){
-    this.mainMenuOst.stop();
-    this.battleOst.play();
     this.app.stage.addChild(this.loadScreen)
     this.animationLogic.fadeFromBlack(this.loadScreen,0.05)
     await this.animationLogic.timer(1000)
