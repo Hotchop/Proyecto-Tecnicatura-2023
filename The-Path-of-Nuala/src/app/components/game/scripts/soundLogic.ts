@@ -13,7 +13,7 @@ export class soundEffect{
     shieldEffect(){
        const sound = new Howl({
         src: ['/assets/music/action-sounds/shield.wav'],
-        volume: 1,
+        volume: 0.2,
         loop: false,
        })
 

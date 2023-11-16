@@ -13,6 +13,7 @@ import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
 import { fightMenuClass } from './scripts/fightMenu';
 import { healthbar } from './scripts/healthbarLogic';
+import { soundEffect } from './scripts/soundLogic';
 
 @Component({
   selector: 'app-game',
@@ -35,18 +36,19 @@ export class GameComponent implements OnInit{
   private score = 0;
   private stageNum=1;
   private difficulty:number; ///0,75 - 1.00 - 1,25
-  private playerHealthBar:healthbar;
+  private playerHealthBar:healthbar = new healthbar();
+  private sounds = new soundEffect()
   
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
-      volume: 0.0, // ajusta el volumen según sea necesario
+      volume: 0.05, // ajusta el volumen según sea necesario
   });
   private battleOst = new Howl({
     src: ['/assets/music/battleost1.mp3',
           '/assets/music/battleost2.mp3',
           '/assets/music/battleost3.mp3',
         ],
-    volume: 0.0, // ajusta el volumen según sea necesario
+    volume: 0.05, // ajusta el volumen según sea necesario
 });
   ngOnInit(): void {
     document.getElementById('window')!.appendChild(this.app.view);
@@ -204,7 +206,6 @@ export class GameComponent implements OnInit{
      */
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
-    this.playerHealthBar=new healthbar();
 
     const newEnemy = new enemy(this.difficulty,this.chartopia);
     
@@ -230,13 +231,13 @@ export class GameComponent implements OnInit{
       //Player Turn Logic
       playerPlayed=await this.playerTurn(fightMenu,newEnemy);
       console.log(playerPlayed)
+      this.menuUnavailable(fightMenu);
       await this.animationLogic.timer(2000);
       if(newEnemy.getHp <= 0){
         onFight = false;
       }else{
         //Enemy Turn
       if(playerPlayed==true){
-          this.menuUnavailable(fightMenu);
           this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
           await this.animationLogic.timer(1000);
       //Enemy Turn Logic
@@ -298,12 +299,16 @@ export class GameComponent implements OnInit{
           this.player.nextTurn=playerActions.ATTACK;
           this.player.action(newEnemy,this.playerHealthBar);
           this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
+          this.sounds.attackEffect()
+          this.animationLogic.characterAttack(this.player,5)
           resolve(true)
     })
     fightMenu.guardButton.eventMode='static';
     fightMenu.guardButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.GUARD;
         this.player.action(newEnemy,this.playerHealthBar);
+        this.sounds.shieldEffect()
+        this.animationLogic.characterBuff(this.player,5)
         resolve(true)
     })
 
@@ -311,6 +316,8 @@ export class GameComponent implements OnInit{
     fightMenu.itemButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.HEALTH_UP;
         this.player.action(newEnemy,this.playerHealthBar);
+        this.sounds.healEffect()
+        this.animationLogic.characterBuff(this.player,5)
         resolve(true)
     })
     fightMenu.runButton.eventMode='static';
@@ -397,7 +404,55 @@ export class GameComponent implements OnInit{
    * @param enemy The enemy about to take it's turn
    */
   async enemyPhaseLogic(enemy: enemy){
-    if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK){
+    switch(enemy.nextTurn){
+      case enemyActions.ATTACK:{
+        this.animationLogic.enemyAttack(enemy,5)
+        this.sounds.attackEffect()
+        await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
+      }
+        break
+      case enemyActions.STRONG_ATTACK:{
+        this.animationLogic.enemyAttack(enemy,5)
+        this.sounds.attackEffect()
+        await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
+      }
+        break
+      case enemyActions.DEFEND:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.shieldEffect()
+      }
+        break
+      case enemyActions.STRONG_DEFEND:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.shieldEffect()
+      }
+        break
+      case enemyActions.DEBUFF:{
+        this.animationLogic.enemyAttack(enemy,5)
+        this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.DEBUFF);
+        this.player.currentStatusSprite.visible = true;
+        this.sounds.debuffEffect()
+      }
+        break
+      case enemyActions.STRONG_DEBUFF:{
+        this.animationLogic.enemyAttack(enemy,5)
+          this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
+          this.player.currentStatusSprite.visible = true;
+          this.sounds.debuffEffect()
+      }
+        break
+      case enemyActions.BUFF:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.buffEffect()
+      }
+        break
+      case enemyActions.STRONG_BUFF:{
+        this.animationLogic.enemyBuff(enemy,5)
+        this.sounds.buffEffect()
+      }
+        break
+    }
+    /* if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK){
       this.animationLogic.enemyAttack(enemy,5)
       await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
     }else{
@@ -414,7 +469,7 @@ export class GameComponent implements OnInit{
           this.animationLogic.enemyBuff(enemy,5)
         }
       }
-    }
+    } */
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
