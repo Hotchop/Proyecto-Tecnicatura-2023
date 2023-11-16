@@ -594,7 +594,7 @@ window.addEventListener('keydown', (event) => {
   }
 
   async randomLevelName(nameplate: PIXI.Text,name: chartNumber){
-    if(name === chartNumber.TAVERN){
+    /* if(name === chartNumber.TAVERN){
       getRandomName(chartNumber.TAVERN,this.chartopia,(error,result) => {
         if(error || result === undefined){
           nameplate.text = '';
@@ -604,8 +604,8 @@ window.addEventListener('keydown', (event) => {
             console.log(result);
         }
       })
-    }
-    if(name === chartNumber.DUNGEON){
+    } */
+   
       getRandomName(chartNumber.DUNGEON,this.chartopia,(error,result) => {
         if(error || result === undefined){
           nameplate.text = '';
@@ -615,7 +615,7 @@ window.addEventListener('keydown', (event) => {
             console.log(result);
         }
       })
-    }
+    
     
   }
   
