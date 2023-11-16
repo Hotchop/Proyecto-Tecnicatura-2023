@@ -361,17 +361,51 @@ window.addEventListener('keydown', (event) => {
   }
 
   async playerTurn(fightMenu:fightMenuClass, newEnemy:enemy):Promise<boolean>{
+    
     return new Promise(resolve=>{
+      let buttonDescrp:PIXI.Text;
+      let actionText= new PIXI.Text("Choose an action...",nameplateStyle)
+      actionText.anchor.set(0.5);
+      actionText.position.set(415,480)
+      this.app.stage.addChild(actionText)
       fightMenu.attackButton.eventMode='static';
+      fightMenu.attackButton.addEventListener('pointerover',()=>{
+        this.app.stage.removeChild(actionText);   
+        buttonDescrp= new PIXI.Text("Press to attack \n"+newEnemy.name+"!",nameplateStyle);
+        buttonDescrp.anchor.set(0.5);
+        buttonDescrp.position.set(400,485)
+        this.app.stage.addChild(buttonDescrp);
+      })
+      fightMenu.attackButton.addEventListener('pointerout',()=>{
+        this.app.stage.removeChild(buttonDescrp);  
+        this.app.stage.addChild(actionText)
+  
+      })
+
       fightMenu.attackButton.addEventListener('click',()=>{
           this.player.nextTurn=playerActions.ATTACK;
           this.player.action(newEnemy,this.playerHealthBar);
           this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
           this.sounds.attackEffect()
           this.animationLogic.characterAttack(this.player,5)
+          
           resolve(true)
     })
+    
     fightMenu.guardButton.eventMode='static';
+    fightMenu.guardButton.addEventListener('pointerover',()=>{
+      this.app.stage.removeChild(actionText);   
+      buttonDescrp= new PIXI.Text("Defend yourself!",nameplateStyle);
+      buttonDescrp.anchor.set(0.5);
+      buttonDescrp.position.set(415,480)
+      this.app.stage.addChild(buttonDescrp);
+
+    })
+    fightMenu.guardButton.addEventListener('pointerout',()=>{
+      this.app.stage.removeChild(buttonDescrp)   
+      this.app.stage.addChild(actionText)
+  
+    })
     fightMenu.guardButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.GUARD;
         this.player.action(newEnemy,this.playerHealthBar);
@@ -381,7 +415,21 @@ window.addEventListener('keydown', (event) => {
     })
 
     fightMenu.itemButton.eventMode='static';
+    fightMenu.itemButton.addEventListener('pointerover',()=>{
+      this.app.stage.removeChild(actionText);   
+      buttonDescrp= new PIXI.Text("Use an item: get healed!",nameplateStyle);
+      buttonDescrp.anchor.set(0.5);
+      buttonDescrp.position.set(415,480)
+      this.app.stage.addChild(buttonDescrp);
+
+    })
+    fightMenu.itemButton.addEventListener('pointerout',()=>{
+      this.app.stage.removeChild(buttonDescrp)  
+      this.app.stage.addChild(actionText)
+   
+    })
     fightMenu.itemButton.addEventListener('click',()=>{
+      
         this.player.nextTurn=playerActions.HEALTH_UP;
         this.player.action(newEnemy,this.playerHealthBar);
         this.sounds.healEffect()
@@ -389,6 +437,20 @@ window.addEventListener('keydown', (event) => {
         resolve(true)
     })
     fightMenu.runButton.eventMode='static';
+    fightMenu.runButton.addEventListener('pointerover',()=>{
+      this.app.stage.removeChild(actionText);   
+
+      buttonDescrp= new PIXI.Text("Runaway!",nameplateStyle);
+      buttonDescrp.anchor.set(0.5);
+      buttonDescrp.position.set(415,480)
+      this.app.stage.addChild(buttonDescrp);
+
+    })
+    fightMenu.runButton.addEventListener('pointerout',()=>{
+      this.app.stage.removeChild(buttonDescrp)  
+      this.app.stage.addChild(actionText)
+   
+    })
     fightMenu.runButton.addEventListener('click',async ()=>{
       await this.loadScreenOut();
       this.endScreen();
