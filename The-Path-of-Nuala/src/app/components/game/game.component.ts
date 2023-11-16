@@ -227,8 +227,7 @@ window.addEventListener('keydown', (event) => {
     this.app.stage.addChild(nameLabel);
     // Render and animate elements
     this.app.stage.render;
-    this.animationLogic.faddingText(title, 0.005);
-    this.animationLogic.faddingText(classLabel, 0.003);
+    await this.loadScreenEnter()
   }
   createButton(text:string, x:number, y:number) {
     const button = new PIXI.Text(text, nameplateStyle);

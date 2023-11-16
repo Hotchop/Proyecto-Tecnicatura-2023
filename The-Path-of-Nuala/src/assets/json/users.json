@@ -48,6 +48,24 @@
         }
       ],
       "id": 1
+    },
+    {
+      "usuario": "UTN",
+      "constraseña": "123",
+      "avatar": "/assets/avatars/mage-avatar.png",
+      "partidas": [
+        {
+          "fecha": "2023-11-16T18:57:57.188Z",
+          "personaje": "Chaldu",
+          "puntaje": 200
+        },
+        {
+          "fecha": "2023-11-16T19:00:48.941Z",
+          "personaje": "Lauti",
+          "puntaje": 125
+        }
+      ],
+      "id": 2
     }
   ]
 }
