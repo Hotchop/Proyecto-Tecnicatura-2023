@@ -5,34 +5,32 @@ import { enemy } from './commonEnemy';
 import { healthbar } from './healthbarLogic';
 
 const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
-
-export class player implements Character{
+export class player implements Character {
     charName: string;
+    charClass: string;
     MAX_HP: number;
     hp: number;
     dmgMod: number;
     defenseMod: number;
-    nextTurn:playerActions;
-    nextTurnSprite:PIXI.Sprite;
-    currentTurnSprite:PIXI.Sprite;
+    nextTurn: playerActions;
+    nextTurnSprite: PIXI.Sprite;
+    currentTurnSprite: PIXI.Sprite;
     currentStatusSprite: PIXI.Sprite;
-    dmg:number;
+    dmg: number;
     hittedIcon: PIXI.Sprite;
 
-    constructor(name: string){
+    constructor(name: string, charClass: string) {
         this.charName = name;
         this.MAX_HP = 100;
-        this.hp = this.MAX_HP;
         this.dmgMod = 1;
+        this.charClass = charClass;
         this.defenseMod = 1;
-        this.dmg = 10;
-        this.currentTurnSprite=new PIXI.Sprite(PIXI.Texture.from(playerSprites.EXAMPLE));
+        this.currentTurnSprite = new PIXI.Sprite(PIXI.Texture.from(playerSprites.EXAMPLE));
         this.currentTurnSprite.anchor.set(0.5)
-        this.currentTurnSprite.x=200;
-        this.currentTurnSprite.y=275;
-        this.currentTurnSprite.width=200;
-        this.currentTurnSprite.height=400;
-
+        this.currentTurnSprite.x = 200;
+        this.currentTurnSprite.y = 275;
+        this.currentTurnSprite.width = 200;
+        this.currentTurnSprite.height = 400;
 
         this.currentStatusSprite = PIXI.Sprite.from(actionIcons.DEFEND)
         this.currentStatusSprite.anchor.set(0.5)
@@ -42,10 +40,33 @@ export class player implements Character{
 
         this.hittedIcon = PIXI.Sprite.from(hitSprite)
         this.hittedIcon.anchor.set(0.5)
-        this.hittedIcon.y = this.currentTurnSprite.y-50;
+        this.hittedIcon.y = this.currentTurnSprite.y - 50;
         this.hittedIcon.x = this.currentTurnSprite.x;
         this.hittedIcon.alpha = 0;
+
+        // Ajustar valores en función de la clase
+        this.setPlayerClass(charClass);
     }
+
+    private setPlayerClass(charClass: string) {
+        switch (charClass.toLowerCase()) {
+            case 'warrior':
+                this.hp = this.MAX_HP + 20; // Ajusta la vida para el guerrero
+                this.dmg = 15; // Ajusta el daño para el guerrero
+                break;
+            case 'mage':
+                this.hp = this.MAX_HP - 10; // Ajusta la vida para el mago
+                this.dmg = 20; // Ajusta el daño para el mago
+                break;
+            case 'rogue':
+                this.hp = this.MAX_HP; // La vida predeterminada para el pícaro
+                this.dmg = 12; // Ajusta el daño para el pícaro
+                break;
+            default:
+                throw new Error('Clase de personaje no válida');
+        }
+    }
+
 
     get getCharName(){
         return this.charName

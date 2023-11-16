@@ -13,7 +13,6 @@ import {Howl, Howler} from 'howler';
 import { backgroundClass } from './scripts/background';
 import { fightMenuClass } from './scripts/fightMenu';
 import { healthbar } from './scripts/healthbarLogic';
-import { soundEffect } from './scripts/soundLogic';
 
 @Component({
   selector: 'app-game',
@@ -32,12 +31,11 @@ export class GameComponent implements OnInit{
   private app: PIXI.Application<HTMLCanvasElement> = new PIXI.Application({});
   private animationLogic = new animationLogic(this.app);
   private loadScreen = new PIXI.Graphics();
-  private player = new player('');
+  private player: player;
   private score = 0;
   private stageNum=1;
-  private difficulty = 1; ///0,75 - 1.00 - 1,25
-  private playerHealthBar:healthbar = new healthbar();
-  private sounds = new soundEffect();
+  private difficulty:number; ///0,75 - 1.00 - 1,25
+  private playerHealthBar:healthbar;
   
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
@@ -108,35 +106,44 @@ export class GameComponent implements OnInit{
    * Character creation screen
    */
   async createCharacterScreen() {
-    // Background image for the character creation screen
-    // Example: const backgroundImage = new PIXI.Sprite(PIXI.Texture.from('path/to/background-image.png'));
-    // Set the position, size, and other properties of the background image
-  
+    
     // Title for the character creation screen
     const title = new PIXI.Text('Character Creation', mainTitleStyle);
     title.anchor.set(0.5);
     title.position.set(400, 100);
+    const startGameButton = this.createButton('Start Game', 400, 500);
+    // Text to choose the difficulty
+    const difficultyLabel = new PIXI.Text('Choose your difficulty:', nameplateStyle);
+    difficultyLabel.anchor.set(0.5);
+    difficultyLabel.position.set(400, 400);
+  
+    // Buttons to choose the difficulty
+    const easyButton = this.createButton('Easy', title.x - 100, title.y + 200);
+    const normalButton = this.createButton('Normal', title.x, title.y + 200);
+    const hardButton = this.createButton('Hard', title.x + 100, title.y + 200);
+  
+    // Event listeners for the difficulty buttons
+    easyButton.on('click', () => {
+      this.difficulty = 0.75;
+    });
+    
+    normalButton.on('click', () => {
+      this.difficulty = 1;
+    });
+    
+    hardButton.on('click', () => {
+      this.difficulty = 1.25;
+    });
   
     // Text to choose the class
     const classLabel = new PIXI.Text('Choose your class:', nameplateStyle);
     classLabel.anchor.set(0.5);
-    classLabel.position.set(200, 200);
+    classLabel.position.set(400, 200);
   
     // Buttons to choose the class
-    const warriorButton = new PIXI.Text('Warrior', nameplateStyle);
-    warriorButton.anchor.set(0.5);
-    warriorButton.position.set(title.x - 100, title.y + 300);
-    warriorButton.interactive = true;
-  
-    const mageButton = new PIXI.Text('Mage', nameplateStyle);
-    mageButton.anchor.set(0.5);
-    mageButton.position.set(title.x, title.y + 300);
-    mageButton.interactive = true;
-  
-    const rogueButton = new PIXI.Text('Rogue', nameplateStyle);
-    rogueButton.anchor.set(0.5);
-    rogueButton.position.set(title.x + 100, title.y + 300);
-    rogueButton.interactive = true;
+    const warriorButton = this.createButton('Warrior', title.x - 100, title.y + 300);
+    const mageButton = this.createButton('Mage', title.x, title.y + 300);
+    const rogueButton = this.createButton('Rogue', title.x + 100, title.y + 300);
   
     // Icon for the chosen class
     const classIcon = new PIXI.Sprite();
@@ -144,41 +151,48 @@ export class GameComponent implements OnInit{
     classIcon.position.set(200, 250); // Adjust the position as needed
   
     // Event listeners for the class buttons
-    warriorButton.on('click', async () => {
-      const characterClass = 'Warrior';
-      // Character creation logic with the chosen class, e.g., create a new player object
-      const newPlayer = new player(characterClass);
-      // Continue with the game flow
-      await this.loadScreenOut();
-      this.fight();
+    warriorButton.on('click', () => {
+      this.player = new player('', 'Warrior');
     });
-  
-    mageButton.on('click', async () => {
-      const characterClass = 'Mage';
-      // Character creation logic with the chosen class, e.g., create a new player object
-      const newPlayer = new player(characterClass);
-      // Continue with the game flow
-      await this.loadScreenOut();
-      this.fight();
+    
+    mageButton.on('click', () => {
+      this.player = new player('', 'Mage');
     });
-  
-    rogueButton.on('click', async () => {
-      const characterClass = 'Rogue';
-      // Character creation logic with the chosen class, e.g., create a new player object
-      const newPlayer = new player(characterClass);
-      // Continue with the game flow
-      await this.loadScreenOut();
-      this.fight();
+    
+    rogueButton.on('click', () => {
+      this.player = new player('', 'Rogue');
     });
-  
+    startGameButton.on('click', async () => {
+      // Verificar si se ha seleccionado la dificultad y la clase
+      if (this.difficulty !== undefined && this.player) {
+        console.log('Game is starting...');
+        console.log('Selected Difficulty:', this.difficulty);
+        console.log('Selected Class:', this.player.charClass);
+        
+        // Aquí puedes agregar la lógica para iniciar el juego
+        await this.loadScreenOut();
+        this.fight();
+      } else {
+        console.log('Please select difficulty and class before starting the game.');
+      }
+    });
     // Add elements to the stage
     this.app.stage.addChild(title, classLabel);
     this.app.stage.addChild(warriorButton, mageButton, rogueButton, classIcon);
-  
+    this.app.stage.addChild(easyButton, normalButton, hardButton);
+    this.app.stage.addChild(startGameButton);
     // Render and animate elements
     this.app.stage.render;
     this.animationLogic.faddingText(title, 0.005);
     this.animationLogic.faddingText(classLabel, 0.003);
+  }
+  
+  createButton(text:string, x:number, y:number) {
+    const button = new PIXI.Text(text, nameplateStyle);
+    button.anchor.set(0.5);
+    button.position.set(x, y);
+    button.interactive = true;
+    return button;
   }
   
   /**
@@ -190,6 +204,7 @@ export class GameComponent implements OnInit{
      */
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
+    this.playerHealthBar=new healthbar();
 
     const newEnemy = new enemy(this.difficulty,this.chartopia);
     
@@ -214,14 +229,14 @@ export class GameComponent implements OnInit{
 
       //Player Turn Logic
       playerPlayed=await this.playerTurn(fightMenu,newEnemy);
-      await this.menuUnavailable(fightMenu);
-      console.log(playerPlayed);
+      console.log(playerPlayed)
       await this.animationLogic.timer(2000);
       if(newEnemy.getHp <= 0){
         onFight = false;
       }else{
         //Enemy Turn
       if(playerPlayed==true){
+          this.menuUnavailable(fightMenu);
           this.animationLogic.turnTextAnimation(enemyTurnTitle,0.05);
           await this.animationLogic.timer(1000);
       //Enemy Turn Logic
@@ -283,16 +298,12 @@ export class GameComponent implements OnInit{
           this.player.nextTurn=playerActions.ATTACK;
           this.player.action(newEnemy,this.playerHealthBar);
           this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
-          this.animationLogic.characterAttack(this.player,5)
-          this.sounds.attackEffect();
           resolve(true)
     })
     fightMenu.guardButton.eventMode='static';
     fightMenu.guardButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.GUARD;
         this.player.action(newEnemy,this.playerHealthBar);
-        this.animationLogic.characterBuff(this.player,5)
-        this.sounds.shieldEffect();
         resolve(true)
     })
 
@@ -300,20 +311,17 @@ export class GameComponent implements OnInit{
     fightMenu.itemButton.addEventListener('click',()=>{
         this.player.nextTurn=playerActions.HEALTH_UP;
         this.player.action(newEnemy,this.playerHealthBar);
-        this.animationLogic.characterBuff(this.player,5)
-        this.sounds.healEffect();
         resolve(true)
     })
     fightMenu.runButton.eventMode='static';
     fightMenu.runButton.addEventListener('click',async ()=>{
-      await this.animationLogic.deathAnimation(this.player.currentTurnSprite,0.05);
       await this.loadScreenOut();
       this.endScreen();
     })
     })
   }
 
-  async menuUnavailable(fightMenu:fightMenuClass){
+  menuUnavailable(fightMenu:fightMenuClass){
     fightMenu.attackButton.eventMode='none';
     fightMenu.guardButton.eventMode='none';
     fightMenu.itemButton.eventMode='none';
@@ -389,55 +397,24 @@ export class GameComponent implements OnInit{
    * @param enemy The enemy about to take it's turn
    */
   async enemyPhaseLogic(enemy: enemy){
-    switch(enemy.nextTurn){
-      case enemyActions.ATTACK:{
+    if(enemy.nextTurn === enemyActions.ATTACK || enemy.nextTurn === enemyActions.STRONG_ATTACK){
+      this.animationLogic.enemyAttack(enemy,5)
+      await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
+    }else{
+      if(enemy.nextTurn === enemyActions.DEBUFF){
         this.animationLogic.enemyAttack(enemy,5)
-        this.sounds.attackEffect();
-        await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
-      }
-      break
-      case enemyActions.STRONG_ATTACK:{
-        this.animationLogic.enemyAttack(enemy,5)
-        this.sounds.attackEffect();
-        await this.animationLogic.hitIconAnimation(this.player.hittedIcon,0.03)
-      }
-      break
-      case enemyActions.DEFEND:{
-        this.animationLogic.enemyBuff(enemy,5)
-        this.sounds.shieldEffect()
-      }
-      break
-      case enemyActions.STRONG_DEFEND:{
-        this.animationLogic.enemyBuff(enemy,5)
-        this.sounds.shieldEffect()
-      }
-      break
-      case enemyActions.DEBUFF:{
-        this.animationLogic.enemyAttack(enemy,5)
-        this.sounds.debuffEffect();
         this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.DEBUFF);
         this.player.currentStatusSprite.visible = true;
+      }else{
+        if(enemy.nextTurn === enemyActions.STRONG_DEBUFF){
+          this.animationLogic.enemyAttack(enemy,5)
+          this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
+          this.player.currentStatusSprite.visible = true;
+        }else{
+          this.animationLogic.enemyBuff(enemy,5)
+        }
       }
-      break
-      case enemyActions.STRONG_DEBUFF:{
-        this.animationLogic.enemyAttack(enemy,5)
-        this.sounds.debuffEffect();
-        this.player.currentStatusSprite.texture = PIXI.Texture.from(actionIcons.STRONG_DEBUFF);
-        this.player.currentStatusSprite.visible = true;
-      }
-      break
-      case enemyActions.BUFF:{
-        this.animationLogic.enemyBuff(enemy,5)
-        this.sounds.buffEffect()
-      }
-      break
-      case enemyActions.STRONG_BUFF:{
-        this.animationLogic.enemyBuff(enemy,5)
-        this.sounds.buffEffect()
-      }
-      break
     }
-
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
