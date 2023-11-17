@@ -13,7 +13,7 @@ const enemyDefaultName = 'Enemy'
 const enemyDefaultSprite = '/assets/game-assets/enemy-ph.png'
 const hitSprite = '/assets/game-assets/action-icons/attack-hit.png'
 const enemyDefaultHealth = 100;
-const enemyDefaultDamage = 10;
+const enemyDefaultDamage = 20;
 const enemyDefaultScore = 100;
 
 /**
@@ -102,7 +102,7 @@ export class enemy implements Enemy {
         }
         break
         case enemyActions.STRONG_ATTACK: {
-          player.getHit(this.dmg * this.dmgMod * 0.25,playerHealthBar)
+          player.getHit(this.dmg * this.dmgMod * 1.25,playerHealthBar)
           this.dmgMod = 1;
           this.currentStatusSprite.visible = false
           console.log('Strong Attack');
@@ -190,6 +190,7 @@ export class enemy implements Enemy {
 
     getHit(damage: number){
       this.hp -= damage * (2 - this.defenseMod) //At more defense, lower damage
+      console.log('Player HP - ',this.hp);
       if(this.hp <= 0){
         console.log('DEAD');
       }

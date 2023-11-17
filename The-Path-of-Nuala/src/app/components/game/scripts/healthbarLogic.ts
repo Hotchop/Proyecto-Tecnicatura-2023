@@ -13,6 +13,7 @@ export class healthbar{
         this.playerHealth.height=38*1.5;
 
         this.barHealth=new PIXI.Sprite(PIXI.Texture.from(healthbarEn.BAR));
+        this.barHealth.anchor.set(0);
         this.barHealth.x=120;
         this.barHealth.y=48;
         this.barHealth.width=165;

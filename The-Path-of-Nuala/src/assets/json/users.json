@@ -45,6 +45,11 @@
           "fecha": "2023-11-10T04:21:49.774Z",
           "personaje": "Mikasa",
           "puntaje": 50000
+        },
+        {
+          "fecha": "2023-11-17T16:10:47.528Z",
+          "personaje": "Hotchop",
+          "puntaje": 400
         }
       ],
       "id": 1

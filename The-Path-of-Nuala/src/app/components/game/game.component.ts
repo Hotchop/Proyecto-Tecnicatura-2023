@@ -324,8 +324,8 @@ window.addEventListener('keydown', (event) => {
         nextLevel.height = 51;
         
         this.app.stage.addChild(txtNextLevel1,txtNextLevel2,nextLevel);
-      
-        await this.animationLogic.nextLevelAnimation(nextLevel,txtNextLevel1,txtNextLevel2,2.5,this.loadScreen)
+        this.loadScreen.alpha = 0.75;
+        await this.animationLogic.nextLevelAnimation(nextLevel,txtNextLevel1,txtNextLevel2,2.5)
         nextLevel.interactive = true;
         nextLevel.on('click',async() =>{
           const map= PIXI.Sprite.from('/assets/game-assets/gui/map.png');
@@ -598,8 +598,8 @@ window.addEventListener('keydown', (event) => {
     enemy.enemyTurn(this.player,this.playerHealthBar)
   }
 
-  async randomLevelName(nameplate: PIXI.Text,name: chartNumber){
-    /* if(name === chartNumber.TAVERN){
+  async randomLevelName(nameplate: PIXI.Text,stage: number){
+    if(stage === 1){
       getRandomName(chartNumber.TAVERN,this.chartopia,(error,result) => {
         if(error || result === undefined){
           nameplate.text = '';
@@ -609,8 +609,7 @@ window.addEventListener('keydown', (event) => {
             console.log(result);
         }
       })
-    } */
-   
+    }else{
       getRandomName(chartNumber.DUNGEON,this.chartopia,(error,result) => {
         if(error || result === undefined){
           nameplate.text = '';
@@ -620,6 +619,7 @@ window.addEventListener('keydown', (event) => {
             console.log(result);
         }
       })
+    }
     
     
   }

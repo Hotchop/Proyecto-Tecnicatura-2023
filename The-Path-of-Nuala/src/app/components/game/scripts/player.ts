@@ -105,12 +105,14 @@ export class player implements Character {
     }
 
     getHit(damage: number,playerhealthbar:healthbar){
-        this.hp -= damage;
-        playerhealthbar.barHealth.width-=(1.65*damage);
-        playerhealthbar.barHealth.x+=1.3;
-        if(this.hp <= 0){
-            console.log('DEAD');
+        if(damage >= this.hp){
+            this.hp = 0
+            playerhealthbar.barHealth.width = 0;
             playerhealthbar.barHealth.visible=false;
+        }else{
+            this.hp -= damage;
+            playerhealthbar.barHealth.width-=(1.65*damage);
+            playerhealthbar.barHealth.x+=(1.65*damage)/8;
         }
     }
 

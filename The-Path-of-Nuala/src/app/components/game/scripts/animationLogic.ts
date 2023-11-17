@@ -341,12 +341,12 @@ export class animationLogic{
         this.app.ticker.add(deathTicker);
     }
 
-    nextLevelAnimation(menu: PIXI.Sprite,texto:PIXI.Text,texto2:PIXI.Text,speed: number, background?: PIXI.Graphics){
+    nextLevelAnimation(menu: PIXI.Sprite,texto:PIXI.Text,texto2:PIXI.Text,speed: number){
         menu.alpha = 0
 
         const menuTicker = (delta:number) => {
-            if(menu.y < 300){
-                if(texto.y<150){
+            if(menu.y < 225){
+                if(texto.y<200){
                     texto.y+=speed*delta;
                     texto.alpha += speed * delta
                     texto2.y+=speed*delta;
@@ -369,20 +369,6 @@ export class animationLogic{
 
         this.app.ticker.add(menuTicker);
 
-        if(background){
-            
-            background.alpha = 0;
-
-            const backgroundTicker = (delta:number) => {
-            if(background.alpha < 0.75){
-                    background.alpha += speed/10 * delta
-                
-            }else{
-                this.app.ticker.remove(backgroundTicker);
-                }
-            }
-            this.app.ticker.add(backgroundTicker);
-        }
     }
 
 }      
