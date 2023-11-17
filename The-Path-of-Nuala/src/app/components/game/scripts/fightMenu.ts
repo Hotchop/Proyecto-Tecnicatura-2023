@@ -8,7 +8,7 @@ export class fightMenuClass{
     runButton:PIXI.Sprite;
     menuBack:PIXI.Sprite;
     static menuDescrpStyle: PIXI.TextStyle = new PIXI.TextStyle({
-        fill: "rgba(255, 255, 255, 0.5)",
+        fill: "rgb(255, 255, 255)",
         fontFamily: "\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
         fontVariant: "small-caps",
         fontSize:25
