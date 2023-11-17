@@ -362,21 +362,21 @@ window.addEventListener('keydown', (event) => {
   async playerTurn(fightMenu:fightMenuClass, newEnemy:enemy):Promise<boolean>{
     
     return new Promise(resolve=>{
-      let buttonDescrp:PIXI.Text;
-      let actionText= new PIXI.Text("Choose an action...",nameplateStyle)
-      actionText.anchor.set(0.5);
-      actionText.position.set(415,480)
+      let buttonDescrp:PIXI.Text=new PIXI.Text('');
+      let actionText= new PIXI.Text("Choose an action...",fightMenuClass.menuDescrpStyle)
+      //actionText.anchor.set(0.5);
+      actionText.position.set(240,460)
       this.app.stage.addChild(actionText)
       fightMenu.attackButton.eventMode='static';
       fightMenu.attackButton.addEventListener('pointerover',()=>{
         this.app.stage.removeChild(actionText);   
-        buttonDescrp= new PIXI.Text("Press to attack \n"+newEnemy.name+"!",nameplateStyle);
-        buttonDescrp.anchor.set(0.5);
-        buttonDescrp.position.set(400  ,485)
-        this.app.stage.addChild(buttonDescrp);
+        buttonDescrp= new PIXI.Text("Press to attack \n"+newEnemy.name+"!",fightMenuClass.menuDescrpStyle);
+        
+       fightMenuClass.setPositionMenuTXT(buttonDescrp);
+       this.app.stage.addChild(buttonDescrp);
       })
       fightMenu.attackButton.addEventListener('mouseup',()=>{
-        this.app.stage.removeChild(buttonDescrp)
+        buttonDescrp.visible=false;
       })
       fightMenu.attackButton.addEventListener('pointerout',()=>{
         this.app.stage.removeChild(buttonDescrp);  
@@ -390,16 +390,16 @@ window.addEventListener('keydown', (event) => {
           this.animationLogic.hitIconAnimation(newEnemy.hittedIcon,0.03)
           this.sounds.attackEffect()
           this.animationLogic.characterAttack(this.player,5)
-          
+          this.app.stage.removeChild(buttonDescrp)
           resolve(true)
     })
     
     fightMenu.guardButton.eventMode='static';
     fightMenu.guardButton.addEventListener('pointerover',()=>{
       this.app.stage.removeChild(actionText);   
-      buttonDescrp= new PIXI.Text("Defend yourself!",nameplateStyle);
-      buttonDescrp.anchor.set(0.5);
-      buttonDescrp.position.set(415,480)
+      buttonDescrp= new PIXI.Text("Defend yourself!",fightMenuClass.menuDescrpStyle);
+      fightMenuClass.setPositionMenuTXT(buttonDescrp);
+
       this.app.stage.addChild(buttonDescrp);
 
     })
@@ -413,6 +413,8 @@ window.addEventListener('keydown', (event) => {
         this.player.action(newEnemy,this.playerHealthBar);
         this.sounds.shieldEffect()
         this.animationLogic.characterBuff(this.player,5)
+        this.app.stage.removeChild(buttonDescrp)
+
         resolve(true)
     })
     fightMenu.guardButton.addEventListener('mouseup',()=>{
@@ -422,9 +424,9 @@ window.addEventListener('keydown', (event) => {
     fightMenu.itemButton.eventMode='static';
     fightMenu.itemButton.addEventListener('pointerover',()=>{
       this.app.stage.removeChild(actionText);   
-      buttonDescrp= new PIXI.Text("Use an item: get healed!",nameplateStyle);
-      buttonDescrp.anchor.set(0.5);
-      buttonDescrp.position.set(415,480)
+      buttonDescrp= new PIXI.Text("Use an item: get healed!",fightMenuClass.menuDescrpStyle);
+      fightMenuClass.setPositionMenuTXT(buttonDescrp);
+
       this.app.stage.addChild(buttonDescrp);
 
     })
@@ -439,6 +441,8 @@ window.addEventListener('keydown', (event) => {
         this.player.action(newEnemy,this.playerHealthBar);
         this.sounds.healEffect()
         this.animationLogic.characterBuff(this.player,5)
+        this.app.stage.removeChild(buttonDescrp)
+
         resolve(true)
     })
     fightMenu.itemButton.addEventListener('mouseup',()=>{
@@ -447,9 +451,9 @@ window.addEventListener('keydown', (event) => {
     fightMenu.runButton.eventMode='static';
     fightMenu.runButton.addEventListener('pointerover',()=>{
       this.app.stage.removeChild(actionText);   
-      buttonDescrp= new PIXI.Text("Runaway!",nameplateStyle);
-      buttonDescrp.anchor.set(0.5);
-      buttonDescrp.position.set(415,480)
+      buttonDescrp= new PIXI.Text("Runaway!",fightMenuClass.menuDescrpStyle);
+      fightMenuClass.setPositionMenuTXT(buttonDescrp);
+
       this.app.stage.addChild(buttonDescrp);
 
     })
@@ -460,6 +464,8 @@ window.addEventListener('keydown', (event) => {
     })
     fightMenu.runButton.addEventListener('click',async ()=>{
       this.app.stage.removeChild(actionText)
+      this.app.stage.removeChild(buttonDescrp)
+
       await this.loadScreenOut();
       this.endScreen();
     })

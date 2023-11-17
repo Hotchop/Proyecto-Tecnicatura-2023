@@ -7,7 +7,13 @@ export class fightMenuClass{
     itemButton:PIXI.Sprite;
     runButton:PIXI.Sprite;
     menuBack:PIXI.Sprite;
-
+    static menuDescrpStyle: PIXI.TextStyle = new PIXI.TextStyle({
+        fill: "rgba(255, 255, 255, 0.5)",
+        fontFamily: "\"Palatino Linotype\", \"Book Antiqua\", Palatino, serif",
+        fontVariant: "small-caps",
+        fontSize:25
+    });
+    
     constructor(){
         this.attackButton=new PIXI.Sprite(PIXI.Texture.from(menuButtons.ATTACK));
         this.setterSize(this.attackButton);
@@ -35,5 +41,10 @@ export class fightMenuClass{
     private setterSize(button:PIXI.Sprite){
         button.width=140;
         button.height=51;
+    }
+
+    static setPositionMenuTXT(txt:PIXI.Text){
+        txt.position.set(240,460)
+
     }
 }
