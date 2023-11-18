@@ -33,12 +33,16 @@ This project uses the following libraries to work:
     </br></br>
 To install the main libraries use the following commands </br>
 **npm i (Install node packages)</br>**
-**npm install -g @angular/cli@(16.2.0)(Intall angular client)</br>**
-**npm install pixi.js@7.3.2 (Intall PIXI.js)</br>**
-**npm install @pixi/events@7.3.2 (Intall PIXI Events Package)</br>**
+**npm install -g @angular/cli@(16.2.0)(Install angular client)</br>**
+**npm install -g json-server (Install json server)**
+**npm install pixi.js@7.3.2 (Install PIXI.js)</br>**
+**npm install @pixi/events@7.3.2 (Install PIXI Events Package)</br>**
 **npm install howler@2.2.4 (Install Howler)</br>**
 
-
+## Running the Project
+To run the project, open two terminals. In one of them, open the JSON server with **npm run backend**</br>
+In the second one, run the project with **ng serve -o**</br>
+Wait for the project to load and you should see it working in the browser.
 
 ## Credits
 This project was the work of Abigail Alegre, Lautaro Elian Burgos, and Nicolás Martin Miranda in full-stack development, as well as Lucia Ferrario who worked with us on the graphic design for the game.
