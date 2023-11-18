@@ -17,20 +17,20 @@ export class fightMenuClass{
     constructor(){
         this.attackButton=new PIXI.Sprite(PIXI.Texture.from(menuButtons.ATTACK));
         this.setterSize(this.attackButton);
-        this.attackButton.x=95;
+        this.attackButton.x=110;
         this.attackButton.y=415;
         this.guardButton=new PIXI.Sprite(PIXI.Texture.from(menuButtons.GUARD));
         this.setterSize(this.guardButton)
-        this.guardButton.x=95;
-        this.guardButton.y=457;
+        this.guardButton.x=110;
+        this.guardButton.y=458;
         this.itemButton=new PIXI.Sprite(PIXI.Texture.from(menuButtons.ITEM));
         this.setterSize(this.itemButton)
-        this.itemButton.x=95;
-        this.itemButton.y=499;
+        this.itemButton.x=110;
+        this.itemButton.y=501;
         this.runButton=new PIXI.Sprite(PIXI.Texture.from(menuButtons.RUN));
         this.setterSize(this.runButton)
-        this.runButton.x=95;
-        this.runButton.y=541;
+        this.runButton.x=110;
+        this.runButton.y=551;
         this.menuBack=new PIXI.Sprite(PIXI.Texture.from(menuButtons.MENUBACK));
         this.menuBack.width=540;
         this.menuBack.height=180;
@@ -39,8 +39,8 @@ export class fightMenuClass{
     }
 
     private setterSize(button:PIXI.Sprite){
-        button.width=140;
-        button.height=51;
+        button.width=108;
+        button.height=52;
     }
 
     static setPositionMenuTXT(txt:PIXI.Text){
