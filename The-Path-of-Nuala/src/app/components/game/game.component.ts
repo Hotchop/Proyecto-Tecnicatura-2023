@@ -442,7 +442,7 @@ window.addEventListener('keydown', (event) => {
         this.sounds.healEffect()
         this.animationLogic.characterBuff(this.player,5)
         this.app.stage.removeChild(buttonDescrp)
-
+        
         resolve(true)
     })
     fightMenu.itemButton.addEventListener('mouseup',()=>{
@@ -450,15 +450,15 @@ window.addEventListener('keydown', (event) => {
     })
     fightMenu.runButton.eventMode='static';
     fightMenu.runButton.addEventListener('pointerover',()=>{
-      this.app.stage.removeChild(actionText);   
+      this.app.stage.removeChild(actionText); 
+      this.app.stage.removeChild(buttonDescrp)  
       buttonDescrp= new PIXI.Text("Runaway!",fightMenuClass.menuDescrpStyle);
       fightMenuClass.setPositionMenuTXT(buttonDescrp);
-
       this.app.stage.addChild(buttonDescrp);
 
     })
-    fightMenu.runButton.addEventListener('pointerout',()=>{
-      this.app.stage.removeChild(buttonDescrp)  
+    fightMenu.runButton.addEventListener('mouseout',()=>{
+      buttonDescrp.visible=false;  
       this.app.stage.addChild(actionText)
    
     })
