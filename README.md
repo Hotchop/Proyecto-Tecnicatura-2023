@@ -16,20 +16,29 @@ If you are defeated or decide to run away, the game will end and you will be abl
 
 ## Dependencies
 This project uses the following libraries to work:
-    "@angular/animations": "^16.2.0",
-    "@angular/common": "^16.2.0",
-    "@angular/compiler": "^16.2.0",
-    "@angular/core": "^16.2.0",
-    "@angular/forms": "^16.2.0",
-    "@angular/platform-browser": "^16.2.0",
-    "@angular/platform-browser-dynamic": "^16.2.0",
-    "@angular/router": "^16.2.0",
-    "@pixi/events": "^7.3.2",
-    "howler": "^2.2.4",
-    "pixi.js": "^7.3.2",
-    "rxjs": "~7.8.0",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.13.0"
+    </br>"@angular/animations": "^16.2.0",
+    </br>"@angular/common": "^16.2.0",
+    </br>"@angular/compiler": "^16.2.0",
+    </br>"@angular/core": "^16.2.0",
+    </br>"@angular/forms": "^16.2.0",
+    </br>"@angular/platform-browser": "^16.2.0",
+    </br>"@angular/platform-browser-dynamic": "^16.2.0",
+    </br>"@angular/router": "^16.2.0",
+    </br>"@pixi/events": "^7.3.2",
+    </br>"howler": "^2.2.4",
+    </br>"pixi.js": "^7.3.2",
+    </br>"rxjs": "~7.8.0",
+    </br>"tslib": "^2.3.0",
+    </br>"zone.js": "~0.13.0"
+    </br></br>
+To install the main libraries use the following commands </br>
+**npm i (Install node packages)</br>**
+**npm install -g @angular/cli@(16.2.0)(Intall angular client)</br>**
+**npm install pixi.js@7.3.2 (Intall PIXI.js)</br>**
+**npm install @pixi/events@7.3.2 (Intall PIXI Events Package)</br>**
+**npm install howler@2.2.4 (Install Howler)</br>**
+
+
 
 ## Credits
 This project was the work of Abigail Alegre, Lautaro Elian Burgos, and Nicolás Martin Miranda in full-stack development, as well as Lucia Ferrario who worked with us on the graphic design for the game.
