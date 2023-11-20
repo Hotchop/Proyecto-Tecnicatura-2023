@@ -45,32 +45,9 @@
           "fecha": "2023-11-10T04:21:49.774Z",
           "personaje": "Mikasa",
           "puntaje": 50000
-        },
-        {
-          "fecha": "2023-11-17T16:10:47.528Z",
-          "personaje": "Hotchop",
-          "puntaje": 400
         }
       ],
       "id": 1
-    },
-    {
-      "usuario": "UTN",
-      "constraseña": "123",
-      "avatar": "/assets/avatars/mage-avatar.png",
-      "partidas": [
-        {
-          "fecha": "2023-11-16T18:57:57.188Z",
-          "personaje": "Chaldu",
-          "puntaje": 200
-        },
-        {
-          "fecha": "2023-11-16T19:00:48.941Z",
-          "personaje": "Lauti",
-          "puntaje": 125
-        }
-      ],
-      "id": 2
     }
   ]
 }
