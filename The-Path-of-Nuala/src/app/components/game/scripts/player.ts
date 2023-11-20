@@ -27,10 +27,11 @@ export class player implements Character {
         this.dmgMod = 1;
         this.charClass = charClass;
         this.defenseMod = 1;
-        this.currentTurnSprite = PIXI.Sprite.from(playerSprites.PLACEHOLDER);
+        this.currentTurnSprite = PIXI.Sprite.from(playerSprites.WARRIOR);
         this.currentTurnSprite.anchor.set(0.5)
         this.currentTurnSprite.x = 200;
-        this.currentTurnSprite.y = 350;
+        this.currentTurnSprite.y = 300;
+        this.currentTurnSprite.scale.set(0.25);
 
         this.namePlate = new PIXI.Text(this.charName,nameplateStyle);
         this.namePlate.anchor.set(0.5);
@@ -58,14 +59,17 @@ export class player implements Character {
             case 'warrior':
                 this.hp = this.MAX_HP + 20; // Ajusta la vida para el guerrero
                 this.dmg = 15; // Ajusta el daño para el guerrero
+                this.currentTurnSprite.texture = PIXI.Texture.from(playerSprites.WARRIOR);
                 break;
             case 'mage':
                 this.hp = this.MAX_HP - 10; // Ajusta la vida para el mago
                 this.dmg = 20; // Ajusta el daño para el mago
+                this.currentTurnSprite.texture = PIXI.Texture.from(playerSprites.MAGE);
                 break;
             case 'rogue':
                 this.hp = this.MAX_HP; // La vida predeterminada para el pícaro
                 this.dmg = 12; // Ajusta el daño para el pícaro
+                this.currentTurnSprite.texture = PIXI.Texture.from(playerSprites.ROGUE);
                 break;
             default:
                 throw new Error('Clase de personaje no válida');
