@@ -43,7 +43,9 @@ export enum menuButtons{
     GUARD = "/assets/game-assets/gui/guard_button.png",
     ITEM = "/assets/game-assets/gui/item_button.png",
     RUN = "/assets/game-assets/gui/run_button.png",
-    MENUBACK = "/assets/game-assets/gui/back_fight_menu.png"
+    MENUBACK = "/assets/game-assets/gui/back_fight_menu.png",
+    SOUND= "/assets/game-assets/gui/sound.png",
+    SOUNDOFF= "/assets/game-assets/gui/mute.png"
 }
 
 export enum playerSprites{

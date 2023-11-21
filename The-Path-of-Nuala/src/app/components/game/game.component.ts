@@ -39,7 +39,7 @@ export class GameComponent implements OnInit{
   private playerHealthBar:healthbar = new healthbar();
   private sounds = new soundEffect()
   private levelName: PIXI.Text = new PIXI.Text('',nameplateStyle)
-  
+  private flagMusic=true;
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
       volume: 0.05, // ajusta el volumen según sea necesario
@@ -58,10 +58,10 @@ export class GameComponent implements OnInit{
     this.loadScreen.beginFill(0x000000,1);
     this.loadScreen.drawRect(0, 0, 800, 600); 
     this.loadScreen.endFill();
-
+    
     //Begin game
     this.startScreen()
-
+    
   }
   
   ngOnDestroy(): void {
@@ -76,7 +76,8 @@ export class GameComponent implements OnInit{
    * Main title screen of the game
    */
   async startScreen(){
-
+    
+   
     //Add background image
   
     //Adds main title
@@ -212,7 +213,10 @@ window.addEventListener('keydown', (event) => {
         // Aquí puedes agregar la lógica para iniciar el juego
         await this.loadScreenOut();
         this.mainMenuOst.stop();
-        this.battleOst.play();
+
+        if(this.flagMusic){
+          this.battleOst.play();
+        }
         this.fight();
       } else {
         console.log('Please select difficulty and class before starting the game.');
@@ -246,7 +250,15 @@ window.addEventListener('keydown', (event) => {
      */
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
-
+    const soundButton=PIXI.Sprite.from(PIXI.Texture.from(menuButtons.SOUND))
+    soundButton.position.set(705,27)
+    soundButton.scale.set(0.15)
+    soundButton.eventMode='static';
+    soundButton.addEventListener('click',()=>{
+      this.flagMusic=false;
+      this.battleOst.stop;
+      
+    })
     const newEnemy = new enemy(this.difficulty,this.chartopia);
 
     await this.randomLevelName(this.levelName,this.stageNum);
@@ -260,6 +272,7 @@ window.addEventListener('keydown', (event) => {
     this.app.stage.addChild(playerTurnTitle,enemyTurnTitle);  //Turn Titlecards
     this.app.stage.addChild(this.playerHealthBar.barHealth);
     this.app.stage.addChild(this.playerHealthBar.playerHealth);
+    this.app.stage.addChild(soundButton);
     await this.loadScreenEnter();
     
     let onFight = true;
