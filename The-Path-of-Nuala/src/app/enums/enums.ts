@@ -52,10 +52,11 @@ export enum playerSprites{
     WARRIOR = "/assets/game-assets/hero-warrior.png",
     MAGE = "/assets/game-assets/hero-mage.png",
     ROGUE = "/assets/game-assets/hero-rogue.png",
+
 }
 export enum healthbarEn{
-    HEALTH_BAR = "/assets/game-assets/gui/healthbar.png",
-    BAR="/assets/game-assets/gui/bar.png"
+    HEALTH_BAR = "/assets/game-assets/gui/vida.png",
+    BAR="/assets/game-assets/gui/healthbar.png"
 }
 
 export enum enemyTextures{

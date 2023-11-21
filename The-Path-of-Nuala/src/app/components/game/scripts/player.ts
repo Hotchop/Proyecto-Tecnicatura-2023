@@ -30,8 +30,9 @@ export class player implements Character {
         this.currentTurnSprite = PIXI.Sprite.from(playerSprites.WARRIOR);
         this.currentTurnSprite.anchor.set(0.5)
         this.currentTurnSprite.x = 200;
-        this.currentTurnSprite.y = 300;
-        this.currentTurnSprite.scale.set(0.25);
+        this.currentTurnSprite.y = 280;
+       
+        this.currentTurnSprite.scale.set(0.32);
 
         this.namePlate = new PIXI.Text(this.charName,nameplateStyle);
         this.namePlate.anchor.set(0.5);
@@ -60,6 +61,7 @@ export class player implements Character {
                 this.hp = this.MAX_HP + 20; // Ajusta la vida para el guerrero
                 this.dmg = 15; // Ajusta el daño para el guerrero
                 this.currentTurnSprite.texture = PIXI.Texture.from(playerSprites.WARRIOR);
+                
                 break;
             case 'mage':
                 this.hp = this.MAX_HP - 10; // Ajusta la vida para el mago
@@ -115,8 +117,8 @@ export class player implements Character {
             playerhealthbar.barHealth.visible=false;
         }else{
             this.hp -= damage;
-            playerhealthbar.barHealth.width-=(1.65*damage);
-            playerhealthbar.barHealth.x+=(1.65*damage)/8;
+            playerhealthbar.barHealth.width-=(1.25*damage);
+            playerhealthbar.barHealth.x+=(1.25*damage)/10;
         }
     }
 
@@ -142,11 +144,11 @@ export class player implements Character {
             break
             case playerActions.HEALTH_UP:{
                 this.hp+=10;
-                if(playerhealthbar.barHealth.width+(1.65*10)>=165){
-                    playerhealthbar.barHealth.width=165;
+                if(playerhealthbar.barHealth.width+(1.25*10)>=120){
+                    playerhealthbar.barHealth.width=200/1.6;
                 }else{
                     playerhealthbar.barHealth.width+=(1.65*10);
-                    playerhealthbar.barHealth.x-=1.3;
+                    playerhealthbar.barHealth.x=150;
                 }    
                 this.currentStatusSprite.visible = false;
                 console.log("CURITA")
