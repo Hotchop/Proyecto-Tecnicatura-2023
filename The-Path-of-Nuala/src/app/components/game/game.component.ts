@@ -39,7 +39,6 @@ export class GameComponent implements OnInit{
   private playerHealthBar:healthbar = new healthbar();
   private sounds = new soundEffect()
   private levelName: PIXI.Text = new PIXI.Text('',nameplateStyle)
-  private flagMusic=true;
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
       volume: 0.05, // ajusta el volumen según sea necesario
@@ -213,10 +212,8 @@ window.addEventListener('keydown', (event) => {
         // Aquí puedes agregar la lógica para iniciar el juego
         await this.loadScreenOut();
         this.mainMenuOst.stop();
+        this.battleOst.play();
 
-        if(this.flagMusic){
-          this.battleOst.play();
-        }
         this.fight();
       } else {
         console.log('Please select difficulty and class before starting the game.');
@@ -251,13 +248,20 @@ window.addEventListener('keydown', (event) => {
     const backSprite= new backgroundClass(this.stageNum);
     const fightMenu=new fightMenuClass();
     const soundButton=PIXI.Sprite.from(PIXI.Texture.from(menuButtons.SOUND))
+    let mute=false;
     soundButton.position.set(705,27)
     soundButton.scale.set(0.15)
     soundButton.eventMode='static';
     soundButton.addEventListener('click',()=>{
-      this.flagMusic=false;
-      this.battleOst.stop;
-      
+      if(!mute){
+        this.battleOst.pause();
+        soundButton.texture=PIXI.Texture.from(menuButtons.SOUNDOFF);
+        mute=true;
+      }else{
+        this.battleOst.play();
+        soundButton.texture=PIXI.Texture.from(menuButtons.SOUND);
+        mute=false;
+      }
     })
     const newEnemy = new enemy(this.difficulty,this.chartopia);
 
