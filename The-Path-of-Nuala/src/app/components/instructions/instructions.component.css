@@ -12,7 +12,8 @@
 
 .titles{
     font-family: "Abhaya Libre";
-    font-size: 7rem;
+    font-size: 4.5rem;
+    font-weight: 100;
 }
 
 .tips{
@@ -21,8 +22,12 @@
     border:2px solid rgb(255, 255, 255);
     margin: 1rem;
     padding: 0.5rem 2rem;
+    text-align: center;
 }
-
+.tips-div{
+    display: flex;
+    flex-direction: column;
+}
 .text-image{
     display: flex;
     flex-direction: row;
@@ -33,7 +38,11 @@
     padding: 2rem;
     margin: 2rem 0rem;
 }
-
+.actions-padre{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
 .text-image p{
     padding: 0 2rem;
     text-align: center;
@@ -60,5 +69,12 @@
     margin-right: 3rem;
 }
 .actions img{
-    margin: 1rem 2rem;
+    margin: 1.2rem 2rem;
+}
+.img-actions{
+    display: flex;
+    margin-top: 3rem;
+}
+.mc{
+    width: 20%;
 }
