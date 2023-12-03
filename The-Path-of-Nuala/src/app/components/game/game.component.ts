@@ -39,6 +39,7 @@ export class GameComponent implements OnInit{
   private playerHealthBar:healthbar = new healthbar();
   private sounds = new soundEffect()
   private levelName: PIXI.Text = new PIXI.Text('',nameplateStyle)
+  private levelNumber = 1;
   private mainMenuOst = new Howl({
       src: ['/assets/music/mainmenuost.mp3',],
       volume: 0.05, // ajusta el volumen según sea necesario
@@ -314,13 +315,14 @@ window.addEventListener('keydown', (event) => {
       await this.animationLogic.deathAnimation(this.player.currentTurnSprite,0.05)
       await this.animationLogic.timer(1000);
       await this.loadScreenOut();
-      this.endScreen();
+      this.endScreen(newEnemy);
     }else{
       if(newEnemy.getHp <= 0){
         if(this.stageNum==1){
           this.stageNum=2
         }
         this.score += newEnemy.score;
+        this.levelNumber += 1;
         newEnemy.namePlate.alpha = 0;
         newEnemy.currentStatusSprite.alpha = 0;
         newEnemy.nextTurnSprite.alpha = 0;
@@ -371,7 +373,7 @@ window.addEventListener('keydown', (event) => {
     fightMenu.runButton.eventMode = 'static'
     fightMenu.runButton.addEventListener('click',async () => {
       await this.loadScreenOut();
-      this.endScreen();
+      this.endScreen(newEnemy);
     })
 
   }
@@ -484,7 +486,7 @@ window.addEventListener('keydown', (event) => {
       this.app.stage.removeChild(buttonDescrp)
 
       await this.loadScreenOut();
-      this.endScreen();
+      this.endScreen(newEnemy);
     })
     })
   }
@@ -498,7 +500,7 @@ window.addEventListener('keydown', (event) => {
   /**
    * End Game Screen
    */
-  async endScreen(){
+  async endScreen(enemy: enemy){
     
     //Add background image
 
@@ -521,7 +523,7 @@ window.addEventListener('keydown', (event) => {
     subtitle.eventMode = 'static'
     subtitle.addEventListener('click', async() =>{
       await this.loadScreenOut()
-      this.scoring.addSave(this.player.charName,this.score);
+      this.scoring.addSave(this.player,this.levelNumber,this.levelName.text,enemy,this.score);
       
     })
 

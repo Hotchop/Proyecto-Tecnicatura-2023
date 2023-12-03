@@ -3,7 +3,7 @@
         <h2>You don't have any heroes!</h2>
         <p>To see your scores, go forth and create your legend!</p>
     </div>
-    <div class="scoreboard" *ngIf="partidas">
+    <div class="scoreboard" *ngIf="partidas && !save">
         <span>Hall of Heroes</span>
         <div class="tableFixHead">
         <table>
@@ -11,14 +11,14 @@
                 <th>Date</th>
                 <th>Hero</th>
                 <th>Score</th>
-                <!-- <th>Info</th> --> <!-- For future feature -->
+                <th>Info</th>
             </thead>
             <tbody *ngFor="let item of list">
                 <tr>
                     <td>{{ fortmatDate(item.fecha ) }}</td>
                     <td>{{item.personaje}}</td>
                     <td>{{item.puntaje}}</td>
-                    <!-- <td><a href="#"><img src="/assets/lupa.png" alt="More Info" id="search-icon"></a></td> --> <!-- For future feature -->
+                    <td><img src="/assets/lupa.png" alt="More Info" id="search-icon" (click)="extraInfo(item)"></td>
                 </tr>
             </tbody>
         </table>
@@ -30,5 +30,37 @@
             <input type="button" value="Lowest Score" (click)="sortLowScore()">
             <input type="button" value="Highest Score" (click)="sortHighScore()">
         </div>
+    </div>
+
+    <div class="extraInfo" *ngIf="partidas && save">
+            <div class="heroInfo">
+                <h2 id="heroName">{{save.personaje}}</h2>
+                <div class="data">
+                    <h3>Class</h3>
+                    <p>{{save.clase}}</p>
+                </div>
+                <div class="data">
+                    <h3>Death</h3>
+                    <p>{{ fortmatDate(save.fecha ) }}</p>
+                </div>
+                <div class="data">
+                    <h3>Place of Death</h3>
+                    <p>{{save.ultimoMapa}}</p>
+                </div>
+                <div class="data">
+                    <h3>Killed By</h3>
+                    <p>{{save.ultimoEnemigo}}</p>
+                </div>
+                <div class="data">
+                    <h3>Rooms Explored</h3>
+                    <p>{{save.nivel}}</p>
+                </div>
+                <div class="data">
+                    <h3>Final Score</h3>
+                    <p>{{save.puntaje}}</p>
+                </div>        
+            </div>
+            <div class="heroSprite"><img src="{{save.sprite}}" alt="Hero Sprite"></div>
+        <input type="button" value="Return" id="return" (click)="backToTable()">
     </div>
 </section>

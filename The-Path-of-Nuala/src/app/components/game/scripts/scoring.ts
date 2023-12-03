@@ -1,7 +1,10 @@
+import { enemy } from './commonEnemy';
 import { Character } from './../../../interfaces/interfaces';
 import { Save, User } from "src/app/interfaces/interfaces";
 import { AuthService } from "src/app/services/auth.service";
 import { UserbaseService } from "src/app/services/userbase.service";
+import { player } from './player';
+import { playerSprites } from 'src/app/enums/enums';
 
 export class scorer{
 
@@ -12,12 +15,31 @@ export class scorer{
      * @param character Character used during the game
      * @param score Score of the last game
      */
-    addSave(character:string,score:number){
-        const savefile: Save = {
+    addSave(character:player,level:number,levelName:string,enemy:enemy,score:number){
+        let savefile: Save = {
             fecha: new Date(Date.now()),
-            personaje: character,
+            personaje: character.charName,
+            sprite:'',
+            clase:character.charClass,
+            nivel:level,
+            ultimoMapa:levelName,
+            ultimoEnemigo:enemy.name,
             puntaje: score,
         }
+
+        switch (savefile.clase) {
+            case 'Mage': savefile.sprite = playerSprites.MAGE;
+                
+                break;
+
+            case 'Rogue': savefile.sprite = playerSprites.ROGUE;
+                
+                break;
+        
+            default: savefile.sprite = playerSprites.WARRIOR;
+                break;
+        }
+        
         console.log(savefile);
         const user: User | undefined = this.auth.currentUser;
         if(user !== undefined){

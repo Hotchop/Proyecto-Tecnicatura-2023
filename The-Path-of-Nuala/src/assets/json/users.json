@@ -6,45 +6,14 @@
       "avatar": "assets/avatars/ranger-avatar.png",
       "partidas": [
         {
-          "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": "Reiner",
-          "puntaje": 100000,
-          "id": 1
-        },
-        {
-          "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": "Annie",
-          "puntaje": 80000,
-          "id": 2
-        },
-        {
-          "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": "Eren",
-          "puntaje": 200000,
-          "id": 3
-        },
-        {
-          "fecha": "2023-11-01T00:00:00.000Z",
-          "personaje": "Armin",
-          "puntaje": 100000,
-          "id": 4
-        },
-        {
-          "fecha": "2023-11-05T00:00:00.000Z",
-          "personaje": "Piek",
-          "puntaje": 150000,
-          "id": 5
-        },
-        {
-          "fecha": "2023-11-07T00:00:00.000Z",
-          "personaje": "Zeke",
-          "puntaje": 100000,
-          "id": 6
-        },
-        {
-          "fecha": "2023-11-10T04:21:49.774Z",
-          "personaje": "Mikasa",
-          "puntaje": 50000
+          "fecha": "2023-12-03T03:29:56.432Z",
+          "personaje": "Leroy",
+          "sprite": "/assets/game-assets/hero-mage.png",
+          "clase": "Mage",
+          "nivel": 3,
+          "ultimoMapa": "The tunnels of whispering stakes",
+          "ultimoEnemigo": "Chundy Nimblefingers",
+          "puntaje": 200
         }
       ],
       "id": 1

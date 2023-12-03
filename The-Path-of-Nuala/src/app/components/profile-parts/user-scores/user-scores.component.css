@@ -96,3 +96,56 @@
     border-radius: 0.5rem;
     padding: 0.5rem;
 }
+
+/*Extra Info*/
+
+.extraInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem 5rem;
+}
+
+.extraInfo h2{
+    font-size: 5rem;
+    font-weight: bold;
+    background-color: rgba(58, 31, 10, 0.9);
+    border-radius: 1rem;
+    border: 2px solid rgba(97, 52, 21, 0.9);
+    padding: 1;
+}
+
+.extraInfo h3{
+    background-color: rgba(97, 52, 21, 0.9);
+    border-radius: 1rem;
+    border: 2px solid rgba(58, 31, 10, 0.9);
+    padding: 1;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.extraInfo input{
+    margin: 0.5rem auto;
+    font-size: 1.5rem;
+    font-weight: 525;
+    color: white;
+    background-color: rgb(17, 17, 17);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: 20%;
+}
+
+.heroInfo{
+    width: 0 100%;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.heroSprite{
+    width: 0 auto;
+}
+
+.heroSprite img{
+    width: 100%;
+}

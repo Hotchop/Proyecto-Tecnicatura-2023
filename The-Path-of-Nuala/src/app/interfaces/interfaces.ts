@@ -14,6 +14,11 @@ export interface User{
 export interface Save{
     fecha: Date,
     personaje: string,
+    sprite: string,
+    clase: string,
+    nivel: number,
+    ultimoMapa: string,
+    ultimoEnemigo: string,
     puntaje: number,
     id?: number
 }

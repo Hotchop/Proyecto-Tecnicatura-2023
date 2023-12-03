@@ -14,6 +14,7 @@ export class UserScoresComponent {
   constructor(private userbase: UserbaseService,private auth:AuthService,private router: Router){}
 
   list: Save[] = [];
+  save?: Save;
 
   get getUser():User | undefined{
     return this.auth.currentUser;
@@ -51,6 +52,14 @@ export class UserScoresComponent {
 
   sortHighScore(){
     this.list.sort((a,b) => a.puntaje < b.puntaje? 1:-1)
+  }
+
+  extraInfo(item: Save){
+    this.save = item;
+  }
+
+  backToTable(){
+    this.save = undefined;
   }
 
   private dateFormat = new Intl.DateTimeFormat();
