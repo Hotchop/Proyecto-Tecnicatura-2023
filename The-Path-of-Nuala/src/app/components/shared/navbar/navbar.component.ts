@@ -8,6 +8,9 @@ import { Component, HostListener} from '@angular/core';
 export class NavbarComponent {
 
   scrolled:boolean=false;
+  visible:boolean=false;
+  openVisible:boolean=false;
+  closeNavbar:boolean=false;
   @HostListener('window:scroll',[])
   onWindowScroll(){
     if(window.scrollY>50){
@@ -16,5 +19,13 @@ export class NavbarComponent {
       this.scrolled=false;
     }
   }
-
+  onKey(event:any){
+    this.visible=true;
+    this.openVisible=true;
+    this.closeNavbar=false;
+  }
+  closeMenu(event:any){
+    this.closeNavbar=true;
+    this.openVisible=false;
+  }
 }

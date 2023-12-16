@@ -1,21 +1,24 @@
 <header class="cabecera" [ngClass]="{'scrolled':scrolled}">
-    <nav class="navbar" >
-       
-        <div class="nav-boton">
-            <a class="enlace" [routerLink]="['/home']">Home</a>
+    <button type="submit" class="menu-button" value="Open" (click)="onKey($event)" [ngClass]="{'not-visible':openVisible}"><i class="bi bi-list"></i></button>
+    <nav class="navbar" [ngClass]="{'visible':visible,'not-visible':closeNavbar}">
+        <button type="submit" class="close-menu" value="Close" (click)="closeMenu($event)"><i class="bi bi-arrow-bar-left"></i></button>
+         <div class="nav-list">    
+            <div class="nav-boton">
+                <a class="enlace" [routerLink]="['/home']" (click)="closeMenu($event)">Home</a>
+            </div>
+            <div class="nav-boton"> 
+                <a class="enlace" [routerLink]="['/how-to-play']" (click)="closeMenu($event)">How To Play</a>
+            </div>  
+            <div class="nav-boton">
+                <a class="enlace" [routerLink]="['/play']" (click)="closeMenu($event)">Play</a>
+             </div>
+            <div class="nav-boton"> 
+                <a class="enlace" [routerLink]="['/contact-us']" (click)="closeMenu($event)">Contact Us</a>
+            </div>
+            <div class="nav-boton">
+                <a class="enlace"  [routerLink]="['/profile']" (click)="closeMenu($event)">Profile</a>
+            </div>
+            <div class="background-img-navbar"><img src="../../../../assets/navbarshadow.png" alt=""></div>
         </div>
-        <div class="nav-boton"> 
-            <a class="enlace" [routerLink]="['/how-to-play']">How To Play</a>
-        </div>  
-        <div class="nav-boton">
-            <a class="enlace" [routerLink]="['/play']">Play</a>
-        </div>
-        <div class="nav-boton"> 
-            <a class="enlace" [routerLink]="['/contact-us']">Contact Us</a>
-        </div>
-        <div class="nav-boton">
-            <a class="enlace"  [routerLink]="['/profile']">Profile</a>
-        </div>
-        <div class="background-img-navbar"><img src="../../../../assets/navbarshadow.png" alt=""></div>
     </nav>
 </header>
