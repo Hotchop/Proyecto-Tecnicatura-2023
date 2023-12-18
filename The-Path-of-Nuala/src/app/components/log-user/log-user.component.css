@@ -117,3 +117,37 @@
     text-align: center;
 }
 
+@media (max-width: 400px){
+    .background{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .login{
+        width: 70%;        
+    }
+    .new-user{
+        width: 100%;
+        margin: 12rem 0rem 5rem 0rem;
+    }
+    .new-user legend{
+        font-size: 1.8rem;    
+    }
+    .campo label, .registro span{
+        font-size: 1.7rem;
+    }
+    .buttons{
+        font-size: 1.2rem;
+    }
+    .text{
+        width: 80%;
+    }
+    .text h2{
+        font-size: 3rem;
+        margin: 3rem 0rem 2rem 0rem;
+    }
+    .text p{
+        font-size: 1.5rem;
+        width: 100%;
+    }
+}

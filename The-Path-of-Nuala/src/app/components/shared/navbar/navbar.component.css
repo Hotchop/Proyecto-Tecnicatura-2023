@@ -148,10 +148,17 @@
         border: none;
         z-index: 999999;
     }
-   
+    .enlace:hover{
+        border: none;
+        letter-spacing: normal;
+    }
 }
 @media (max-width: 400px){
     .enlace{
         font-size: 1.4rem;
+    }
+    .enlace:hover{
+        border: none;
+        letter-spacing: normal;
     }
 }
