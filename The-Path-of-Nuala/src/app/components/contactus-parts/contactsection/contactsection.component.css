@@ -131,7 +131,6 @@
   @media (max-width: 400px){
     .fondo{
       height: 160rem;
-
     }
     .fondo-txt{
       margin-top: 15rem;
@@ -159,8 +158,12 @@
     .developer h3{
       font-size: 2.5rem;
     }
-    .developer a{
+    .div-a a{
       margin: 0rem;
+      z-index: 999999;
+    }
+    .div-a a:hover{
+      cursor: pointer;
     }
   }
   

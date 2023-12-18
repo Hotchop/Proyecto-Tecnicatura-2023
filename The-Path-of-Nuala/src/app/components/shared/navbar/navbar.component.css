@@ -89,6 +89,7 @@
         background-color: transparent;
         opacity: 1;
         visibility: visible;
+        z-index: 9999999;
     }
 
     .menu-button.not-visible{
@@ -96,9 +97,8 @@
         visibility: hidden;
     }
     .navbar{
-        justify-content: end;
         height: 100%;
-        width: 35%;
+        width: 100%;
         background-color: rgba(0, 0, 0, 0.966);
         box-shadow: 0 0 0 100vmax rgba(0,0,0,.5);
         opacity: 0;
@@ -114,11 +114,10 @@
     }
     .nav-list{
         flex-direction: column;
-        align-items: end;
         position:absolute;
-        width: 35%;
-        margin-top: 3rem;
-        height: 40%;
+        width: 100%;
+        margin-top: 6rem;
+        height: 30%;
     }
     .nav-boton{
         height: auto;
@@ -155,10 +154,18 @@
 }
 @media (max-width: 400px){
     .enlace{
-        font-size: 1.4rem;
+        font-size: 1.8rem;
+        width: 100%;
     }
     .enlace:hover{
         border: none;
         letter-spacing: normal;
+    }
+    .cabecera{
+        width: 35%;
+        margin-left: 25rem;
+    }
+    .menu-button{
+        margin-right: 4rem;
     }
 }
