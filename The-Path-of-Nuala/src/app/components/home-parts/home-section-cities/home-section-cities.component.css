@@ -56,3 +56,33 @@
 .city-name{
     font-size: 1.8rem;
 }
+
+@media (max-width: 400px){
+    .cities{
+        height: 125rem;
+    }
+    .cities-text h2{
+        font-size: 3.1rem;
+    }
+    .cities-text p{
+        font-size: 1.5rem;
+        width: 80%;
+    }
+    .cities-text hr{
+        width: 80%;
+    }
+    .cities-images{
+        flex-direction: column;
+        margin-top: 3rem;
+    }
+    .city-img{
+        height: 28rem;
+        width: 19rem;
+    }
+    .city-descr{
+        margin-top: 4rem;
+    }
+    .city-descr p{
+        margin-top: 22rem;
+    }
+}

@@ -16,6 +16,7 @@ img{
     color: white;
     width: 100%;
     margin: 24rem 0rem 0rem 0rem;
+    text-align: center;
 }
 .hero-txt h1{
     font-family: 'Abhaya Libre';
@@ -31,4 +32,18 @@ img{
     margin: 17rem;
     font-size: 2rem;
     font-weight: 300;
+}
+
+@media (max-width: 400px){
+    .hero{
+        height:82rem;
+    }
+    .hero-txt h1{
+        font-size: 6rem;
+    }
+    .hero-txt p{
+        margin: 20rem;
+        font-size: 1.5rem;
+        width: 80%;
+    }
 }

@@ -1,0 +1,10 @@
+@media (max-width: 400px){
+    .home-padre{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    .home-part{
+        height: 25%;
+    }
+}

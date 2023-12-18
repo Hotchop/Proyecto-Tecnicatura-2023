@@ -43,3 +43,24 @@
     margin-top: .6rem;
     
 }
+
+@media (max-width: 400px){
+    .txt-play-now p{
+        font-size: 1.5rem;
+        width: 80%;
+
+    }
+    .txt-play-now h2{
+        font-size: 3rem;
+    }
+    .txt-play-now hr{
+        width: 80%;
+    }
+    .play-now{
+        width: 50%;
+        height: 9%;
+    }
+    .play-now a{
+        font-size: 3rem;
+    }
+}

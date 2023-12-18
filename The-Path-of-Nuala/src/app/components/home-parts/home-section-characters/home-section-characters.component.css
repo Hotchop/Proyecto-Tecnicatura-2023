@@ -49,3 +49,31 @@
     opacity: 1;
 
 }
+
+@media (max-width: 400px){
+    .characters-section{
+        flex-direction: column;
+        height: 60rem;
+    }
+    .black-backgr{
+        width: 100%;
+        height: 45%;
+    }
+    .char-txt{
+        margin-top: 2rem;
+    }
+    .char-txt h2{
+        font-size: 3rem;
+    }
+    .char-txt p{
+        font-size: 1.5rem;
+    }
+    #imagen{
+
+    }
+    .char-img{
+        width: 100%;
+        position: absolute;
+        margin-top: 18rem;
+    }
+}
