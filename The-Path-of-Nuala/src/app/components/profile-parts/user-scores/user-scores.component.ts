@@ -56,10 +56,20 @@ export class UserScoresComponent {
 
   extraInfo(item: Save){
     this.save = item;
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
   backToTable(){
     this.save = undefined;
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+    });
   }
 
   private dateFormat = new Intl.DateTimeFormat();
