@@ -1,4 +1,4 @@
-<header class="cabecera" [ngClass]="{'scrolled':scrolled}">
+<header class="cabecera" [ngClass]="{'scrolled':scrolled,'not-collide':closedMenu}">
     <button type="submit" class="menu-button" value="Open" (click)="onKey($event)" [ngClass]="{'not-visible':openVisible}"><i class="bi bi-list"></i></button>
     <nav class="navbar" [ngClass]="{'visible':visible,'not-visible':closeNavbar}">
         <button type="submit" class="close-menu" value="Close" (click)="closeMenu($event)"><i class="bi bi-arrow-bar-left"></i></button>

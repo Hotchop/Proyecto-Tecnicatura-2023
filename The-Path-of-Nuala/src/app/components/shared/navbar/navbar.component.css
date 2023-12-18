@@ -97,7 +97,8 @@
         visibility: hidden;
     }
     .navbar{
-        height: 100%;
+        position: absolute;
+        height: 100vh;
         width: 100%;
         background-color: rgba(0, 0, 0, 0.966);
         box-shadow: 0 0 0 100vmax rgba(0,0,0,.5);
@@ -110,6 +111,7 @@
     }
     .navbar.not-visible{
         opacity:0;
+        height: 10%;
         visibility: hidden;
     }
     .nav-list{
@@ -163,9 +165,13 @@
     }
     .cabecera{
         width: 35%;
-        margin-left: 25rem;
+        margin-left: 25.2rem;
+        height: 10vh;
     }
     .menu-button{
         margin-right: 4rem;
+    }
+    .cabecera.not-collide{
+        height: 10vh;
     }
 }
