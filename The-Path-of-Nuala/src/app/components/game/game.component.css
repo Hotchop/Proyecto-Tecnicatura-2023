@@ -8,6 +8,10 @@
     background-size: cover;
 }
 
+.game-container.not-available{
+    visibility: collapse;
+}
+
 #window{
     margin: 0 auto;
     width: 1065px;
@@ -20,4 +24,22 @@
     background-image: url('/assets/game-assets/game-frame.png');
     background-size: 1045px 1020px;
     background-repeat: no-repeat;
+}
+.mobile-device{
+    visibility: collapse;
+}
+@media (max-width: 400px){
+   #window{
+    visibility: collapse;
+   }
+   .mobile-device{
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.815);
+    margin-top: 25rem;
+    width: 80%;
+    text-align: center;
+   }
+   .game-container{
+    height: 60rem;
+   }
 }

@@ -28,7 +28,7 @@ export class GameComponent implements OnInit{
     this.scoring = new scorer(auth,userbase);
 
   }
-
+  gameNotAvailable:boolean=false;
   private app: PIXI.Application<HTMLCanvasElement> = new PIXI.Application({});
   private animationLogic = new animationLogic(this.app);
   private loadScreen = new PIXI.Graphics();
