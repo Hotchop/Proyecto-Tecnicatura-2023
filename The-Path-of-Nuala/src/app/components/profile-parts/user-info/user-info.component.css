@@ -54,3 +54,14 @@
     color: rgb(252, 146, 146);
 }
 
+@media (max-width: 400px){
+    .user-info{
+        width: 30rem;
+        align-items: center;
+        padding: 2rem;
+   }
+    .user-info img{
+        width: 15rem;
+        margin-left: 5.5rem;
+    }
+}

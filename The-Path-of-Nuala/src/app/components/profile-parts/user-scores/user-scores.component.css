@@ -149,3 +149,28 @@
 .heroSprite img{
     width: 100%;
 }
+
+@media (max-width: 400px){
+    .scoreboard span{
+        font-size: 2.5rem;
+    }
+    .tableFixHead th, .tableFixHead td, .warning p{
+        font-size: 1.9rem;
+        font-weight: lighter;
+    }
+    .warning h2{
+        font-size: 3rem;
+    }
+
+    .sorters{
+        flex-direction: column;
+        margin-bottom: 2rem;
+
+    }
+    .sorters input{
+        font-size: 1.3rem;
+    }
+    .user-scores{
+        padding: 3rem;
+    }
+}
