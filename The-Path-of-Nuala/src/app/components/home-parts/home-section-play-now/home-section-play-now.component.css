@@ -56,11 +56,17 @@
     .txt-play-now hr{
         width: 80%;
     }
+    .txt-play-now{
+        margin-top: 8rem;
+    }
     .play-now{
         width: 50%;
-        height: 9%;
+        height: 10%;
     }
     .play-now a{
         font-size: 3rem;
+    }
+    .section-play-now{
+        height: 71rem;
     }
 }
