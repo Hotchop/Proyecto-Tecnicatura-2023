@@ -476,7 +476,7 @@ window.addEventListener('keydown', (event) => {
       this.app.stage.addChild(buttonDescrp);
 
     })
-    fightMenu.runButton.addEventListener('mouseout',()=>{
+    fightMenu.runButton.addEventListener('mouseout',async()=>{
       buttonDescrp.visible=false;  
       this.app.stage.addChild(actionText)
    
@@ -484,7 +484,7 @@ window.addEventListener('keydown', (event) => {
     fightMenu.runButton.addEventListener('click',async ()=>{
       this.app.stage.removeChild(actionText)
       this.app.stage.removeChild(buttonDescrp)
-
+      actionText.visible=false;
       await this.loadScreenOut();
       this.endScreen(newEnemy);
     })
