@@ -134,3 +134,69 @@
 .actions-buffed-icons{
     display: flex;
 }
+
+@media (max-width: 400px){
+    .text-image{
+        flex-direction: column;
+        padding-bottom: 2rem;
+    }
+    .txt-first-part h2{
+        font-size: 3rem;
+        font-weight: normal;
+        margin: 2rem 3rem 2rem 3rem;
+    }
+    .txt-first-part hr{
+        width: 70%;
+        margin: 0rem 3rem;
+    }
+    .txt-first-part p{
+        font-size: 1.5rem;
+        text-align: justify;
+        margin: 2rem 3rem 3rem 3rem;
+    }
+    .image-part img{
+        width: 100%;
+    }
+    .image-part h3{
+        font-family: 'Raleway', sans-serif;
+        margin: 1rem;
+        padding: 0rem;
+        font-size: 1.2rem;
+        font-weight: lighter;
+    
+    }
+
+    #img-2{
+       
+        width: 100%;
+    }
+    .txt-third-part{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .txt-third-part p{
+        font-family: 'Raleway', sans-serif;
+        margin: 2rem 3rem 3rem 3rem;        
+        font-size: 1.5rem;
+    }
+    .txt-third-part img{
+        width: 50%;
+    }
+    .mc{
+        height: 0rem;
+        width: 0rem;
+    }
+    .img-actions{
+        flex-direction: column;
+    }
+    .single-actions{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+    .actions{
+        width: 90%;
+        font-size: 1.5rem;
+    }
+}
