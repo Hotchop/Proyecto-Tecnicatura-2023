@@ -14,9 +14,11 @@ The enemy can attack, defend, lower your attack, or increase its attack. It can 
 Once you defeat the enemy, you'll be able to continue to the next stage and fight the next enemy.
 If you are defeated or decide to run away, the game will end and you will be able to save your score in your profile.
 
-![Home Page](Path of Nuala Home.png)
-![Game Preview](Path of Nuala Game.png)
-![Profile Page](Path of Nuala Profile.png)
+![Home Page](nuala_home.png)
+
+![Game Preview](nuala_game.png)
+
+![Profile Page](nuala_profile.png)
 
 ## Dependencies
 This project uses the following libraries to work:
