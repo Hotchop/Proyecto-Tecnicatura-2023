@@ -58,12 +58,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "The-Path-of-Nuala:build"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "The-Path-of-Nuala:build:production"
+              "buildTarget": "The-Path-of-Nuala:build:production"
             },
             "development": {
-              "browserTarget": "The-Path-of-Nuala:build:development"
+              "buildTarget": "The-Path-of-Nuala:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,8 +101,4 @@
   "cli": {
     "analytics": "3fa90eb5-1ace-4798-a61e-8fe0df7b7e4f"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 2659800eb80f0130c297ff6355b93608852d02b6
