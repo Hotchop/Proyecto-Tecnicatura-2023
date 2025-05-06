@@ -14,9 +14,19 @@
           "ultimoMapa": "The tunnels of whispering stakes",
           "ultimoEnemigo": "Chundy Nimblefingers",
           "puntaje": 200
+        },
+        {
+          "fecha": "2025-05-05T22:47:05.766Z",
+          "personaje": "James",
+          "sprite": "/assets/game-assets/hero-warrior.png",
+          "clase": "Warrior",
+          "nivel": 2,
+          "ultimoMapa": "The temple of glowing royals",
+          "ultimoEnemigo": "Nulara Ankhalab",
+          "puntaje": 100
         }
       ],
-      "id": 1
+      "id": "1"
     }
   ]
 }

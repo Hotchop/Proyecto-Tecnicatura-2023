@@ -59,14 +59,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "The-Path-of-Nuala:build"
+            "browserTarget": "The-Path-of-Nuala:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "The-Path-of-Nuala:build:production"
+              "browserTarget": "The-Path-of-Nuala:build:production"
             },
             "development": {
-              "buildTarget": "The-Path-of-Nuala:build:development"
+              "browserTarget": "The-Path-of-Nuala:build:development"
             }
           },
           "defaultConfiguration": "development"
