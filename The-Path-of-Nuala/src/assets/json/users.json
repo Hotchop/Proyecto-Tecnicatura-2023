@@ -27,6 +27,24 @@
         }
       ],
       "id": "1"
+    },
+    {
+      "usuario": "UTN",
+      "constraseña": "utn123",
+      "avatar": "/assets/avatars/mage-avatar.png",
+      "partidas": [
+        {
+          "fecha": "2025-05-15T01:54:12.367Z",
+          "personaje": "Tester",
+          "sprite": "/assets/game-assets/hero-warrior.png",
+          "clase": "Warrior",
+          "nivel": 4,
+          "ultimoMapa": "The labyrinth of eternal vampires",
+          "ultimoEnemigo": "Arveene",
+          "puntaje": 300
+        }
+      ],
+      "id": "aihq8hC"
     }
   ]
 }
